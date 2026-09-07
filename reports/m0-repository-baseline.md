@@ -1,6 +1,6 @@
 # M0 仓库基线验收报告
 
-- 检查日期：2026-09-07
+- 检查日期：2026-09-08
 - 工作区：`C:\Users\Lenovo\Desktop\archguard-workspace`
 - Issue：未提供；本次不执行远程 Issue 写操作
 - 目标版本：M0；未提供语义化版本，不擅自设定
@@ -10,7 +10,7 @@
 
 七个仓库均有独立 `.git`、与仓库名称一致的 GitHub `origin` 和 `main` 默认分支。外层工作区没有 `.git`。七个初始提交已分别推送，首轮 GitHub Actions 均成功。
 
-本阶段只建立治理基线，没有实现业务代码或创建许可证。分支保护因私有仓库套餐限制未能启用；项目看板因现有凭据缺少 Projects 权限未能创建，均已记录为明确待办。
+本阶段只建立治理基线，没有实现业务代码或创建许可证。七仓库已公开，`main` 分支保护已在首轮 CI 成功后统一启用；组织级 `ArchGuard M0–M9 Roadmap` 已创建并完成里程碑与日期视图配置。
 
 ## 仓库身份与状态
 
@@ -24,7 +24,7 @@
 | archguard-samples | `C:\Users\Lenovo\Desktop\archguard-workspace\archguard-samples` | `https://github.com/AI-ArchGuard/archguard-samples.git` | `main` | 是 | 初始提交 `ac082be`；首轮 CI 成功 |
 | archguard-evals | `C:\Users\Lenovo\Desktop\archguard-workspace\archguard-evals` | `https://github.com/AI-ArchGuard/archguard-evals.git` | `main` | 是 | 初始提交 `0ad92e4`；首轮 CI 成功 |
 
-远程检查使用系统中已有的 GitHub 凭据，凭据未写入文件或日志。七个 `main` 均已建立远程跟踪；GitHub API 返回的 Actions run 与本地提交 SHA 完全一致。
+远程检查使用系统中已有的 GitHub 凭据，凭据未写入文件或日志。七个 `main` 均已建立远程跟踪；GitHub API 返回的 Actions run 与本地提交 SHA 完全一致。远程仓库当前均为 public。
 
 ## 首轮 CI 证据
 
@@ -83,20 +83,19 @@
 
 建议优先选择 Apache-2.0：它兼顾公开作品集、企业友好复用和明确专利条款。若所有者更看重最简文本且接受专利条款不足，可选择 MIT。许可证属于所有者决策；本阶段不创建 `LICENSE`，决定后应在七仓库一致落地，并核对依赖清单及 NOTICE 义务。
 
-## 默认分支保护建议
+## 默认分支保护
 
-以下是目标策略。对私有仓库调用 GitHub 分支保护 API 时返回 `403`：当前方案需要升级 GitHub Pro/Team 或将仓库设为公开。本次未更改可见性，也没有部分应用保护规则。
+首轮 CI 成功后，七仓库 `main` 已统一启用以下保护策略，并通过 GitHub API 回读核验：
 
-1. 将 `main` 设为默认分支，所有变更通过 PR；至少 1 个批准。
-2. 要求分支在合并前保持最新，所有对话已解决。
-3. 将实际出现的 `Repository Baseline / governance`（docs 为 `Documentation Baseline / documentation`）设为必需状态检查；不得提前填写不存在的 context。
-4. 禁止强推和分支删除；管理员也遵守规则，紧急绕过必须审计。
-5. 限制直接推送，默认 Squash Merge，自动删除已合并功能分支。
-6. 后续加入构建、测试、依赖/Secret 扫描时，先观察稳定状态，再逐项升级为必需检查。
+1. 所有变更通过 PR，至少 1 个批准；新提交会撤销过期批准。
+2. 合并前分支必须保持最新，所有评审对话必须解决。
+3. 必需状态检查使用已实际出现的 context：docs 为 `documentation`，其余六仓库为 `governance`。
+4. 禁止强推和分支删除，管理员同样遵守规则。
+5. 后续加入构建、测试、依赖/Secret 扫描时，先观察稳定状态，再逐项升级为必需检查。
 
 ## 跨仓库项目看板与 M0–M9
 
-建议建立一个组织级项目看板，字段包括：Status、Repository、Milestone、Priority、Type、Owner、Target version、Blocked by、Risk。推荐状态为 Backlog、Ready、In progress、In review、Ready to release、Done。
+已创建组织级 [ArchGuard M0–M9 Roadmap](https://github.com/orgs/AI-ArchGuard/projects/1)。项目使用 Roadmap 布局，现有字段包括 `Status`、`Sub-issues progress`、`Delivery milestone`、`Priority`、`Start date`、`Target date` 和 `Effort`；其中 `Delivery milestone` 为单选字段，选项完整覆盖 M0–M9。GitHub 已占用 `Milestone` 名称，因此使用 `Delivery milestone` 避免与内置语义冲突。Roadmap 默认日期映射为 `Start date` 到 `Target date`。
 
 | 里程碑 | 目标 | 主要仓库 |
 |---|---|---|
@@ -127,17 +126,16 @@
 
 ## 回滚方案
 
-若需回滚，按仓库逐一 revert 对应初始提交并推送；不要删除独立 `.git` 或重写远程历史。docs 中的规范应最后回滚，以便其余仓库在回滚过程中仍可引用治理要求。分支保护和项目看板未产生远程变更，无需回滚。
+若需回滚，按仓库逐一 revert 对应初始提交并通过 PR 合并；不要删除独立 `.git` 或重写远程历史。docs 中的规范应最后回滚，以便其余仓库在回滚过程中仍可引用治理要求。远程治理回滚需逐仓库移除 `main` 保护规则，并在确认没有项目数据需要保留后关闭或删除组织项目；这些操作不得与代码回滚混在同一步执行。
 
-## 远程治理待办
+## 后续治理待办
 
 1. 所有者决定 Apache-2.0、MIT 或暂不授权，并一致处理七仓库许可证。
-2. 为私有仓库启用支持分支保护的 GitHub 方案，或由所有者明确决定将仓库公开；随后按实际 CI context 配置保护规则。
-3. 为自动化凭据增加 `read:project` 与 `project` scope，或由有权限的组织管理员登录 GitHub Projects 页面。
-4. 创建组织级 `ArchGuard M0–M9 Roadmap` 项目及 Milestone 单选字段 M0–M9，把跨仓库 Issue 关联到同一视图。
-5. 使用有权限的 GitHub 身份核验 Issue、PR、Security Advisories 和 Actions 权限。
-6. CI 稳定后再加入 Secret、依赖和供应链扫描；新增工具需记录依赖、许可证和维护成本。
+2. 为组织增加至少一名可评审成员；当前组织只有一名成员，而保护规则要求 1 个批准，提交者不能批准自己的 PR。
+3. 将后续跨仓库 Issue 关联到 `ArchGuard M0–M9 Roadmap`，并填写 `Delivery milestone`、优先级和日期。
+4. 使用有权限的 GitHub 身份核验 Issue、PR、Security Advisories 和 Actions 权限。
+5. CI 稳定后再加入 Secret、依赖和供应链扫描；新增工具需记录依赖、许可证和维护成本。
 
 ## 验证记录
 
-本地验收已覆盖：外层无 `.git`、七个 origin/本地分支/独立 `.git`、必需文件、Markdown 相对链接、YAML 结构、空白错误、常见 Secret 模式、README 边界一致性。七个首轮 GitHub Actions 已远程运行并成功；业务构建和测试尚不存在，因此未运行。
+本地验收已覆盖：外层无 `.git`、七个 origin/本地分支/独立 `.git`、必需文件、Markdown 相对链接、YAML 结构、空白错误、常见 Secret 模式、README 边界一致性。七个首轮 GitHub Actions 已远程运行并成功；docs 的报告更新 CI（run `34139563357`）也已成功。七仓库分支保护已通过 GitHub API 回读核验，项目字段与 Roadmap 日期映射已通过 GitHub 页面核验。业务构建和测试尚不存在，因此未运行。
