@@ -1,0 +1,32 @@
+name: Documentation Baseline
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  documentation:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Verify documentation map
+        shell: bash
+        run: |
+          set -euo pipefail
+          for file in README.md AGENTS.md CONTRIBUTING.md SECURITY.md CHANGELOG.md .editorconfig .gitignore .github/pull_request_template.md .github/ISSUE_TEMPLATE/feature.yml .github/ISSUE_TEMPLATE/bug.yml engineering/governance.md engineering/development-workflow.md engineering/engineering-standards.md engineering/quality-gates.md engineering/security-and-observability.md engineering/release-and-operations.md engineering/prompts.md templates/feature-spec.md templates/technical-design.md templates/adr.md templates/pull-request.md templates/postmortem.md; do
+            test -f "$file"
+          done
+          for directory in product architecture adr requirements runbooks reports; do
+            test -d "$directory"
+          done
+      - name: Check whitespace errors
+        shell: bash
+        run: |
+          baseline_empty_tree="$(git hash-object -t tree /dev/null)"
+          git diff --check "$baseline_empty_tree" HEAD
