@@ -8,23 +8,35 @@
 
 ## 验收结论
 
-七个仓库均有独立 `.git`、与仓库名称一致的 GitHub `origin` 和本地 `main` 初始化分支。外层工作区没有 `.git`。本地没有提交或远程跟踪 ref；远程实时 HEAD 查询受网络环境阻断，因而远程默认分支状态未核验。必须在各仓库初始提交和首轮 CI 完成后复核远程默认分支，再配置分支保护与必需状态检查。
+七个仓库均有独立 `.git`、与仓库名称一致的 GitHub `origin` 和 `main` 默认分支。外层工作区没有 `.git`。七个初始提交已分别推送，首轮 GitHub Actions 均成功。
 
-本阶段只建立治理基线，没有实现业务代码、创建许可证、提交、推送或修改远程设置。
+本阶段只建立治理基线，没有实现业务代码或创建许可证。分支保护因私有仓库套餐限制未能启用；项目看板因现有凭据缺少 Projects 权限未能创建，均已记录为明确待办。
 
 ## 仓库身份与状态
 
 | 仓库 | 绝对路径 | origin | 本地分支 | 独立 Git | 当前状态 |
 |---|---|---|---|---|---|
-| archguard-docs | `C:\Users\Lenovo\Desktop\archguard-workspace\archguard-docs` | `https://github.com/AI-ArchGuard/archguard-docs.git` | `main` | 是 | 无提交；基线文件未跟踪 |
-| archguard-platform | `C:\Users\Lenovo\Desktop\archguard-workspace\archguard-platform` | `https://github.com/AI-ArchGuard/archguard-platform.git` | `main` | 是 | 无提交；基线文件未跟踪 |
-| archguard-scanner | `C:\Users\Lenovo\Desktop\archguard-workspace\archguard-scanner` | `https://github.com/AI-ArchGuard/archguard-scanner.git` | `main` | 是 | 无提交；基线文件未跟踪 |
-| archguard-mcp-gateway | `C:\Users\Lenovo\Desktop\archguard-workspace\archguard-mcp-gateway` | `https://github.com/AI-ArchGuard/archguard-mcp-gateway.git` | `main` | 是 | 无提交；基线文件未跟踪；名称无末尾连字符 |
-| archguard-deploy | `C:\Users\Lenovo\Desktop\archguard-workspace\archguard-deploy` | `https://github.com/AI-ArchGuard/archguard-deploy.git` | `main` | 是 | 无提交；基线文件未跟踪 |
-| archguard-samples | `C:\Users\Lenovo\Desktop\archguard-workspace\archguard-samples` | `https://github.com/AI-ArchGuard/archguard-samples.git` | `main` | 是 | 无提交；基线文件未跟踪 |
-| archguard-evals | `C:\Users\Lenovo\Desktop\archguard-workspace\archguard-evals` | `https://github.com/AI-ArchGuard/archguard-evals.git` | `main` | 是 | 无提交；基线文件未跟踪 |
+| archguard-docs | `C:\Users\Lenovo\Desktop\archguard-workspace\archguard-docs` | `https://github.com/AI-ArchGuard/archguard-docs.git` | `main` | 是 | 初始提交 `65cf95f`；首轮 CI 成功 |
+| archguard-platform | `C:\Users\Lenovo\Desktop\archguard-workspace\archguard-platform` | `https://github.com/AI-ArchGuard/archguard-platform.git` | `main` | 是 | 初始提交 `64f6c7f`；首轮 CI 成功 |
+| archguard-scanner | `C:\Users\Lenovo\Desktop\archguard-workspace\archguard-scanner` | `https://github.com/AI-ArchGuard/archguard-scanner.git` | `main` | 是 | 初始提交 `2b407a6`；首轮 CI 成功 |
+| archguard-mcp-gateway | `C:\Users\Lenovo\Desktop\archguard-workspace\archguard-mcp-gateway` | `https://github.com/AI-ArchGuard/archguard-mcp-gateway.git` | `main` | 是 | 初始提交 `09f9db1`；首轮 CI 成功；名称无末尾连字符 |
+| archguard-deploy | `C:\Users\Lenovo\Desktop\archguard-workspace\archguard-deploy` | `https://github.com/AI-ArchGuard/archguard-deploy.git` | `main` | 是 | 初始提交 `a115f0a`；首轮 CI 成功 |
+| archguard-samples | `C:\Users\Lenovo\Desktop\archguard-workspace\archguard-samples` | `https://github.com/AI-ArchGuard/archguard-samples.git` | `main` | 是 | 初始提交 `ac082be`；首轮 CI 成功 |
+| archguard-evals | `C:\Users\Lenovo\Desktop\archguard-workspace\archguard-evals` | `https://github.com/AI-ArchGuard/archguard-evals.git` | `main` | 是 | 初始提交 `0ad92e4`；首轮 CI 成功 |
 
-远程只读检查：本地 Git 元数据可确认上述 `origin`，但 `git ls-remote --symref origin HEAD` 因当前环境无法连接 GitHub 而未完成；GitHub CLI 也未安装，且没有提供已认证的 GitHub 管理接口。远程默认分支、Issue、PR、分支保护和项目看板的实际配置状态记为“待核验”，不做推断。
+远程检查使用系统中已有的 GitHub 凭据，凭据未写入文件或日志。七个 `main` 均已建立远程跟踪；GitHub API 返回的 Actions run 与本地提交 SHA 完全一致。
+
+## 首轮 CI 证据
+
+| 仓库 | Workflow / Job | 结果 | Run |
+|---|---|---|---|
+| docs | Documentation Baseline / documentation | success | [34137375234](https://github.com/AI-ArchGuard/archguard-docs/actions/runs/34137375234) |
+| samples | Repository Baseline / governance | success | [34137382237](https://github.com/AI-ArchGuard/archguard-samples/actions/runs/34137382237) |
+| scanner | Repository Baseline / governance | success | [34137387351](https://github.com/AI-ArchGuard/archguard-scanner/actions/runs/34137387351) |
+| platform | Repository Baseline / governance | success | [34137390522](https://github.com/AI-ArchGuard/archguard-platform/actions/runs/34137390522) |
+| mcp-gateway | Repository Baseline / governance | success | [34137397448](https://github.com/AI-ArchGuard/archguard-mcp-gateway/actions/runs/34137397448) |
+| evals | Repository Baseline / governance | success | [34137405023](https://github.com/AI-ArchGuard/archguard-evals/actions/runs/34137405023) |
+| deploy | Repository Baseline / governance | success | [34137414798](https://github.com/AI-ArchGuard/archguard-deploy/actions/runs/34137414798) |
 
 ## 职责与依赖方向
 
@@ -73,7 +85,7 @@
 
 ## 默认分支保护建议
 
-在每个仓库完成初始提交并至少产生一次 CI 状态后执行：
+以下是目标策略。对私有仓库调用 GitHub 分支保护 API 时返回 `403`：当前方案需要升级 GitHub Pro/Team 或将仓库设为公开。本次未更改可见性，也没有部分应用保护规则。
 
 1. 将 `main` 设为默认分支，所有变更通过 PR；至少 1 个批准。
 2. 要求分支在合并前保持最新，所有对话已解决。
@@ -115,17 +127,17 @@
 
 ## 回滚方案
 
-本阶段没有提交和远程写操作。若需回滚，按仓库逐一移除本次基线文件或在形成初始提交后 revert 对应仓库提交；不要删除独立 `.git`。docs 中的规范应最后回滚，以便其余仓库在回滚过程中仍可引用治理要求。
+若需回滚，按仓库逐一 revert 对应初始提交并推送；不要删除独立 `.git` 或重写远程历史。docs 中的规范应最后回滚，以便其余仓库在回滚过程中仍可引用治理要求。分支保护和项目看板未产生远程变更，无需回滚。
 
 ## 远程治理待办
 
 1. 所有者决定 Apache-2.0、MIT 或暂不授权，并一致处理七仓库许可证。
-2. 分别审查并提交七个仓库的初始基线，确认远程 `main` 和首轮 CI。
-3. 使用有权限的 GitHub 身份核验 Issue、PR、Security Advisories、Actions 权限和项目看板状态。
-4. 按实际 CI context 配置分支保护，禁止强推和删除。
-5. 创建组织级项目看板及 M0–M9 里程碑，把跨仓库 Issue 关联到同一视图。
+2. 为私有仓库启用支持分支保护的 GitHub 方案，或由所有者明确决定将仓库公开；随后按实际 CI context 配置保护规则。
+3. 为自动化凭据增加 `read:project` 与 `project` scope，或由有权限的组织管理员登录 GitHub Projects 页面。
+4. 创建组织级 `ArchGuard M0–M9 Roadmap` 项目及 Milestone 单选字段 M0–M9，把跨仓库 Issue 关联到同一视图。
+5. 使用有权限的 GitHub 身份核验 Issue、PR、Security Advisories 和 Actions 权限。
 6. CI 稳定后再加入 Secret、依赖和供应链扫描；新增工具需记录依赖、许可证和维护成本。
 
 ## 验证记录
 
-本地验收应覆盖：外层无 `.git`、七个 origin/本地分支/独立 `.git`、必需文件、Markdown 相对链接、YAML 解析、空白错误、常见 Secret 模式、README 边界一致性。由于七仓库尚无提交，GitHub Actions 不能在本地声称已运行；业务构建和测试也尚不存在。
+本地验收已覆盖：外层无 `.git`、七个 origin/本地分支/独立 `.git`、必需文件、Markdown 相对链接、YAML 结构、空白错误、常见 Secret 模式、README 边界一致性。七个首轮 GitHub Actions 已远程运行并成功；业务构建和测试尚不存在，因此未运行。
