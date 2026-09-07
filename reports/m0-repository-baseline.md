@@ -95,7 +95,7 @@
 
 ## 跨仓库项目看板与 M0–M9
 
-已创建组织级 [ArchGuard M0–M9 Roadmap](https://github.com/orgs/AI-ArchGuard/projects/1)。项目使用 Roadmap 布局，现有字段包括 `Status`、`Sub-issues progress`、`Delivery milestone`、`Priority`、`Start date`、`Target date` 和 `Effort`；其中 `Delivery milestone` 为单选字段，选项完整覆盖 M0–M9。GitHub 已占用 `Milestone` 名称，因此使用 `Delivery milestone` 避免与内置语义冲突。Roadmap 默认日期映射为 `Start date` 到 `Target date`。
+已创建组织级 [ArchGuard M0–M9 Roadmap](https://github.com/orgs/AI-ArchGuard/projects/1)。项目使用 Roadmap 布局，现有字段包括 `Status`、`Sub-issues progress`、`Delivery milestone`、`Priority`、`Start date`、`Target date` 和 `Effort`；其中 `Delivery milestone` 为单选字段，选项完整覆盖 M0–M9。GitHub 已占用 `Milestone` 名称，因此使用 `Delivery milestone` 避免与内置语义冲突。Roadmap 默认按 `Delivery milestone` 分组，日期映射为 `Start date` 到 `Target date`。
 
 | 里程碑 | 目标 | 主要仓库 |
 |---|---|---|
