@@ -10,5 +10,6 @@
 | D02 | [术语表](glossary.md) | Scanner、Analyzer、Rule、Finding、Evidence 等术语如何统一 | Draft |
 | D03 | [能力地图](capability-map.md) | 平台、分析、契约和部署能力如何分类 | Draft |
 | D04 | [支持矩阵](support-matrix.md) | 当前已支持、V1 目标和后续候选如何区分 | Draft |
+| D05 | [产品章程](product-charter.md) | 目标用户、价值、指标和非目标如何确定 | Draft |
 
-完成 D01–D06 后进行 G1 产品边界评审。当前 D01–D04 只建立评审基础，不代表 G1 已通过，也不冻结 Scanner 结构或公共 Schema。
+完成 D01–D06 后进行 G1 产品边界评审。当前 D01–D05 只建立评审基础，不代表 G1 已通过，也不冻结 Scanner 结构或公共 Schema。
