@@ -2,7 +2,7 @@
 
 - 检查日期：2026-09-08
 - 工作区：`C:\Users\Lenovo\Desktop\archguard-workspace`
-- Issue：未提供；本次不执行远程 Issue 写操作
+- Issue：已建立 M0–M9 十个阶段 Issue，并纳入组织级 Roadmap
 - 目标版本：M0；未提供语义化版本，不擅自设定
 - 范围：七个 ArchGuard 独立仓库的治理、模板、最小 CI 和本地验收证据
 
@@ -10,7 +10,7 @@
 
 七个仓库均有独立 `.git`、与仓库名称一致的 GitHub `origin` 和 `main` 默认分支。外层工作区没有 `.git`。七个初始提交已分别推送，首轮 GitHub Actions 均成功。
 
-本阶段只建立治理基线，没有实现业务代码或创建许可证。七仓库已公开，`main` 分支保护已在首轮 CI 成功后统一启用；组织级 `ArchGuard M0–M9 Roadmap` 已创建并完成里程碑与日期视图配置。
+本阶段只建立治理基线，没有实现业务代码或创建许可证。七仓库已公开，`main` 分支保护已在首轮 CI 成功后统一启用；组织级 `ArchGuard M0–M9 Roadmap` 已创建，十个跨仓库阶段 Issue 已加入并完成里程碑、优先级和日期配置。
 
 ## 仓库身份与状态
 
@@ -97,18 +97,20 @@
 
 已创建组织级 [ArchGuard M0–M9 Roadmap](https://github.com/orgs/AI-ArchGuard/projects/1)。项目使用 Roadmap 布局，现有字段包括 `Status`、`Sub-issues progress`、`Delivery milestone`、`Priority`、`Start date`、`Target date` 和 `Effort`；其中 `Delivery milestone` 为单选字段，选项完整覆盖 M0–M9。GitHub 已占用 `Milestone` 名称，因此使用 `Delivery milestone` 避免与内置语义冲突。Roadmap 默认按 `Delivery milestone` 分组，日期映射为 `Start date` 到 `Target date`。
 
-| 里程碑 | 目标 | 主要仓库 |
-|---|---|---|
-| M0 | 七仓库基线、治理、模板、最小 CI | 全部 |
-| M1 | 产品范围、总体架构、边界与 ADR | docs |
-| M2 | Java Platform 模块化单体骨架 | platform、docs |
-| M3 | 仓库登记与扫描任务状态机 | platform |
-| M4 | Scanner MVP 与版本化契约 | scanner、samples、docs |
-| M5 | 真实扫描集成、重试与清理 | platform、scanner、samples |
-| M6 | GitHub PR 安全集成 | platform、deploy |
-| M7 | 消息与可靠性演进 | platform、deploy、docs |
-| M8 | Go MCP Gateway 只读工具与治理 | mcp-gateway、platform、evals |
-| M9 | Evals 基线与安全门禁 | evals、samples、docs |
+| 里程碑 | 目标 | 主要仓库 | 阶段 Issue | 优先级 | 开始日期 | 目标日期 |
+|---|---|---|---|---|---|---|
+| M0 | 七仓库基线、治理、模板、最小 CI | 全部 | [archguard-docs#2](https://github.com/AI-ArchGuard/archguard-docs/issues/2) | High | 2026-09-07 | 2026-09-08 |
+| M1 | 产品范围、总体架构、边界与 ADR | docs | [archguard-docs#3](https://github.com/AI-ArchGuard/archguard-docs/issues/3) | High | 2026-09-09 | 2026-09-22 |
+| M2 | Java Platform 模块化单体骨架 | platform、docs | [archguard-platform#1](https://github.com/AI-ArchGuard/archguard-platform/issues/1) | High | 2026-09-23 | 2026-10-06 |
+| M3 | 仓库登记与扫描任务状态机 | platform | [archguard-platform#2](https://github.com/AI-ArchGuard/archguard-platform/issues/2) | High | 2026-10-07 | 2026-10-20 |
+| M4 | Scanner MVP 与版本化契约 | scanner、samples、docs | [archguard-scanner#1](https://github.com/AI-ArchGuard/archguard-scanner/issues/1) | High | 2026-10-21 | 2026-11-03 |
+| M5 | 真实扫描集成、重试与清理 | platform、scanner、samples | [archguard-platform#3](https://github.com/AI-ArchGuard/archguard-platform/issues/3) | Medium | 2026-11-04 | 2026-11-17 |
+| M6 | GitHub PR 安全集成 | platform、deploy | [archguard-platform#4](https://github.com/AI-ArchGuard/archguard-platform/issues/4) | Medium | 2026-11-18 | 2026-12-01 |
+| M7 | 消息与可靠性演进 | platform、deploy、docs | [archguard-platform#5](https://github.com/AI-ArchGuard/archguard-platform/issues/5) | Medium | 2026-12-02 | 2026-12-15 |
+| M8 | Go MCP Gateway 只读工具与治理 | mcp-gateway、platform、evals | [archguard-mcp-gateway#1](https://github.com/AI-ArchGuard/archguard-mcp-gateway/issues/1) | Low | 2026-12-16 | 2026-12-29 |
+| M9 | Evals 基线与安全门禁 | evals、samples、docs | [archguard-evals#1](https://github.com/AI-ArchGuard/archguard-evals/issues/1) | Low | 2026-12-30 | 2027-01-12 |
+
+M0 已完成并关闭；M1–M9 保持开放。M1 起采用连续两周节奏，阶段边界不重叠。
 
 阶段 10–13 保留在后续路线图，不混入 M0–M9 初始化看板配置。
 
@@ -132,10 +134,9 @@
 
 1. 所有者决定 Apache-2.0、MIT 或暂不授权，并一致处理七仓库许可证。
 2. 为组织增加至少一名可评审成员；当前组织只有一名成员，而保护规则要求 1 个批准，提交者不能批准自己的 PR。
-3. 将后续跨仓库 Issue 关联到 `ArchGuard M0–M9 Roadmap`，并填写 `Delivery milestone`、优先级和日期。
-4. 使用有权限的 GitHub 身份核验 Issue、PR、Security Advisories 和 Actions 权限。
-5. CI 稳定后再加入 Secret、依赖和供应链扫描；新增工具需记录依赖、许可证和维护成本。
+3. 使用有权限的 GitHub 身份核验 Issue、PR、Security Advisories 和 Actions 权限。
+4. CI 稳定后再加入 Secret、依赖和供应链扫描；新增工具需记录依赖、许可证和维护成本。
 
 ## 验证记录
 
-本地验收已覆盖：外层无 `.git`、七个 origin/本地分支/独立 `.git`、必需文件、Markdown 相对链接、YAML 结构、空白错误、常见 Secret 模式、README 边界一致性。七个首轮 GitHub Actions 已远程运行并成功；docs 的报告更新 CI（run `34139563357`）也已成功。七仓库分支保护已通过 GitHub API 回读核验，项目字段与 Roadmap 日期映射已通过 GitHub 页面核验。业务构建和测试尚不存在，因此未运行。
+本地验收已覆盖：外层无 `.git`、七个 origin/本地分支/独立 `.git`、必需文件、Markdown 相对链接、YAML 结构、空白错误、常见 Secret 模式、README 边界一致性。七个首轮 GitHub Actions 已远程运行并成功；docs 的报告更新 CI（run `34139563357`）也已成功。七仓库分支保护已通过 GitHub API 回读核验。十个阶段 Issue 的状态、优先级、开始日期和目标日期已通过 GitHub API 回读；Roadmap 的 M0–M9 分组及每组 1 个事项已通过 GitHub 页面核验。业务构建和测试尚不存在，因此未运行。
