@@ -4,7 +4,7 @@
 - 适用范围：ArchGuard 产品能力的分类与边界
 - 所有者：ArchGuard 项目所有者
 - 依赖决策：产品定位与公共术语草案
-- 最后评审：2026-09-09（同步 G2 架构边界；G1 能力分类不变）
+- 最后评审：2026-09-09（同步 G4 V1 能力范围；分类不变）
 - 取代/被取代：无
 
 ## 本文解决的问题
@@ -13,7 +13,7 @@
 
 ## 当前事实
 
-- 当前仅完成 M0 治理与文档基线，没有可运行的产品或 Analyzer 能力。
+- 当前已完成 M0 治理和 M1 G1–G4 文档关卡，没有可运行的产品或 Analyzer 能力。
 - 现有仓库 README 已区分 Platform、Scanner、MCP Gateway、Deploy、Samples 和 Evals 的高层职责。
 - 组件、进程、仓库和 Analyzer Registry 关系已通过 G2；公共字段、Rule 职责和安全默认值已通过 G3。
 
@@ -62,7 +62,7 @@
 | JVM 制品分析 | 字节码、类路径和已编译依赖关系。 | V1 增强项，不是发布门槛。 |
 | Spring 语义分析 | Bean、注入、分层、模块和框架配置关系。 | V1 深度支持方向。 |
 | 其他语言分析 | Go、TypeScript、Kotlin、Scala 等语言前端与规则。 | V1 之外的候选，不是当前支持。 |
-| Maven 元数据分析 | 只读解析 POM 等静态元数据，不执行目标构建。 | V1 必选方向，具体字段范围待 Feature Spec。 |
+| Maven 元数据分析 | 只读解析 POM 等静态元数据，不执行目标构建。 | V1 必选；覆盖 POM 4.0.0 本地闭包的 module/dependency 范围。 |
 | Gradle 元数据分析 | 只读解析可安全识别的静态元数据，不执行插件或任务。 | V1 增强项，不是发布门槛。 |
 | 其他工程制品分析 | 依赖清单、容器或部署配置。 | 单独声明范围；不因 Deploy 仓库存在而自动支持。 |
 | 跨技术栈关联 | 把多个 Analyzer 的事实连接为跨仓库视图。 | 长期方向，依赖稳定契约和至少两个已支持 Analyzer。 |
@@ -111,12 +111,11 @@
 - 确定性规则作为事实基础，LLM 只承担解释、归纳和低风险建议。
 - V1 以 Java 源码、Spring 语义和 Maven 静态元数据为必选分析范围；JVM 字节码与 Gradle 静态元数据为增强项；PR、MCP 和 AI 能力不进入 V1。
 
-能力分类及 V1 归属已在 G1 评审中接受；组件所有权、Registry 和 V1 进程边界已在 G2 接受，公共契约、Rule 执行语义和安全默认值已在 G3 接受。
+能力分类及 V1 归属已在 G1 评审中接受；组件所有权、Registry 和 V1 进程边界已在 G2 接受，公共契约、Rule 执行语义和安全默认值已在 G3 接受，四个 V1 Capability 与七类公共 Fact 已在 G4 接受。
 
 ## 开放问题
 
-- V1 的 Java 源码与 Spring 语义覆盖到何种深度？
-- Maven 静态元数据需要覆盖哪些元素，无法静态判断时如何诊断？
+- Java、Spring 与 Maven 的具体 Analyzer 代码模块、解析库和内部 Fact 如何组织？由 M4 Technical Design 决定。
 - JVM 字节码与 Gradle 增强项分别采用什么进入条件？
 - 哪些通用能力由 Scanner runtime 提供，哪些由 Analyzer 自行实现？
 - 跨技术栈关联何时具备足够事实模型和验收样例？
@@ -128,3 +127,4 @@
 - [术语表](glossary.md)为本地图使用的核心概念提供统一含义。
 - D01–D04 范围评审已确认必选能力、增强项与 V1 非目标。
 - [G1 产品边界评审记录](../reports/g1-product-boundary-review.md)确认了能力分类、V1 归属和后续路线图边界。
+- [D14 V1 Feature Spec](../requirements/v1-java-spring-feature-spec.md)与 [G4 评审记录](../reports/g4-v1-readiness-review.md)确认 V1 Capability、Fact、Rule 和限制。

@@ -85,6 +85,8 @@
 
 MCP Gateway 和 Evals 被放在 AI 评审之前，使工具边界、安全策略和评估基线先于模型功能建立。
 
+V1 的阶段 2–5 必须遵循 [D14 Feature Spec](../requirements/v1-java-spring-feature-spec.md)、[D15 验收矩阵](../requirements/v1-acceptance-matrix.md)和[D16 交付追踪与阶段入口](../requirements/v1-delivery-traceability.md)。G4 已于 2026-09-09 通过，允许开始阶段 2；仍须逐阶段填写并评审 Issue、Technical Design、版本和基线参数，不能把 G4 当作后续实现的通用授权。
+
 ## 阶段索引
 
 | 阶段 | 文件 | 主要结果 |

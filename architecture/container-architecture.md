@@ -156,6 +156,8 @@ sequenceDiagram
 
 以上边界已于 2026-09-09 通过 G2 评审；传输、Schema 和容量机制仍由对应后续设计冻结。
 
+对应选择由 [ADR-0004：Platform 模块化单体](../adr/0004-platform-modular-monolith.md)和 [ADR-0005：PostgreSQL 业务事实来源](../adr/0005-postgresql-business-source-of-truth.md)正式记录，不改变本文件的 G2 结论。
+
 ## 非目标
 
 - 不选择 HTTP、gRPC、命令协议、消息 Broker 或序列化库。

@@ -14,4 +14,4 @@
 | D12 | [结果与 Rule 模型](result-rule-model.md) | Fact、Finding、Evidence、Diagnostic、Policy 和 Rule 的字段与职责 | Accepted |
 | D13 | [不可信 Repository 安全](untrusted-repository-security.md) | 输入获取、文件、进程、网络、凭据、清理和保留采用什么默认值 | Accepted |
 
-D07–D10 已于 2026-09-09 通过 [G2 架构边界评审](../reports/g2-architecture-boundary-review.md)，D11–D13 又于同日通过 [G3 契约与安全评审](../reports/g3-contract-security-review.md)。下一步可以进入 G4 V1 可开发性；G3 不表示任何机器 Schema 或运行时能力已经交付。
+D07–D10 已于 2026-09-09 通过 [G2 架构边界评审](../reports/g2-architecture-boundary-review.md)，D11–D13 又于同日通过 [G3 契约与安全评审](../reports/g3-contract-security-review.md)，D14–D16 已通过 [G4 V1 可开发性评审](../reports/g4-v1-readiness-review.md)。G4 允许开始 M2 设计，不表示任何机器 Schema 或运行时能力已经交付。
