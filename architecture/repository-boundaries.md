@@ -131,7 +131,7 @@ G2 当前只修改 Docs，没有运行时契约或制品变化；回滚本分支
 - Samples 与 Evals 只作为测试/评估输入，Deploy 只组合已发布制品。
 - Docs 保存规范语义和评审证据，Deploy 保存已验证的运行制品兼容组合。
 
-以上边界已于 2026-09-09 通过 G2 评审；契约制品格式和首个版本仍由 G3 冻结。
+以上边界已于 2026-09-09 通过 G2 评审；G3 又接受 JSON Schema Draft 2020-12 和首个契约版本 `0.1.0`，机器制品仍由 M4 交付。
 
 ## 非目标
 
@@ -142,7 +142,7 @@ G2 当前只修改 Docs，没有运行时契约或制品变化；回滚本分支
 
 ## 开放问题
 
-- Scanner 契约以 JSON Schema、OpenAPI、Protobuf 还是其他形式发布？由 D11 和 M4 Technical Design 决定。
+- Scanner 契约已由 D11 选择 JSON Schema Draft 2020-12；文件组织、代码生成和测试工具由 M4 Technical Design 决定。
 - 是否需要独立的契约制品仓库？当前答案为否，只有多提供方或发布治理证据出现时重新评估。
 - Gateway 是否存在不经过 Platform 的实际 V3 用例？由 V3 Feature Spec 决定；没有证据时不开放。
 - Deploy 兼容矩阵的机器可读格式和制品签名要求是什么？由 M11 决定。

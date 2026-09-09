@@ -15,7 +15,7 @@
 
 - 当前仅完成 M0 治理与文档基线，没有可运行的产品或 Analyzer 能力。
 - 现有仓库 README 已区分 Platform、Scanner、MCP Gateway、Deploy、Samples 和 Evals 的高层职责。
-- 组件、进程、仓库和 Analyzer Registry 关系已通过 G2；公共字段、Rule 职责和安全策略仍待 G3 决定。
+- 组件、进程、仓库和 Analyzer Registry 关系已通过 G2；公共字段、Rule 职责和安全默认值已通过 G3。
 
 ## 分类原则
 
@@ -111,7 +111,7 @@
 - 确定性规则作为事实基础，LLM 只承担解释、归纳和低风险建议。
 - V1 以 Java 源码、Spring 语义和 Maven 静态元数据为必选分析范围；JVM 字节码与 Gradle 静态元数据为增强项；PR、MCP 和 AI 能力不进入 V1。
 
-能力分类及 V1 归属已在 G1 评审中接受；组件所有权、Registry 和 V1 进程边界已在 G2 接受，公共契约和 Rule 执行语义仍由 G3 决定。
+能力分类及 V1 归属已在 G1 评审中接受；组件所有权、Registry 和 V1 进程边界已在 G2 接受，公共契约、Rule 执行语义和安全默认值已在 G3 接受。
 
 ## 开放问题
 

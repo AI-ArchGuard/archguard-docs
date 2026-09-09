@@ -22,7 +22,7 @@ V1 不追求多语言广度，优先深度支持 Java/Spring；“多技术栈�
 - 截至 M0，七个仓库只完成治理、模板和最小 CI 基线，业务工程骨架、Analyzer、扫描契约和端到端流程均未交付。
 - 当前可以评审的是产品与工程边界，不能声称已具备 Java、Spring、Go、TypeScript 或部署配置分析能力。
 - `archguard-docs` 是产品、需求、总体架构、ADR 和跨仓库规范的事实来源。
-- Platform、Scanner、Registry、Analyzer 和七仓库关系已通过 G2 架构边界评审；字段级契约、Rule 职责和安全机制仍待 G3 确认。
+- Platform、Scanner、Registry、Analyzer 和七仓库关系已通过 G2 架构边界评审；字段级契约、Rule 职责和安全默认值已通过 G3 契约与安全评审。
 
 ## 目标状态
 
