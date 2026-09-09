@@ -7,3 +7,4 @@
 - [M0 仓库基线验收](m0-repository-baseline.md)
 - [G1 产品边界评审](g1-product-boundary-review.md)
 - [G2 架构边界评审](g2-architecture-boundary-review.md)
+- [G3 契约与安全评审](g3-contract-security-review.md)

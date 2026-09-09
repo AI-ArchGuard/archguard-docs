@@ -18,7 +18,7 @@
 - V1 必选分析范围是 Java 源码、Spring 语义和只读 Maven 静态元数据；JVM 字节码和 Gradle 为增强项。
 - Analyzer 是声明能力并产生 Fact、Finding 或 Diagnostic 的分析单元；Scanner 是协调 Analyzer 的运行时边界。
 - V1 不执行目标 Repository 的构建、脚本、插件、任务或任意命令。
-- G3 尚未决定 Rule 执行所有权、结果字段、部分成功语义和不可信 Repository 安全默认值。
+- G3 已接受 Rule 执行所有权、结果字段、部分成功语义和不可信 Repository 安全默认值；机器 Schema 与实现仍待 M4/M5。
 
 ## 逻辑组件
 
@@ -68,7 +68,7 @@ flowchart LR
 
 ## Analyzer 能力声明
 
-每个随制品发布的 Analyzer 必须提供机器可校验的描述；D11 冻结具体字段前，G2 只要求以下语义：
+每个随制品发布的 Analyzer 必须提供机器可校验的描述；D11–D12 已冻结公共契约与结果语义，本节继续规定 G2 的 Analyzer 描述边界：
 
 | 声明项 | 用途 | 约束 |
 |---|---|---|
@@ -77,7 +77,7 @@ flowchart LR
 | 输入类型与版本范围 | 判断是否能处理当前输入 | 未声明即不执行，不用“尽力猜测”冒充支持 |
 | 提供的 Capability | 供 planner 做显式选择 | 只声明有自动化验收证据的能力 |
 | 配置 Schema/版本 | 在执行前拒绝未知或非法配置 | 不接受任意反射参数或脚本 |
-| 输出类别 | 声明可能产生 Fact、Finding、Evidence、Diagnostic 或统计 | 具体字段和 Rule 归属由 G3 决定 |
+| 输出类别 | 声明可能产生 Fact、Finding、Evidence、Diagnostic 或统计 | 具体字段和 Rule 归属遵循 D11–D12 |
 | 资源与权限需求 | 供 runtime 应用预算和隔离 | V1 Analyzer 默认无网络、无凭据、只读工作区 |
 | 依赖能力 | 表达 Spring 语义对 Java Fact 等显式前置 | 禁止通过调用另一个 Analyzer 内部类形成隐藏依赖 |
 
@@ -157,7 +157,7 @@ sequenceDiagram
 ## 可观测与可重复性边界
 
 - 每次 Scan 记录 traceId、Scanner 版本、契约版本、Analyzer 身份/版本、输入不可变标识、配置摘要、状态、耗时和资源摘要。
-- 日志不记录 Token、完整源码、未经最小化的 AST 或隐藏推理；Evidence 是否包含片段由 G3 决定。
+- 日志不记录 Token、完整源码、未经最小化的 AST 或隐藏推理；D12 `0.1.0` Evidence 不包含源码片段。
 - 相同不可变输入、Analyzer/Rule/配置版本和资源条件应产生稳定排序的同语义结果。
 - 时间、随机数、文件遍历顺序、Locale 和外部网络不得成为未声明的结果变量。
 - Analyzer 能力升级必须用 `archguard-samples` 黄金用例证明正常、违规、失败和边界行为。
@@ -180,7 +180,7 @@ sequenceDiagram
 - Analyzer 通过稳定能力声明参与选择，Platform 只表达所需能力而不指定实现类。
 - 跨能力依赖通过规范化输出或 Scanner 内部显式接口表达，不泄漏私有解析对象到公共契约。
 
-以上边界已于 2026-09-09 通过 G2 评审；公共字段、Rule 归属和隔离阈值仍由 G3 冻结。
+以上边界已于 2026-09-09 通过 G2 评审；公共字段、Rule 归属和安全默认值又于同日通过 G3 评审。具体资源数值仍由 M4 基线与 Deploy 固定。
 
 ## 非目标
 
@@ -193,9 +193,9 @@ sequenceDiagram
 ## 开放问题
 
 - Java、Spring、Maven 应拆成几个代码模块和 Analyzer 身份？由 D14 Feature Spec 与 M4 Technical Design 决定。
-- Rule 求值由 Scanner runtime 的通用执行器还是能力特定 Analyzer 承担？由 D12 和对应 ADR 决定。
-- 部分成功的总体状态、重试粒度、结果去重和未知输出如何表达？由 D11–D12 决定。
-- V1 的输入物化、文件系统隔离和操作系统资源限制如何实现？由 D13 决定。
+- Rule Executor 的代码接口和 Analyzer 注册机制如何实现？由 M4 Technical Design 在 D12 与 ADR-0002 边界内决定。
+- 部分成功、重试、去重和未知输出的机器 Schema 如何组织？由 M4 Technical Design 在 D11–D12 语义内决定。
+- V1 的输入适配器、文件系统隔离和操作系统资源限制采用哪些具体组件与数值？由 D14、M4/M5 Technical Design 和 Deploy 决定。
 - 首个需要子进程隔离的触发条件是什么？在原生工具或不同信任级能力出现时重新评估。
 
 ## 验收证据
