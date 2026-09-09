@@ -4,7 +4,7 @@
 - 适用范围：ArchGuard 长期产品定位与 V1 技术栈边界
 - 所有者：ArchGuard 项目所有者
 - 依赖决策：M0 仓库与治理基线
-- 最后评审：2026-09-08（G1 产品边界评审通过）
+- 最后评审：2026-09-09（同步 G2 架构边界；G1 产品结论不变）
 - 取代/被取代：无
 
 ## 本文解决的问题
@@ -22,7 +22,7 @@ V1 不追求多语言广度，优先深度支持 Java/Spring；“多技术栈�
 - 截至 M0，七个仓库只完成治理、模板和最小 CI 基线，业务工程骨架、Analyzer、扫描契约和端到端流程均未交付。
 - 当前可以评审的是产品与工程边界，不能声称已具备 Java、Spring、Go、TypeScript 或部署配置分析能力。
 - `archguard-docs` 是产品、需求、总体架构、ADR 和跨仓库规范的事实来源。
-- 已建立 Platform、Scanner、MCP Gateway、Deploy、Samples 和 Evals 的仓库级职责草案；更细的运行时关系仍需后续架构关卡确认。
+- Platform、Scanner、Registry、Analyzer 和七仓库关系已通过 G2 架构边界评审；字段级契约、Rule 职责和安全机制仍待 G3 确认。
 
 ## 目标状态
 
