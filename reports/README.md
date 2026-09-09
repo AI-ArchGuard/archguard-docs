@@ -1,11 +1,9 @@
 # Reports
 
-保存评估、性能、安全、发布和演练的可复现证据；不得包含密钥、个人数据或真实客户源码。
+本目录只保存阶段退出、正式发布、性能基线、安全测试和故障演练的可复现证据。日常 CI 输出保留在 CI/PR，不为每个切片创建独立验收报告。
 
-## 关卡与基线报告
+## 当前有效报告
 
-- [M0 仓库基线验收](m0-repository-baseline.md)
-- [G1 产品边界评审](g1-product-boundary-review.md)
-- [G2 架构边界评审](g2-architecture-boundary-review.md)
-- [G3 契约与安全评审](g3-contract-security-review.md)
-- [G4 V1 可开发性评审](g4-v1-readiness-review.md)
+- [阶段 0 Foundation 验收](2026-09-10-foundation-acceptance.md)
+
+报告必须写明对象版本、环境、执行方式、结果和未验证项，不得包含密钥、个人数据或真实客户源码。被新阶段报告完全取代且没有合规保留要求时，应删除旧报告并同步链接。

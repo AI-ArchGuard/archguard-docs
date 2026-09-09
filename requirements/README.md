@@ -1,13 +1,9 @@
 # Requirements
 
-保存 Feature Spec 和验收标准。新需求从 [`../templates/feature-spec.md`](../templates/feature-spec.md) 创建。
+本目录只保留当前或已发布能力的 Feature Spec。每个 Spec 使用产品能力命名，并直接绑定路线阶段和验收标准。
 
-## 规范索引
+| 文档 | 阶段 | 状态 |
+|---|---:|---|
+| [Java Scanner MVP](scanner-v0.2-feature-spec.md) | 1 | In Progress；S1 完成，S2 下一步 |
 
-| 切片 | 文档 | 内容 | 状态 |
-|---|---|---|---|
-| D14 | [V1 Java/Spring Feature Spec](v1-java-spring-feature-spec.md) | V1 用户闭环、技术栈版本、Capability、Fact、Rule 和稳定需求 ID | Ready |
-| D15 | [V1 验收矩阵](v1-acceptance-matrix.md) | 每项需求的样例、场景、测试层、所有者和证据 | Accepted |
-| D16 | [V1 交付追踪与阶段入口](v1-delivery-traceability.md) | 需求—架构—仓库—里程碑追踪和 M2–M5 入口/退出 | Accepted |
-
-D14–D16 已于 2026-09-09 通过 [G4 V1 可开发性评审](../reports/g4-v1-readiness-review.md)。允许在 M2 Issue 和 Technical Design 评审后开始 Platform 骨架；目标能力仍不是“已支持”。
+新功能从 [`../templates/feature-spec.md`](../templates/feature-spec.md) 创建。实现步骤和类设计不得写入 Feature Spec，应进入生产者仓库 Technical Design。

@@ -22,14 +22,14 @@ Platform 与 Scanner 是独立进程和仓库。若共享 Platform DTO、Java �
 - `archguard-scanner` 拥有 Schema/示例制品，`archguard-docs` 拥有规范语义，Platform 只消费公开契约。
 - `0.MINOR` 是兼容线；字段、枚举或语义变化使用新 MINOR 并与旧线并行迁移，PATCH 不改变结构。
 - 对象默认拒绝未知字段；无共同兼容线、未知枚举或无效引用均失败关闭。
-- transport adapter 可以替换，但不得改变 D11 的身份、幂等、状态和部分成功语义。
+- transport adapter 可以替换，但不得改变已发布契约的身份、幂等、状态和部分成功语义。
 
 ## 备选方案
 
 - 共享 Java DTO：类型安全但绑定语言、构建和内部发布节奏，拒绝。
 - 复用 Platform REST/数据库模型：泄漏业务所有权和持久化细节，拒绝。
 - 宽松无版本 JSON：前期简单，但无法证明兼容和拒绝恶意字段，拒绝。
-- Protobuf/gRPC：机器契约强，但会提前绑定 transport/toolchain；G3 暂不选择。
+- Protobuf/gRPC：机器契约强，但会提前绑定 transport/toolchain；当前不选择。
 
 ## 正面影响
 
@@ -53,4 +53,4 @@ Platform 与 Scanner 是独立进程和仓库。若共享 Platform DTO、Java �
 
 - JSON 消息成为可测量的性能瓶颈，或多语言 SDK 需要更强代码生成时。
 - 出现多个独立 Scanner 提供方，需要独立 Schema Registry 或标准化协议时。
-- 新 transport 无法保持 D11 语义时，必须以新 ADR 取代而非绕过。
+- 新 transport 无法保持已发布契约语义时，必须以新 ADR 取代而非绕过。

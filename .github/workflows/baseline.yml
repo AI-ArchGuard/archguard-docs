@@ -19,10 +19,11 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          for file in README.md AGENTS.md CONTRIBUTING.md SECURITY.md CHANGELOG.md .editorconfig .gitignore .github/pull_request_template.md .github/ISSUE_TEMPLATE/feature.yml .github/ISSUE_TEMPLATE/bug.yml engineering/governance.md engineering/development-workflow.md engineering/engineering-standards.md engineering/quality-gates.md engineering/security-and-observability.md engineering/release-and-operations.md engineering/prompts.md templates/feature-spec.md templates/technical-design.md templates/adr.md templates/pull-request.md templates/postmortem.md; do
+          for file in README.md LICENSE AGENTS.md CONTRIBUTING.md SECURITY.md CHANGELOG.md .editorconfig .gitignore .github/pull_request_template.md .github/ISSUE_TEMPLATE/feature.yml .github/ISSUE_TEMPLATE/bug.yml product/README.md product/vision.md product/scope.md product/roadmap.md product/glossary.md architecture/README.md architecture/context.md architecture/containers.md adr/README.md adr/0001-versioned-scanner-contract.md adr/0002-deterministic-rule-execution.md adr/0003-untrusted-repository-default-deny.md adr/0004-platform-modular-monolith.md adr/0005-postgresql-business-source-of-truth.md adr/0006-java-first-phased-delivery.md development/README.md development/git-convention.md development/coding-standard.md development/testing-strategy.md development/definition-of-done.md development/phase-gates.md development/documentation-standard.md contracts/README.md operations/README.md requirements/README.md requirements/scanner-v0.2-feature-spec.md reports/README.md reports/2026-09-10-foundation-acceptance.md templates/feature-spec.md templates/technical-design.md templates/adr.md templates/pull-request.md templates/postmortem.md; do
             test -f "$file"
           done
-          for directory in product architecture adr requirements runbooks reports; do
+          echo "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4  LICENSE" | sha256sum --check --strict
+          for directory in product architecture adr requirements development contracts operations reports templates; do
             test -d "$directory"
           done
       - name: Check whitespace errors

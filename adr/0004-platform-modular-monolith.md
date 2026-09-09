@@ -7,11 +7,11 @@
 
 ## 背景
 
-Platform 需要在 V1 管理身份与资源归属、Project、Repository、Policy、Scan、结果和审计。这些能力共享授权与事务边界，当前没有独立团队、差异化扩缩、故障隔离或发布节奏证据支持拆成微服务。G2 已接受 D08 的模块化单体边界，但此前缺少独立 ADR。
+Platform 需要管理身份与资源归属、Project、Repository、RuleSet、ScanJob、Finding、基线和审计。这些能力共享授权与事务边界，当前没有独立团队、差异化扩缩、故障隔离或发布节奏证据支持拆成微服务。
 
 ## 决策驱动因素
 
-- V1 先验证手动 Java/Spring 治理闭环，降低分布式一致性和部署成本。
+- 阶段 2 先验证手动 Java 治理闭环，降低分布式一致性和部署成本。
 - 领域模块必须拥有明确边界，避免单体退化为任意内部调用和跨表写入。
 - Platform 与处理不可信输入的 Scanner 必须保持独立进程。
 - 架构应允许未来基于容量、团队或隔离证据提取服务，而不是预先拆分。
@@ -19,7 +19,7 @@ Platform 需要在 V1 管理身份与资源归属、Project、Repository、Polic
 ## 选择
 
 - Platform 初期发布为一个 Java/Spring Boot 模块化单体制品；API 和后台执行器可以是同一制品的不同运行模式，不形成新领域服务。
-- 初始领域模块候选为 `identity`、`project`、`repository`、`policy`、`scan`、`result`、`architecture` 和 `audit`；M2 可以调整名称，但不能取消所有权边界。
+- 初始领域模块为 `identity`、`project`、`ruleset`、`scanjob`、`finding`、`baseline` 和 `audit`；阶段 2 可以基于实现证据调整名称，但不能取消所有权边界。
 - 每个模块拥有自己的领域模型、应用用例和持久化映射；跨模块只调用公开应用接口或显式领域/应用事件。
 - 领域层不依赖 Spring Web、数据库驱动或 Scanner SDK；REST、数据库、后台执行器和 Scanner adapter 都是边界适配器。
 - 事务边界位于应用层；初期优先使用同库事务和可追踪事件，不引入分布式事务。
@@ -34,7 +34,7 @@ Platform 需要在 V1 管理身份与资源归属、Project、Repository、Polic
 
 ## 正面影响
 
-- V1 可以用单一构建和部署验证产品控制面，事务和本地调试更直接。
+- 阶段 2 可以用单一构建和部署验证产品控制面，事务和本地调试更直接。
 - 领域所有权、依赖方向和适配器边界仍可通过架构测试自动约束。
 - 未来服务提取有明确模块边界和可度量触发条件。
 
@@ -46,7 +46,7 @@ Platform 需要在 V1 管理身份与资源归属、Project、Repository、Polic
 
 ## 验证方式
 
-- M2 架构测试阻止领域层依赖 Web/数据库/Scanner 实现，并阻止未声明的跨模块内部依赖。
+- Platform 架构测试阻止领域层依赖 Web、数据库或 Scanner 实现，并阻止未声明的跨模块内部依赖。
 - 模块测试证明应用接口、事务和事件边界，不使用跨模块表写入完成用例。
 - 构建只产生一个 Platform 应用制品；Scanner 作为独立进程通过 Fake/真实 adapter 替换验证。
 - 每次新增模块或依赖边记录所有者、允许方向和循环依赖检查。

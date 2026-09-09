@@ -7,18 +7,18 @@
 
 ## 背景
 
-Repository 可以包含恶意路径、归档、Git 配置、构建脚本、插件、二进制和提示注入内容。V1 只需要静态 Java/Spring/Maven 分析，没有执行目标代码或开放分析期网络的产品价值。
+Repository 可以包含恶意路径、归档、Git 配置、构建脚本、插件、二进制和提示注入内容。当前 Java Scanner 只需要静态分析，没有执行目标代码或开放分析期网络的产品价值。
 
 ## 决策驱动因素
 
 - 源码、凭据、Scanner 主机和 Platform 业务数据是核心资产。
-- V1 已明确不执行构建、脚本、插件、任务或任意命令。
+- 阶段 1 已明确不执行构建、脚本、插件、任务或任意命令。
 - Analyzer 与 Scanner 同进程，需要在输入、OS、网络和资源层降低风险。
 - 安全失败必须可审计、可清理且不伪装成 Finding。
 
 ## 选择
 
-- Repository 永远作为不可信数据；V1 禁止其中的任何可执行代码、动态 Analyzer、Git hook/filter、LFS 进程和 submodule 初始化。
+- Repository 永远作为不可信数据；Scanner 禁止其中的任何可执行代码、动态 Analyzer、Git hook/filter、LFS 进程和 submodule 初始化。
 - 输入获取阶段仅开放 allowlist 网络和短期只读凭据；验证及分析阶段无网络、无凭据、输入只读。
 - Scanner 非 root、无特权、无容器 socket，并对文件、字节、深度、时间、内存、进程和输出使用有限硬上限。
 - 路径规范化后仍必须位于任务根；不跟随根外 symlink/junction/hardlink，拒绝特殊文件和归档逃逸。
@@ -34,7 +34,7 @@ Repository 可以包含恶意路径、归档、Git 配置、构建脚本、插�
 
 ## 正面影响
 
-- 显著收窄 V1 攻击面、凭据暴露窗口和数据保留范围。
+- 显著收窄 Scanner 攻击面、凭据暴露窗口和数据保留范围。
 - 安全测试可以围绕明确默认值和失败行为自动化。
 - 未来放宽必须显式声明和评审，不会由 Repository 内容隐式启用。
 
