@@ -15,3 +15,4 @@
 - 接受 Java-first、Scanner-first 的八阶段路线和六平面架构。
 - 七仓库统一采用 Apache License 2.0，并关闭 `v0.1.0-foundation`。
 - 发布 Java Scanner MVP Feature Spec，记录 Scanner S1 完成状态。
+- 增加阶段 1–7 文档交付计划、模板索引和自动断链/旧编号检查。

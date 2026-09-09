@@ -22,6 +22,7 @@ ArchGuard 的跨仓库产品、架构、工程规范、契约索引和阶段证�
 | 当前功能范围 | [Java Scanner MVP](requirements/scanner-v0.2-feature-spec.md) |
 | 工程约定 | [开发规范](development/README.md) |
 | 文档治理 | [文档编写规范](development/documentation-standard.md) |
+| 后续文档产物与节奏 | [文档交付计划](development/documentation-delivery-plan.md) |
 | 跨仓库接口状态 | [契约索引](contracts/README.md) |
 | 部署和运行原则 | [运维规范](operations/README.md) |
 | 架构决策 | [ADR 索引](adr/README.md) |
@@ -39,7 +40,7 @@ ArchGuard 的跨仓库产品、架构、工程规范、契约索引和阶段证�
 | `contracts/` | 契约所有者、版本和兼容状态索引 |
 | `operations/` | 配置、部署、可观测、安全和恢复原则 |
 | `reports/` | 阶段退出、发布、性能、安全和演练证据 |
-| `templates/` | Feature Spec、Technical Design、ADR、PR 和复盘模板 |
+| [`templates/`](templates/README.md) | Feature Spec、Technical Design、ADR、PR 和复盘模板 |
 
 实现细节与源码一起维护：例如 Scanner S1 Technical Design 位于 `archguard-scanner/docs/technical-design/`。临时计划、任务拆分、评审对话和执行提示放在 Issue/PR，不进入长期文档库。
 
