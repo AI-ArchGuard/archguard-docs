@@ -18,7 +18,7 @@
 - 当前没有 ScanRequest/ScanResult 代码、Schema、Scanner 制品或跨仓库契约测试。
 - Platform 与 Scanner 已由 G2 确认为独立进程，Scanner 不接收 Platform 内部类或数据库权限。
 - Platform 先保存业务 Scan，再异步调用 Scanner；业务状态机和重试租约不属于 Scanner 契约。
-- V1 输入方式和精确分析能力仍由 D14 Feature Spec 决定，契约只能预留受控输入类型。
+- V1 生产输入已由 D14 选择 `content-archive`，并冻结四个必选 Capability；契约仍预留受控的后续输入类型。
 
 ## 表达与版本基线
 
@@ -174,7 +174,7 @@ Platform 的 `projectId`、`repositoryId`、actor、权限和数据库键不进�
 ## 开放问题
 
 - `0.1.0` 的 Schema 文件组织、代码生成和兼容测试工具由 M4 Technical Design 选择。
-- V1 启用哪些输入类型和 Capability ID 由 D14 冻结。
+- D14 已冻结 V1 `content-archive` 与四个 Capability ID；具体机器 Schema 文件和输入适配器由 M4/M5 Technical Design 决定。
 - 初始 `ExecutionLimits` 数值由 M4 基线和 Deploy 环境共同确定；缺省时生产 Scanner 不得就绪。
 
 ## 验收证据

@@ -10,7 +10,7 @@
 
 ## 本文解决的问题
 
-本文冻结跨 Scanner 边界的结果项字段、确定性身份和 Rule 执行职责，避免 Fact、Finding、Evidence 与 Diagnostic 混用。具体 Java/Spring/Maven Fact kind、Rule 清单和支持版本由 D14 定义。
+本文冻结跨 Scanner 边界的结果项字段、确定性身份和 Rule 执行职责，避免 Fact、Finding、Evidence 与 Diagnostic 混用。具体 Java/Spring/Maven Fact kind、Rule 清单和支持版本已由 D14 定义。
 
 ## 当前事实
 
@@ -187,7 +187,7 @@ flowchart LR
 
 ## 开放问题
 
-- D14 必须选择 V1 导出的额外 Fact、首批 Rule 和允许 severity。
+- D14 已选择 V1 七类公共 Fact、四条首批 Rule 和允许 severity；M4 需补齐严格 Schema 与黄金样例。
 - M4 Technical Design 必须选择 Rule/Fact Schema 的代码组织和黄金测试工具。
 - 跨 Analyzer Fact 公共化只在第二个已支持 Analyzer 出现且有真实用例时复审。
 

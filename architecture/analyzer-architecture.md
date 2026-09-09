@@ -192,10 +192,10 @@ sequenceDiagram
 
 ## 开放问题
 
-- Java、Spring、Maven 应拆成几个代码模块和 Analyzer 身份？由 D14 Feature Spec 与 M4 Technical Design 决定。
+- D14 已冻结四个公共 Capability ID；它们应拆成几个代码模块和 Analyzer 身份，由 M4 Technical Design 决定。
 - Rule Executor 的代码接口和 Analyzer 注册机制如何实现？由 M4 Technical Design 在 D12 与 ADR-0002 边界内决定。
 - 部分成功、重试、去重和未知输出的机器 Schema 如何组织？由 M4 Technical Design 在 D11–D12 语义内决定。
-- V1 的输入适配器、文件系统隔离和操作系统资源限制采用哪些具体组件与数值？由 D14、M4/M5 Technical Design 和 Deploy 决定。
+- V1 `content-archive` 适配器、文件系统隔离和操作系统资源限制采用哪些具体组件与数值？由 M4/M5 Technical Design 和 Deploy 决定。
 - 首个需要子进程隔离的触发条件是什么？在原生工具或不同信任级能力出现时重新评估。
 
 ## 验收证据

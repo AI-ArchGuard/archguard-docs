@@ -4,7 +4,7 @@ ArchGuard 的产品、需求、架构、ADR、工程规范、运行手册和交�
 
 ## 当前状态
 
-M0 仓库治理基线、G1 产品边界、G2 架构边界和 G3 契约与安全已经完成；下一步进入 G4 V1 可开发性。当前仍没有已支持的业务或分析能力，机器 Schema 和运行时实现尚未交付。
+M0 仓库治理基线和 M1 的 G1–G4 文档关卡已经完成；下一步是在独立 Issue 和 Technical Design 审阅后开始 M2 Platform 骨架。当前仍没有已支持的业务或分析能力，机器 Schema 和运行时实现尚未交付。
 
 ## 职责
 
@@ -34,8 +34,12 @@ M0 仓库治理基线、G1 产品边界、G2 架构边界和 G3 契约与安全�
 - [安全与可观测性](engineering/security-and-observability.md)
 - [发布与运行](engineering/release-and-operations.md)
 - [分阶段开发提示词](engineering/prompts.md)
+- [V1 Java/Spring Feature Spec](requirements/v1-java-spring-feature-spec.md)
+- [V1 验收矩阵](requirements/v1-acceptance-matrix.md)
+- [V1 交付追踪与阶段入口](requirements/v1-delivery-traceability.md)
 - [文档模板](templates/)
 - [M0 仓库基线验收报告](reports/m0-repository-baseline.md)
+- [G4 V1 可开发性评审](reports/g4-v1-readiness-review.md)
 
 ## 目录
 
@@ -52,4 +56,4 @@ M0 仓库治理基线、G1 产品边界、G2 架构边界和 G3 契约与安全�
 
 ## 本地验证
 
-当前基线可执行空白、Markdown 相对链接、YAML 结构和常见 Secret 模式检查。仓库尚无提交，因此 GitHub Actions 只完成了配置审查，不能声称远程 CI 已运行。
+当前基线可执行空白、Markdown 相对链接、YAML 结构和常见 Secret 模式检查。GitHub Actions 已运行文档基线检查；每次变更仍须以对应分支和提交的实际检查结果为准。

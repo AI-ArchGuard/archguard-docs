@@ -17,7 +17,7 @@
 - 当前没有输入获取、临时工作区、容器、凭据注入、清理任务或安全测试实现。
 - V1 明确不执行目标构建、脚本、插件、任务或任意命令。
 - Scanner 与 Platform 是独立进程；Analyzer 与 Scanner 在 V1 同进程，但 Analyzer 默认无网络和凭据。
-- 具体输入来源和支持版本由 D14 决定，本设计必须同时覆盖 Git、归档和受管目录的安全边界。
+- D14 已选择 `content-archive` 作为 V1 唯一生产输入；本设计仍覆盖 Git、归档和受管目录的安全边界，但未启用的适配器不得获得部署权限。
 
 ## 受保护资产与主要威胁
 
@@ -127,7 +127,7 @@ DNS 每次连接前解析并校验全部地址，连接目标必须与已校验�
 | 输入凭据 | 获取完成立即撤销，不落盘 | 获取失败/取消立即撤销并审计 | 输入适配器与 Deploy |
 | Repository 工作区 | 结果校验后、返回终态前立即递归删除 | 移入仅运维可访问的隔离区并由补偿任务重试 | Scanner runtime |
 | Analyzer 临时文件/缓存 | 与工作区同次清理 | 同工作区隔离，禁止其他任务复用 | Scanner runtime |
-| Finding/引用 Fact/Evidence/Diagnostic | 按 Platform Scan 生命周期持久化 | 删除/保留由 Platform 审计用例处理 | Platform；具体产品时长由 D14 |
+| Finding/引用 Fact/Evidence/Diagnostic | 按 Platform Scan 生命周期持久化 | 删除/保留由 Platform 审计用例处理 | Platform；具体产品时长由 M11 运行规范 |
 | 安全审计 | 不包含源码，独立于工作区 | 保留清理失败和人工处置链 | Platform/Deploy；时长由运行规范 |
 
 - 隔离区数据的补偿清理截止时间为首次失败后 24 小时；超期触发安全告警、停止受影响 worker 接收新任务并进入人工 Runbook。
@@ -173,12 +173,12 @@ DNS 每次连接前解析并校验全部地址，连接目标必须与已校验�
 
 - 不选择 Git 库、容器运行时、Sandbox 产品、Secret Manager、SCA 或日志厂商。
 - 不给 CPU、内存、文件数和字节数虚构无基准数值；缺省时生产拒绝就绪。
-- 不定义 Platform 业务结果和审计的产品保留时长，该值由 D14/运行规范决定。
+- 不定义 Platform 业务结果和审计的产品保留时长，该值由 M11 运行规范决定。
 - 不为 V1 提供构建沙箱、动态插件、远程 Analyzer 或任意 Shell。
 
 ## 开放问题
 
-- D14 选择 V1 输入类型后，应删除未启用适配器的部署权限和网络规则。
+- M5/Deploy 必须只为 D14 启用的 `content-archive` 适配器提供部署权限，并用测试证明 Git/受管目录路径未开启。
 - M4 基线必须给出所有 D11 `ExecutionLimits` 的初始值和安全余量。
 - M5 Runbook 必须实现并演练 24 小时清理补偿与 worker 隔离流程。
 
