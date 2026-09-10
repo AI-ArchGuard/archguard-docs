@@ -48,20 +48,33 @@ def check_legacy_references(files: list[Path]) -> list[str]:
     return errors
 
 
+def check_file_endings(files: list[Path]) -> list[str]:
+    errors: list[str] = []
+    trailing_blank_lines = re.compile(rb"(?:\r?\n[ \t]*){2,}$")
+    for file in files:
+        content = file.read_bytes()
+        if not content.endswith(b"\n"):
+            errors.append(f"{relative(file)}: missing final newline")
+        elif trailing_blank_lines.search(content):
+            errors.append(f"{relative(file)}: trailing blank line")
+    return errors
+
+
 def main() -> int:
     files = sorted(path for path in ROOT.rglob("*.md") if ".git" not in path.parts)
     link_errors = check_links(files)
     legacy_errors = check_legacy_references(files)
+    ending_errors = check_file_endings(files + [Path(__file__)])
 
     print(f"Markdown files checked: {len(files)}")
     print(f"Broken local links/images: {len(link_errors)}")
     print(f"Legacy documentation references: {len(legacy_errors)}")
+    print(f"Invalid file endings: {len(ending_errors)}")
 
-    for error in link_errors + legacy_errors:
+    for error in link_errors + legacy_errors + ending_errors:
         print(f"ERROR: {error}", file=sys.stderr)
-    return 1 if link_errors or legacy_errors else 0
+    return 1 if link_errors or legacy_errors or ending_errors else 0
 
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

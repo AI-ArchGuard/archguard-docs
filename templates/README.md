@@ -9,4 +9,3 @@
 - [Postmortem](postmortem.md)：发生需要正式复盘的事故后使用。
 
 是否创建文档先遵循[文档编写规范](../development/documentation-standard.md)和[文档交付计划](../development/documentation-delivery-plan.md)。
-
