@@ -1,27 +1,27 @@
 # `v0.1.0-foundation` 阶段 0 验收报告
 
-- 状态：Closed
+- 状态：Failed（远端发布证据缺失）
 - 验收日期：2026-09-10
 - 许可证决策：Apache License 2.0
-- 下一阶段：阶段 1 `v0.2.0-scanner`，S2 统一模型与 JSON Schema
+- 下一阶段：阶段 1 `v0.2.0-scanner`；阶段 0 关闭后启用 S2 统一模型与 JSON Schema
 
 ## 结论
 
-阶段 0 的产品边界、仓库治理、工程规范、许可证和基础 CI 退出条件已经满足。七仓库正式进入统一 Apache-2.0 许可证线；阶段 0 关闭，Scanner/Samples/Docs 成为阶段 1 功能主线。现有 Platform 继续作为阶段 2 预实现资产冻结功能扩展。
+阶段 0 的产品边界、仓库治理、工程规范、许可证和基础 CI 已在七个本地工作树中准备，但远端退出条件尚未满足。Docs 已提交并与本地 `origin/main` 跟踪引用一致；Platform、Scanner、Gateway、Evals、Samples 和 Deploy 的许可证及 CI 变更仍未提交，托管 CI 因而无法验证这些基线。阶段 0 重新打开，阶段 1 功能实现不得继续越过该关卡。现有 Platform 继续作为阶段 2 预实现资产冻结功能扩展。
 
-本报告关闭治理阶段，不声称已经创建远端 Git Tag 或 Release。标签只能在对应工作树提交、托管 CI 通过且七仓库版本组合确认后发布。
+本报告记录本地验收结果，不声称已经创建远端 Git Tag 或 Release。只有六个待发布仓库的 Foundation 变更提交、全部托管 CI 通过且七仓库版本组合确认后，才能把状态改为 `Closed` 并发布标签。
 
 ## 七仓库验收矩阵
 
 | 仓库 | README | LICENSE | CONTRIBUTING | Issue/PR 模板 | 基础 CI | 阶段职责 |
 |---|---|---|---|---|---|---|
-| `archguard-platform` | 通过 | Apache-2.0 | 通过 | 通过 | 治理 + Java 构建 | 阶段 2 预实现资产，阶段 1 冻结 |
-| `archguard-scanner` | 通过 | Apache-2.0 | 通过 | 通过 | 治理 + Java 构建 | 阶段 1 当前主线 |
-| `archguard-mcp-gateway` | 通过 | Apache-2.0 | 通过 | 通过 | 治理 | 阶段 5 启用 |
-| `archguard-evals` | 通过 | Apache-2.0 | 通过 | 通过 | 治理 | 阶段 6 启用 |
-| `archguard-samples` | 通过 | Apache-2.0 | 通过 | 通过 | 治理 | 阶段 1 当前主线 |
-| `archguard-deploy` | 通过 | Apache-2.0 | 通过 | 通过 | 治理 | 阶段 2 起启用 |
-| `archguard-docs` | 通过 | Apache-2.0 | 通过 | 通过 | 文档治理 | 全阶段事实来源 |
+| `archguard-platform` | 本地通过 | Apache-2.0，未提交 | 通过 | 通过 | 本地具备，托管 CI 待验证 | 阶段 2 预实现资产，阶段 1 冻结 |
+| `archguard-scanner` | 本地通过 | Apache-2.0，未提交 | 通过 | 通过 | 本地具备，托管 CI 待验证 | 阶段 1 候选主线 |
+| `archguard-mcp-gateway` | 本地通过 | Apache-2.0，未提交 | 通过 | 通过 | 本地具备，托管 CI 待验证 | 阶段 5 启用 |
+| `archguard-evals` | 本地通过 | Apache-2.0，未提交 | 通过 | 通过 | 本地具备，托管 CI 待验证 | 阶段 6 启用 |
+| `archguard-samples` | 本地通过 | Apache-2.0，未提交 | 通过 | 通过 | 本地具备，托管 CI 待验证 | 阶段 1 候选主线 |
+| `archguard-deploy` | 本地通过 | Apache-2.0，未提交 | 通过 | 通过 | 本地具备，托管 CI 待验证 | 阶段 2 起启用 |
+| `archguard-docs` | 通过 | Apache-2.0，已提交 | 通过 | 通过 | 文档治理已通过 | 全阶段事实来源 |
 
 ## 许可证门禁
 
@@ -43,22 +43,22 @@
 
 | 检查 | 结果 |
 |---|---|
-| 七仓库必需治理文件 | 通过 |
-| 七仓库 Apache-2.0 SHA-256 | 通过；七份一致 |
-| 七仓库 CI 包含许可证校验和门禁 | 通过 |
-| 七份 GitHub Actions Workflow YAML 解析 | 通过 |
+| 七仓库必需治理文件 | 本地通过 |
+| 七仓库 Apache-2.0 SHA-256 | 本地通过；七份一致，六份未提交 |
+| 七仓库 CI 包含许可证校验和门禁 | 本地通过；六份未提交 |
+| 七份 GitHub Actions Workflow YAML 解析 | 本地通过；托管 CI 待验证 |
 | Platform 完整构建 | 通过；33 tests，0 failures/errors/skipped |
-| Scanner S1 完整构建 | 通过；父工程和五模块成功，缓存齐全后的离线复验也通过 |
+| Scanner S1 完整构建 | 本地通过；父工程和五模块成功，尚未由托管 CI 验证 |
 | Scanner S1 架构测试 | 通过；3 tests，0 failures/errors/skipped |
 | Markdown 相对文件链接 | 通过 |
 | 差异空白和常见密钥模式 | 通过 |
 
 ## 发布、兼容与回滚
 
-正常提交顺序为 Docs 治理证据 → 六个实现/样例仓库许可证和门禁；这些变更不修改 API、数据、制品格式或运行时行为，可独立合入。为保持阶段证据一致，建议同一发布窗口完成。
+提交顺序为 Docs 治理证据 → Scanner Foundation → Scanner S1 → Platform Foundation → Samples/Deploy Foundation → Gateway/Evals Foundation。Foundation 变更不修改 API、数据、制品格式或运行时行为，可独立合入；Scanner S1 单独提交和验证。全部托管 CI 通过后再关闭阶段 0。
 
 若法律策略改变，必须由项目所有者作出新决定，同时更新七份 LICENSE、README、贡献说明、CI 校验和和本报告；不得只修改单个仓库。Scanner S1 的构建变更与许可证变更可分别回滚，不影响现有 Platform 数据库和运行时。
 
 ## 阶段 1 入口
 
-Scanner S1 已完成：Java 21/Maven Wrapper、父工程、五模块、Enforcer 和模块依赖测试均可运行。下一切片严格进入 S2：先冻结语言无关统一模型、`0.1.0` JSON Schema、稳定 ID/排序和契约失败规则，再开始 Java parser。
+Scanner S1 的本地实现已验证：Java 21/Maven Wrapper、父工程、五模块、Enforcer 和模块依赖测试均可运行。当前下一步不是 S2，而是提交 Scanner Foundation 与 S1 并取得托管 CI 证据；阶段 0 关闭后，才进入 S2 并先冻结语言无关统一模型、`0.1.0` JSON Schema、稳定 ID/排序和契约失败规则。

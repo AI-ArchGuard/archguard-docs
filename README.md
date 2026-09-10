@@ -5,8 +5,8 @@ ArchGuard 的跨仓库产品、架构、工程规范、契约索引和阶段证�
 ## 当前状态
 
 - 最终定位：Java-first、语言无关架构、AI 增强的软件架构治理平台。
-- 阶段 0 `v0.1.0-foundation` 已关闭。
-- 阶段 1 `v0.2.0-scanner` 进行中；Scanner S1 已完成，S2 统一模型和 JSON Schema 是下一切片。
+- 阶段 0 `v0.1.0-foundation` 远端收口中：Docs 已发布，另外六个仓库的许可证和 CI 基线仍只存在于本地工作树。
+- Scanner S1 已在本地通过完整构建；待 Foundation 变更提交、托管 CI 通过并形成可复现证据后关闭阶段 0，再启用 S2 统一模型和 JSON Schema。
 - Platform 作为阶段 2 预实现资产冻结功能扩展。
 
 ## 唯一入口

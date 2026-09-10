@@ -1,6 +1,6 @@
 # Feature Spec：Java Scanner MVP `v0.2.0-scanner`
 
-- 状态：In Progress（S1 已完成，S2 下一步）
+- 状态：Ready（S1 本地验证完成；阶段 0 远端关卡关闭后进入 S2）
 - 阶段：1
 - 主要仓库：`archguard-scanner`、`archguard-samples`、`archguard-docs`
 - 前置：[阶段 0 退出关卡](../product/roadmap.md#阶段-0v010-foundation)
