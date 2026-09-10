@@ -11,7 +11,7 @@
 - 七个仓库的 README、贡献指南、Issue/PR 模板、基础 CI 和统一 Apache-2.0 许可证已在本地准备；除 Docs 外，另外六个仓库的许可证和 CI 变更尚未提交，阶段 0 仍在远端收口。
 - `archguard-platform` 已提前实现 Java 21/Spring Boot 模块化单体、Project/OIDC、Flyway/PostgreSQL、统一错误、traceId、审计和相关测试。该成果保留为阶段 2 预实现资产。
 - `archguard-scanner` 的 S1 父工程、五模块和边界测试已在本地通过，但尚未提交并由托管 CI 验证；`archguard-samples`、`archguard-mcp-gateway`、`archguard-evals` 和 `archguard-deploy` 仍只有本地工程基线变更。
-- 当前主线：按 Docs → Scanner → Platform → Gateway/Evals 顺序完成 Foundation 远端收口。Scanner S2 统一模型和 `0.1.0` JSON Schema 在阶段 0 关卡关闭后启用；Platform 继续冻结功能扩展。
+- 当前主线：按 Docs → Scanner → Platform → Samples/Deploy → Gateway/Evals 顺序完成七仓库 Foundation 远端收口。全部托管 CI 通过并关闭阶段 0 后，先验收 Scanner S1，再启用 S2 统一模型和 `0.1.0` JSON Schema；Platform 继续冻结功能扩展。
 
 ## 路线图
 

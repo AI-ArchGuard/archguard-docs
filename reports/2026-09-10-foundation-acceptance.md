@@ -55,10 +55,10 @@
 
 ## 发布、兼容与回滚
 
-提交顺序为 Docs 治理证据 → Scanner Foundation → Scanner S1 → Platform Foundation → Samples/Deploy Foundation → Gateway/Evals Foundation。Foundation 变更不修改 API、数据、制品格式或运行时行为，可独立合入；Scanner S1 单独提交和验证。全部托管 CI 通过后再关闭阶段 0。
+提交顺序为 Docs 治理证据 → Scanner Foundation → Platform Foundation → Samples/Deploy Foundation → Gateway/Evals Foundation。Foundation 变更不修改 API、数据、制品格式或运行时行为，可独立合入；全部托管 CI 通过后关闭阶段 0，再单独提交和验收 Scanner S1。
 
 若法律策略改变，必须由项目所有者作出新决定，同时更新七份 LICENSE、README、贡献说明、CI 校验和和本报告；不得只修改单个仓库。Scanner S1 的构建变更与许可证变更可分别回滚，不影响现有 Platform 数据库和运行时。
 
 ## 阶段 1 入口
 
-Scanner S1 的本地实现已验证：Java 21/Maven Wrapper、父工程、五模块、Enforcer 和模块依赖测试均可运行。当前下一步不是 S2，而是提交 Scanner Foundation 与 S1 并取得托管 CI 证据；阶段 0 关闭后，才进入 S2 并先冻结语言无关统一模型、`0.1.0` JSON Schema、稳定 ID/排序和契约失败规则。
+Scanner S1 的本地实现已验证：Java 21/Maven Wrapper、父工程、五模块、Enforcer 和模块依赖测试均可运行。当前下一步不是 S1/S2，而是完成另外五个实现/样例仓库的 Foundation 提交并取得托管 CI 证据；阶段 0 关闭后先单独验收 S1，再进入 S2 并冻结语言无关统一模型、`0.1.0` JSON Schema、稳定 ID/排序和契约失败规则。
