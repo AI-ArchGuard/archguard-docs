@@ -20,7 +20,7 @@
 
 ## 当前产品范围
 
-阶段 0 正在完成远端收口：Docs 已发布，另外六个仓库的 Apache-2.0 和 CI 基线仍待提交与托管 CI 验证。Scanner S1 构建和五模块边界已在本地通过，但在上述关卡关闭前不标记为正式完成，也不启用 S2。阶段 1 只承诺本地 Java CLI、统一模型、首批规则、合成样例和稳定 JSON；不承诺 Platform 闭环、Git/PR、Agent、MCP、Python Evals 或生产部署。
+阶段 0 已关闭，当前工作目标是阶段 1 `v0.2.0-scanner`。Scanner S1 构建和五模块边界已在本地通过，是当前待提交和托管 CI 验收切片；S1 验收前不启用 S2。阶段 1 只承诺本地 Java CLI、统一模型、首批规则、合成样例和稳定 JSON；不承诺 Platform 闭环、Git/PR、Agent、MCP、Python Evals 或生产部署。
 
 ## 最终职责边界
 
