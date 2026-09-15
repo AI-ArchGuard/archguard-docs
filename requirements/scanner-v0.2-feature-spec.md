@@ -1,6 +1,6 @@
 # Feature Spec：Java Scanner MVP `v0.2.0-scanner`
 
-- 状态：In Progress（S1 已通过 PR 与合并后 `main` 的托管 CI 验收；S2 下一步）
+- 状态：In Progress（S1、S2 已通过 PR 与合并后 `main` 的托管 CI 验收；S3 下一步）
 - 阶段：1
 - 主要仓库：`archguard-scanner`、`archguard-samples`、`archguard-docs`
 - 前置：[阶段 0 退出关卡](../product/roadmap.md#阶段-0v010-foundation)
@@ -156,7 +156,7 @@ Project
 ## 实施切片
 
 1. S1：聚合构建、五模块骨架和架构规则测试。已完成并通过 [Scanner PR #6](https://github.com/AI-ArchGuard/archguard-scanner/pull/6) 与合并后 [`main` CI](https://github.com/AI-ArchGuard/archguard-scanner/actions/runs/34930184377) 验收。
-2. S2：`0.1.0` JSON Schema、统一模型、规范 ID/排序和有效/无效契约测试。
+2. S2：`0.1.0` JSON Schema、统一模型、规范 ID/排序和有效/无效契约测试。已完成并通过 [Scanner PR #8](https://github.com/AI-ArchGuard/archguard-scanner/pull/8) 与合并后 [`main` CI](https://github.com/AI-ArchGuard/archguard-scanner/actions/runs/34955543010) 验收。
 3. S3：Java 文件发现、语法解析、Component/Dependency/Evidence 提取。
 4. S4：依赖图和前三条结构规则。
 5. S5：Spring/模块/组件/复杂度/注解规则。
