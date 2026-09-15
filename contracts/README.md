@@ -4,7 +4,7 @@
 
 | 契约 | 生产者 | 消费者 | 当前状态 |
 |---|---|---|---|
-| Scanner Result Schema `0.1.x` | `archguard-scanner` | Platform、Evals | S2 目标，尚未发布 |
+| Scanner Result Schema `0.1.x` | `archguard-scanner` | Platform、Evals | `0.1.0` 已由 Scanner 发布；[PR #8](https://github.com/AI-ArchGuard/archguard-scanner/pull/8) 与合并后 [`main` CI](https://github.com/AI-ArchGuard/archguard-scanner/actions/runs/34955543010) 已通过 |
 | Platform REST/OpenAPI | `archguard-platform` | UI、CI、Gateway | 阶段 2 预实现资产，正式消费边界未冻结 |
 | MCP Tool Schema | `archguard-mcp-gateway` | Agent/MCP 客户端 | 阶段 5 未启用 |
 | Agent Output Schema | `archguard-platform` | UI、Evals | 阶段 4 未启用 |
