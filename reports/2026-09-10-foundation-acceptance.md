@@ -5,6 +5,8 @@
 - 许可证决策：Apache License 2.0
 - 下一阶段：阶段 1 `v0.2.0-scanner`；先验收 S1 构建与模块边界
 
+> 本报告是阶段 0 关闭时的历史快照，不随后续切片状态改写。当前执行状态以[产品路线图](../product/roadmap.md)为准。
+
 ## 结论
 
 阶段 0 的产品边界、仓库治理、工程规范、许可证和基础 CI 退出条件已经满足。七个 Foundation PR 均已 Squash Merge，合并后的七条 `main` CI 全部成功；阶段 0 正式关闭，Scanner/Samples/Docs 进入阶段 1。现有 Platform 继续作为阶段 2 预实现资产冻结功能扩展。
