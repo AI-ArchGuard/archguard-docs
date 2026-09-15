@@ -10,15 +10,15 @@
 
 - 七个仓库的 README、贡献指南、Issue/PR 模板、基础 CI 和统一 Apache-2.0 许可证均已合入 `main`，合并后的托管 CI 全部成功；阶段 0 已关闭。
 - `archguard-platform` 已提前实现 Java 21/Spring Boot 模块化单体、Project/OIDC、Flyway/PostgreSQL、统一错误、traceId、审计和相关测试。该成果保留为阶段 2 预实现资产。
-- `archguard-scanner` 的 S1 父工程、五模块和边界测试，以及 S2 统一模型和 `0.1.0` JSON Schema，均已通过 PR 与合并后 `main` 的托管 CI 验收；`archguard-samples`、`archguard-mcp-gateway`、`archguard-evals` 和 `archguard-deploy` 仍只有工程基线。
-- 当前主线：阶段 1 Scanner/Samples/Docs。下一切片是 S3 Java 文件发现、语法解析和 Component/Dependency/Evidence 提取；Platform 继续冻结功能扩展。
+- `archguard-scanner` 的 S1 父工程、五模块和边界测试，S2 统一模型和 `0.1.0` JSON Schema，以及 S3 Java 源码发现和 Component/Dependency/Evidence 提取，均已通过 PR 与合并后 `main` 的托管 CI 验收；`archguard-samples`、`archguard-mcp-gateway`、`archguard-evals` 和 `archguard-deploy` 仍只有工程基线。
+- 当前主线：阶段 1 Scanner/Samples/Docs。下一切片是 S4 依赖图和前三条结构规则；Platform 继续冻结功能扩展。
 
 ## 路线图
 
 | 阶段 | 时间 | 版本 | 主要仓库 | 可独立演示的结果 | 当前状态 |
 |---|---:|---|---|---|---|
 | 0 工程治理基础 | 2 周 | `v0.1.0-foundation` | 全部，Docs 主导 | 七仓库工程标准、治理和文档导航 | 已关闭；七仓库 `main` CI 成功 |
-| 1 Java Scanner MVP | 6～8 周 | `v0.2.0-scanner` | Scanner、Samples、Docs | 本地 CLI 扫描三个 Java 样例并输出稳定 JSON | 进行中；S1、S2 已验收，S3 下一步 |
+| 1 Java Scanner MVP | 6～8 周 | `v0.2.0-scanner` | Scanner、Samples、Docs | 本地 CLI 扫描三个 Java 样例并输出稳定 JSON | 进行中；S1–S3 已验收，S4 下一步 |
 | 2 治理平台 MVP | 8～10 周 | `v0.3.0-platform` | Platform、Scanner、Deploy、Docs | 创建项目/规则集/任务并查看和处置结果 | Platform 有预实现资产，未进入正式集成 |
 | 3 持续治理闭环 | 6～8 周 | `v0.4.0-governance` | Platform、Scanner、Samples、Deploy、Docs | 错误依赖使 CI 失败，修复后通过 | 未启用 |
 | 4 Java Agent 增强 | 6～8 周 | `v0.5.0-agent` | Platform、Scanner、Docs | 引用证据生成解释、摘要和修复建议 | 未启用 |
