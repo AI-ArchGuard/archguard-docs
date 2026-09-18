@@ -1,6 +1,6 @@
 # Feature Spec：Java Scanner MVP `v0.2.0-scanner`
 
-- 状态：In Progress（S1–S5 已通过 PR 与合并后 `main` 的托管 CI 验收；S6 下一步）
+- 状态：In Progress（S1–S6 已通过 PR 与合并后 `main` 的托管 CI 验收；S7 下一步）
 - 阶段：1
 - 主要仓库：`archguard-scanner`、`archguard-samples`、`archguard-docs`
 - 前置：[阶段 0 退出关卡](../product/roadmap.md#阶段-0v010-foundation)
@@ -160,7 +160,7 @@ Project
 3. S3：Java 文件发现、语法解析、Component/Dependency/Evidence 提取。已完成并通过 [Scanner PR #10](https://github.com/AI-ArchGuard/archguard-scanner/pull/10) 与合并后 [`main` CI](https://github.com/AI-ArchGuard/archguard-scanner/actions/runs/34962913786) 验收。
 4. S4：依赖图和前三条结构规则。已完成并通过 [Scanner PR #12](https://github.com/AI-ArchGuard/archguard-scanner/pull/12) 与合并后 [`main` CI](https://github.com/AI-ArchGuard/archguard-scanner/actions/runs/35193307247) 验收。
 5. S5：Spring/模块/组件/复杂度/注解规则。已完成并通过 [Scanner PR #14](https://github.com/AI-ArchGuard/archguard-scanner/pull/14) 与合并后 [`main` CI](https://github.com/AI-ArchGuard/archguard-scanner/actions/runs/35324851867) 验收。
-6. S6：CLI、YAML 校验、退出码和报告写入。下一步。
-7. S7：Samples、黄金/失败/重复性测试、性能基线和发布文档。
+6. S6：CLI、YAML 校验、退出码和报告写入。已完成并通过 [Scanner PR #16](https://github.com/AI-ArchGuard/archguard-scanner/pull/16) 与合并后 [`main` CI](https://github.com/AI-ArchGuard/archguard-scanner/actions/runs/35330285632) 验收。
+7. S7：Samples、黄金/失败/重复性测试、性能基线和发布文档。下一步。
 
 每个切片单独评审和验证，不在 S1 一次创建全部占位实现。
