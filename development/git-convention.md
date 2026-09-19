@@ -28,6 +28,6 @@ PR 必须关联 Issue，并说明：目标与非目标、修改范围、架构�
 ## 版本
 
 - 仓库使用语义化版本，开发期为 `0.x.y`，标签为 `vMAJOR.MINOR.PATCH`；阶段展示名可以使用 `v0.2.0-scanner` 等预发布/路线标识。
-- 七仓库独立版本，不要求同一标签。
+- 各仓库独立版本，不要求同一标签。
 - Scanner Schema、Rule、Platform REST、MCP Tool 和 Agent 输出各自独立版本；不得用仓库版本代替契约版本。
 - Deploy 记录可运行的 Platform/Scanner/Gateway/Schema 组合。

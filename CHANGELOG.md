@@ -12,6 +12,8 @@
 
 ### Added
 
+- 接受阶段 2 Platform MVP Feature Spec 和独立 `archguard-web` 客户端决策。
+- 将仓库职责、容器架构、契约索引和路线图扩展到阶段 2 的八仓库边界。
 - 接受 Java-first、Scanner-first 的八阶段路线和六平面架构。
 - 七仓库统一采用 Apache License 2.0，并关闭 `v0.1.0-foundation`。
 - 发布 Java Scanner MVP Feature Spec，记录 Scanner S1 完成状态。

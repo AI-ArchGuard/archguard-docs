@@ -5,7 +5,7 @@
 | 契约 | 生产者 | 消费者 | 当前状态 |
 |---|---|---|---|
 | Scanner Result Schema `0.1.x` | `archguard-scanner` | Platform、Evals | `0.1.0` 随 Scanner [`v0.2.0`](https://github.com/AI-ArchGuard/archguard-scanner/releases/tag/v0.2.0) 发布并通过[阶段验收](../reports/2026-09-19-scanner-v0.2.0-acceptance.md)；Schema 仍由 Scanner 仓库唯一拥有 |
-| Platform REST/OpenAPI | `archguard-platform` | UI、CI、Gateway | 阶段 2 预实现资产，正式消费边界未冻结 |
+| Platform REST/OpenAPI v1 | `archguard-platform` | `archguard-web`、CI、Gateway | 阶段 2 正在冻结 Project、Repository、RuleSet、ScanJob、Result 和 Finding 处置边界 |
 | MCP Tool Schema | `archguard-mcp-gateway` | Agent/MCP 客户端 | 阶段 5 未启用 |
 | Agent Output Schema | `archguard-platform` | UI、Evals | 阶段 4 未启用 |
 

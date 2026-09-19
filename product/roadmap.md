@@ -11,7 +11,7 @@
 - 七个仓库的 README、贡献指南、Issue/PR 模板、基础 CI 和统一 Apache-2.0 许可证均已合入 `main`，合并后的托管 CI 全部成功；阶段 0 已关闭。
 - `archguard-platform` 已提前实现 Java 21/Spring Boot 模块化单体、Project/OIDC、Flyway/PostgreSQL、统一错误、traceId、审计和相关测试。该成果保留为阶段 2 预实现资产。
 - `archguard-scanner` S1–S7、三个项目样例、三个失败夹具、黄金/重复性/性能门禁和 `v0.2.0` Release 已通过托管 CI 与[阶段验收](../reports/2026-09-19-scanner-v0.2.0-acceptance.md)；阶段 1 已关闭。
-- 当前主线：阶段 2 进入评审。下一项工作是冻结 Platform MVP 范围与 Scanner `0.1.0` 消费方边界；在评审完成前不启动 Platform 功能扩展，Gateway 和 Evals 继续保持未启用。
+- 当前主线：阶段 2 已通过范围评审并进入实现，按 2A–2H 交付 Platform、Scanner 消费方、独立 Web 与本地 Compose；Gateway 和 Evals 继续保持未启用。
 
 ## 路线图
 
@@ -19,7 +19,7 @@
 |---|---:|---|---|---|---|
 | 0 工程治理基础 | 2 周 | `v0.1.0-foundation` | 全部，Docs 主导 | 七仓库工程标准、治理和文档导航 | 已关闭；七仓库 `main` CI 成功 |
 | 1 Java Scanner MVP | 6～8 周 | `v0.2.0-scanner` | Scanner、Samples、Docs | 本地 CLI 扫描三个 Java 样例并输出稳定 JSON | 已关闭；`v0.2.0` Release 与阶段验收通过 |
-| 2 治理平台 MVP | 8～10 周 | `v0.3.0-platform` | Platform、Scanner、Deploy、Docs | 创建项目/规则集/任务并查看和处置结果 | 进入评审；预实现资产尚未纳入正式集成 |
+| 2 治理平台 MVP | 8～10 周 | `v0.3.0-platform` | Platform、Scanner、Web、Deploy、Docs | 登录并创建项目/规则集/任务，查看和处置结果 | 开发中；范围和消费边界已接受 |
 | 3 持续治理闭环 | 6～8 周 | `v0.4.0-governance` | Platform、Scanner、Samples、Deploy、Docs | 错误依赖使 CI 失败，修复后通过 | 未启用 |
 | 4 Java Agent 增强 | 6～8 周 | `v0.5.0-agent` | Platform、Scanner、Docs | 引用证据生成解释、摘要和修复建议 | 未启用 |
 | 5 Go MCP Gateway | 4～6 周 | `v0.6.0-mcp` | Gateway、Platform、Deploy | 受控工具调用具备权限、限流、取消和审计 | 未启用 |
