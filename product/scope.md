@@ -20,7 +20,7 @@
 
 ## 当前产品范围
 
-阶段 0 已关闭，当前工作目标是阶段 1 `v0.2.0-scanner`。Scanner S1 构建和五模块边界已通过 PR 与合并后 `main` 的托管 CI 验收；S2 统一模型与 `0.1.0` JSON Schema 是下一切片且尚未开始实现。阶段 1 只承诺本地 Java CLI、统一模型、首批规则、合成样例和稳定 JSON；不承诺 Platform 闭环、Git/PR、Agent、MCP、Python Evals 或生产部署。
+阶段 0 与阶段 1 已关闭，Scanner `v0.2.0` 已交付本地 Java CLI、统一模型、八条规则、合成样例和稳定 JSON。当前工作目标是阶段 2 的范围与 Scanner `0.1.0` 消费方契约评审；尚未承诺或启动 Platform 正式集成、Git/PR 治理闭环、Agent、MCP、Python Evals 或生产部署。
 
 ## 最终职责边界
 
