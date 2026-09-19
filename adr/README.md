@@ -12,3 +12,4 @@
 | [ADR-0004](0004-platform-modular-monolith.md) | Platform 初期采用模块化单体 | Accepted |
 | [ADR-0005](0005-postgresql-business-source-of-truth.md) | PostgreSQL 作为 Platform 业务事实来源 | Accepted |
 | [ADR-0006](0006-java-first-phased-delivery.md) | Java-first、Scanner-first 的阶段化交付顺序 | Accepted |
+| [ADR-0007](0007-dedicated-web-client.md) | 阶段 2 使用独立 Web 客户端仓库 | Accepted |
