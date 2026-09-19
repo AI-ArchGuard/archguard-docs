@@ -1,6 +1,6 @@
 # Feature Spec：Java Scanner MVP `v0.2.0-scanner`
 
-- 状态：In Progress（S1–S6 已通过 PR 与合并后 `main` 的托管 CI 验收；S7 下一步）
+- 状态：Accepted / Closed（S1–S7、`v0.2.0` Release 与[阶段验收](../reports/2026-09-19-scanner-v0.2.0-acceptance.md)已完成）
 - 阶段：1
 - 主要仓库：`archguard-scanner`、`archguard-samples`、`archguard-docs`
 - 前置：[阶段 0 退出关卡](../product/roadmap.md#阶段-0v010-foundation)
@@ -77,14 +77,13 @@ Project
 ```json
 {
   "schemaVersion": "0.1.0",
-  "project": "order-service",
-  "language": "java",
+  "project": {},
   "artifacts": [],
   "components": [],
   "dependencies": [],
+  "metrics": [],
   "findings": [],
-  "metrics": {},
-  "diagnostics": []
+  "evidences": []
 }
 ```
 
@@ -123,11 +122,11 @@ Project
 | 情况 | 退出码类别 |
 |---|---|
 | 扫描完成且无阻断 Finding | `0` |
-| 扫描完成但存在达到门槛的 Finding | 独立的规则违规退出码 |
-| 参数、规则或输入无效 | 独立的用户输入退出码 |
-| 解析/执行/资源/内部失败 | 独立的扫描失败退出码 |
+| 扫描完成但存在达到门槛的 Finding | `2` |
+| 参数、规则或输入无效 | `64` |
+| 解析/执行/资源/内部失败 | `70` |
 
-具体整数值由 CLI Technical Design 冻结；规则违规与扫描失败绝不能共用同一语义。
+具体整数已由 CLI Technical Design 和 `v0.2.0` Release 冻结；规则违规与扫描失败不共用同一语义。
 
 ## 合成样例
 
@@ -161,6 +160,6 @@ Project
 4. S4：依赖图和前三条结构规则。已完成并通过 [Scanner PR #12](https://github.com/AI-ArchGuard/archguard-scanner/pull/12) 与合并后 [`main` CI](https://github.com/AI-ArchGuard/archguard-scanner/actions/runs/35193307247) 验收。
 5. S5：Spring/模块/组件/复杂度/注解规则。已完成并通过 [Scanner PR #14](https://github.com/AI-ArchGuard/archguard-scanner/pull/14) 与合并后 [`main` CI](https://github.com/AI-ArchGuard/archguard-scanner/actions/runs/35324851867) 验收。
 6. S6：CLI、YAML 校验、退出码和报告写入。已完成并通过 [Scanner PR #16](https://github.com/AI-ArchGuard/archguard-scanner/pull/16) 与合并后 [`main` CI](https://github.com/AI-ArchGuard/archguard-scanner/actions/runs/35330285632) 验收。
-7. S7：Samples、黄金/失败/重复性测试、性能基线和发布文档。下一步。
+7. S7：Samples、黄金/失败/重复性测试、性能基线和发布。已完成并通过 [Samples PR #3](https://github.com/AI-ArchGuard/archguard-samples/pull/3)、[Scanner PR #18](https://github.com/AI-ArchGuard/archguard-scanner/pull/18)、合并后 [`main` CI](https://github.com/AI-ArchGuard/archguard-scanner/actions/runs/35435285689) 与 [`v0.2.0` Release](https://github.com/AI-ArchGuard/archguard-scanner/releases/tag/v0.2.0) 验收。
 
 每个切片单独评审和验证，不在 S1 一次创建全部占位实现。

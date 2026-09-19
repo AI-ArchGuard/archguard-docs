@@ -16,3 +16,5 @@
 - 七仓库统一采用 Apache License 2.0，并关闭 `v0.1.0-foundation`。
 - 发布 Java Scanner MVP Feature Spec，记录 Scanner S1 完成状态。
 - 增加阶段 1–7 文档交付计划、模板索引和自动断链/旧编号检查。
+- 关闭阶段 1 `v0.2.0-scanner`，记录 Scanner/Samples 托管 CI、黄金 digest、性能门禁、发布资产、已知限制和回滚证据。
+- 将 Scanner Feature Spec、路线图、契约与报告索引切换为已发布状态，并把阶段 2 标记为仅进入评审。

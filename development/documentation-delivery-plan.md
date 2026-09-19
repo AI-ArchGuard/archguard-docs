@@ -21,8 +21,8 @@
 ## 当前基线
 
 - 阶段 0 已关闭；七仓库 Foundation PR 和合并后的 `main` CI 证据保留在 `reports/`。
-- 阶段 1 正在进行；Scanner S1 已通过 PR 与合并后 `main` 的托管 CI 验收，S2 是下一切片且尚未开始实现。
-- Platform 成果作为阶段 2 预实现资产保留，正式功能扩展冻结。
+- 阶段 1 已通过 Scanner `v0.2.0` Release 与正式阶段验收并关闭。
+- Platform 成果作为阶段 2 预实现资产保留；当前仅进入范围与 Scanner 消费方契约评审，正式功能扩展尚未启动。
 - 阶段 3–7 未启用，不创建其 Feature Spec、Technical Design 或验收报告占位文件。
 - 历史 M、D、G、V 编号体系已从本地文档库删除；远端历史 Issue/PR 不再作为当前事实来源。
 
