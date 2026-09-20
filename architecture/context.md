@@ -8,7 +8,9 @@
 
 ```mermaid
 flowchart TD
-    U[开发者 / CI / 管理员] --> P[Java Control Plane<br/>项目、规则、任务、Agent]
+    U[开发者 / 管理员] --> W[Web Client<br/>OIDC、治理控制台]
+    CI[CI] --> P
+    W --> P[Java Control Plane<br/>项目、规则、任务、Agent]
     P --> S[Java Analysis Plane<br/>解析、依赖、规则、证据]
     P --> G[Go Tool Plane<br/>MCP、鉴权、限流、审计]
     G --> T[Git、文档、扫描结果等工具]
@@ -21,12 +23,13 @@ flowchart TD
     O --> G
 ```
 
-图描述最终边界，不表示这些组件已经交付。阶段 0 与阶段 1 已关闭；Scanner `v0.2.0`、Result Schema `0.1.0` 和固定 Samples 已发布。当前仅进入阶段 2 的范围与 Scanner 消费方契约评审；Platform 预实现资产尚未纳入正式集成，其余平面未启用。
+图描述最终边界，不表示这些组件已经交付。阶段 0 与阶段 1 已关闭；Scanner `v0.2.0`、Result Schema `0.1.0` 和固定 Samples 已发布。阶段 2 已进入 Platform、独立 Web 和本地 Compose 实现，其余平面未启用。
 
 ## 信任边界
 
 - Repository、文档、Webhook、工具参数、模型输入和模型输出均不可信。
 - Platform 是 Project、RuleSet、ScanJob、Finding 生命周期、权限和审计的业务入口。
+- Web 不拥有业务事实，只携带经 OIDC 验证的用户令牌调用 Platform REST。
 - Scanner 只处理受控输入并返回版本化结果，不接触 Platform 数据库。
 - Gateway 在阶段 5 接管成熟工具的通信与前置控制；Platform 仍作最终业务授权。
 - Evals 只通过公开契约做黑盒评估，不在生产请求链路中。

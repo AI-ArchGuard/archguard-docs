@@ -5,5 +5,6 @@
 | 文档 | 阶段 | 状态 |
 |---|---:|---|
 | [Java Scanner MVP](scanner-v0.2-feature-spec.md) | 1 | Accepted / Closed；`v0.2.0` 已发布并通过阶段验收 |
+| [治理平台 MVP](platform-v0.3-feature-spec.md) | 2 | Accepted / Developing |
 
 新功能从 [`../templates/feature-spec.md`](../templates/feature-spec.md) 创建。实现步骤和类设计不得写入 Feature Spec，应进入生产者仓库 Technical Design。

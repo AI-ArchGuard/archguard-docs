@@ -7,19 +7,20 @@ ArchGuard 的跨仓库产品、架构、工程规范、契约索引和阶段证�
 - 最终定位：Java-first、语言无关架构、AI 增强的软件架构治理平台。
 - 阶段 0 `v0.1.0-foundation` 已关闭：七仓库 Foundation PR 已合并，合并后的 `main` CI 全部成功。
 - 阶段 1 `v0.2.0-scanner` 已通过[阶段验收](reports/2026-09-19-scanner-v0.2.0-acceptance.md)并关闭；Scanner `v0.2.0` Release、Result Schema `0.1.0` 和固定 Samples 已发布。
-- 下一步是阶段 2 `v0.3.0-platform` 的范围与 Scanner 消费方契约评审；Platform 功能扩展尚未启动。
+- 阶段 2 `v0.3.0-platform` 的范围、独立 Web 边界和 Scanner 消费方契约已接受，当前进入实现。
 
 ## 唯一入口
 
 | 主题 | 文档 |
 |---|---|
 | 产品定位和原则 | [产品愿景](product/vision.md) |
-| 七仓库职责和范围 | [产品范围](product/scope.md) |
+| 八仓库职责和范围 | [产品范围](product/scope.md) |
 | 阶段、版本和退出条件 | [八阶段路线图](product/roadmap.md) |
 | 公共概念 | [术语表](product/glossary.md) |
 | 系统边界 | [系统上下文](architecture/context.md) |
 | 六平面和运行组件 | [容器架构](architecture/containers.md) |
 | 当前功能范围 | [Java Scanner MVP](requirements/scanner-v0.2-feature-spec.md) |
+| 当前阶段范围 | [治理平台 MVP](requirements/platform-v0.3-feature-spec.md) |
 | 工程约定 | [开发规范](development/README.md) |
 | 文档治理 | [文档编写规范](development/documentation-standard.md) |
 | 后续文档产物与节奏 | [文档交付计划](development/documentation-delivery-plan.md) |
