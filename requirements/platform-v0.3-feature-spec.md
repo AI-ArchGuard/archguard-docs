@@ -1,10 +1,11 @@
 # Feature Spec：治理平台 MVP `v0.3.0-platform`
 
-- 状态：Accepted / Developing
+- 状态：Accepted / Closed
 - 阶段：2
 - 主要仓库：`archguard-platform`、`archguard-scanner`、`archguard-web`、`archguard-deploy`、`archguard-docs`
 - 前置：[Scanner `v0.2.0` 阶段验收](../reports/2026-09-19-scanner-v0.2.0-acceptance.md)
 - 架构决策：[ADR-0001](../adr/0001-versioned-scanner-contract.md)、[ADR-0003](../adr/0003-untrusted-repository-default-deny.md)、[ADR-0004](../adr/0004-platform-modular-monolith.md)、[ADR-0005](../adr/0005-postgresql-business-source-of-truth.md)、[ADR-0007](../adr/0007-dedicated-web-client.md)
+- 验收：[Platform `v0.3.0` 阶段验收](../reports/2026-09-22-platform-v0.3.0-acceptance.md)
 
 ## 用户结果
 

@@ -12,6 +12,7 @@
 
 ### Added
 
+- 关闭阶段 2 `v0.3.0-platform`，记录 Scanner、Platform、Web、Deploy 发布资产、Compose 用户旅程、安全边界、已知限制和回滚证据。
 - 接受阶段 2 Platform MVP Feature Spec 和独立 `archguard-web` 客户端决策。
 - 将仓库职责、容器架构、契约索引和路线图扩展到阶段 2 的八仓库边界。
 - 接受 Java-first、Scanner-first 的八阶段路线和六平面架构。
