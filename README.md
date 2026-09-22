@@ -7,7 +7,8 @@ ArchGuard 的跨仓库产品、架构、工程规范、契约索引和阶段证�
 - 最终定位：Java-first、语言无关架构、AI 增强的软件架构治理平台。
 - 阶段 0 `v0.1.0-foundation` 已关闭：七仓库 Foundation PR 已合并，合并后的 `main` CI 全部成功。
 - 阶段 1 `v0.2.0-scanner` 已通过[阶段验收](reports/2026-09-19-scanner-v0.2.0-acceptance.md)并关闭；Scanner `v0.2.0` Release、Result Schema `0.1.0` 和固定 Samples 已发布。
-- 阶段 2 `v0.3.0-platform` 的范围、独立 Web 边界和 Scanner 消费方契约已接受，当前进入实现。
+- 阶段 2 `v0.3.0-platform` 已通过[阶段验收](reports/2026-09-22-platform-v0.3.0-acceptance.md)并关闭；Scanner `v0.2.1`、Platform `v0.3.0`、Web `v0.1.0` 和 Deploy `v0.3.0` 已发布。
+- 阶段 3 `v0.4.0-governance` 尚未启用，下一步仅进入范围评审。
 
 ## 唯一入口
 

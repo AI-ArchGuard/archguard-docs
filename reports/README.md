@@ -6,5 +6,6 @@
 
 - [阶段 0 Foundation 验收](2026-09-10-foundation-acceptance.md)
 - [阶段 1 Scanner `v0.2.0` 验收](2026-09-19-scanner-v0.2.0-acceptance.md)
+- [阶段 2 Platform `v0.3.0` 验收](2026-09-22-platform-v0.3.0-acceptance.md)
 
 报告必须写明对象版本、环境、执行方式、结果和未验证项，不得包含密钥、个人数据或真实客户源码。被新阶段报告完全取代且没有合规保留要求时，应删除旧报告并同步链接。
