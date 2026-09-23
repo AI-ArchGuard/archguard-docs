@@ -12,7 +12,7 @@
 
 ### Added
 
-- 启动阶段 3 的 3A 范围评审，冻结持续治理 Feature Spec 与不可变基线、Finding 分类、例外和质量门禁语义；功能开发仍由阶段入口关卡阻止。
+- 阶段 3 的 3A 范围评审已关闭；3B 冻结 Git 修订、报告提交、门禁结果和 Platform Finding 指纹契约，并用固定 Scanner 报告验证现有 Schema 足够。
 - 关闭阶段 2 `v0.3.0-platform`，记录 Scanner、Platform、Web、Deploy 发布资产、Compose 用户旅程、安全边界、已知限制和回滚证据。
 - 接受阶段 2 Platform MVP Feature Spec 和独立 `archguard-web` 客户端决策。
 - 将仓库职责、容器架构、契约索引和路线图扩展到阶段 2 的八仓库边界。
