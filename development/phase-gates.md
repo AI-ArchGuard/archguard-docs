@@ -15,8 +15,9 @@
 
 - 阶段 0：已关闭；七仓库 Foundation PR 已合并，Apache-2.0、治理文件和合并后的 `main` CI 通过验收。
 - 阶段 1：已关闭；Scanner `v0.2.0`、固定 Samples、托管 CI、Release 与阶段验收证据完整。
-- 阶段 2：范围、独立 Web 边界与 Scanner `0.1.0` 消费方契约已接受，当前按 2A–2H 切片实现。
-- 阶段 3–7：未启用，只允许需求调研和不形成运行时承诺的文档准备。
+- 阶段 2：已关闭；Scanner、Platform、Web、Deploy 的发布与 Compose 用户旅程已通过阶段验收。
+- 阶段 3：只启用 3A 范围评审；3B–3H 保持 `Next`。3A 合并且 Docs `main` CI 成功后，3B 才能进入 `Current`。
+- 阶段 4–7：未启用，只允许需求调研和不形成运行时承诺的文档准备。
 
 ## 停止条件
 
