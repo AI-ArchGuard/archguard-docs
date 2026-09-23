@@ -1,6 +1,6 @@
 # Feature Spec：持续治理闭环 `v0.4.0-governance`
 
-- 状态：Ready；仅授权 3A 范围评审，尚未授权功能开发
+- 状态：Accepted；3A 已完成，3B 契约冻结，后续切片按顺序关卡执行
 - 阶段：3
 - Issue：[AI-ArchGuard/archguard-docs#25](https://github.com/AI-ArchGuard/archguard-docs/issues/25)
 - 主要仓库：`archguard-platform`、`archguard-web`、`archguard-deploy`、`archguard-samples`、`archguard-docs`
@@ -10,7 +10,7 @@
 
 ## 阶段入口关卡
 
-本 Spec、ADR-0008、索引和路线图构成 3A 的完整交付。3A 的 Docs PR 合并且合并后的 `main` CI 成功前，3B–3H 只能保持 `Next`，不得启动 Platform、Scanner、Web 或 Deploy 功能开发。本阶段入口不创建验收报告；阶段验收报告只在 3H 形成。
+本 Spec、ADR-0008、索引和路线图构成 3A 的完整交付。3A Docs PR #26 已合并，合并后的 `main` CI 已成功，3B 因而获准冻结跨仓库契约。3B 的 [Platform 设计与 OpenAPI](https://github.com/AI-ArchGuard/archguard-platform/blob/main/docs/technical-design/v0.4-governance-3b-contracts.md)及 [Samples 固定向量](https://github.com/AI-ArchGuard/archguard-samples/tree/main/governance)提供消费方证据；3C 仍须等待全部 3B PR 合并后的相关 `main` CI 成功。本阶段入口不创建验收报告；阶段验收报告只在 3H 形成。
 
 ## 问题与用户价值
 
@@ -134,7 +134,7 @@
 
 ## 风险与待验证项
 
-- 3B 必须用阶段 2 固定报告验证当前 Schema 能否覆盖依赖、组件、复杂度和循环类 Finding 的稳定逻辑身份；验证失败不等于自动授权 Scanner 变更。
+- 3B 已用阶段 2 的三份固定报告和 15 个 Finding 验证当前 Schema 可覆盖依赖、组件、复杂度和循环类逻辑身份；Scanner Schema 保持 `0.1.0`。
 - GitHub commit ancestry 在 Platform 不持有 Git 凭据且不 clone 的条件下只能依赖经过认证的事件和 CI 元数据；3B/3E 必须明确可信边界和迟到判断。
 - 例外范围过宽会掩盖新增风险；3D 应默认选择最小规则/指纹范围并限制到期时间。
-- Project #2 的自动写入需要令牌具备 `read:project` 和 `project` scope；权限恢复前由维护者在 GitHub UI 添加 Issue 并维护 `Current`/`Next`。
+- Project #2 的状态选项为 `Todo`、`In Progress`、`Done`、`Blocked`；切片只有通过前置 `main` CI 后才从 `Todo` 进入 `In Progress`。
