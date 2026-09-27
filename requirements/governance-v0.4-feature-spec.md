@@ -1,6 +1,6 @@
 # Feature Spec：持续治理闭环 `v0.4.0-governance`
 
-- 状态：Accepted；3A–3G 已完成，3H Compose 验收与发布进行中
+- 状态：Accepted / Closed；3A–3H 已完成，见[阶段验收](../reports/2026-09-27-governance-v0.4.0-acceptance.md)
 - 阶段：3
 - Issue：[AI-ArchGuard/archguard-docs#25](https://github.com/AI-ArchGuard/archguard-docs/issues/25)
 - 主要仓库：`archguard-platform`、`archguard-web`、`archguard-deploy`、`archguard-samples`、`archguard-docs`
@@ -10,7 +10,7 @@
 
 ## 阶段入口关卡
 
-本 Spec、ADR-0008、索引和路线图构成 3A 的完整交付。3A Docs PR #26 已合并，合并后的 `main` CI 已成功；3B–3G 已按顺序完成并通过各自合并后的 `main` CI。3B 的 [Platform 设计与 OpenAPI](https://github.com/AI-ArchGuard/archguard-platform/blob/main/docs/technical-design/v0.4-governance-3b-contracts.md)及 [Samples 固定向量](https://github.com/AI-ArchGuard/archguard-samples/tree/main/governance)提供消费方证据。3H 验收发现的 PR 修订差异按 ADR-0009 扩展；阶段验收报告只在 3H 形成，未通过前不发布。
+本 Spec、ADR-0008、索引和路线图构成 3A 的完整交付。3A Docs PR #26 已合并，合并后的 `main` CI 已成功；3B–3G 已按顺序完成并通过各自合并后的 `main` CI。3B 的 [Platform 设计与 OpenAPI](https://github.com/AI-ArchGuard/archguard-platform/blob/main/docs/technical-design/v0.4-governance-3b-contracts.md)及 [Samples 固定向量](https://github.com/AI-ArchGuard/archguard-samples/tree/main/governance)提供消费方证据。3H 验收发现的 PR 修订差异按 ADR-0009 扩展，并在[单份阶段报告](../reports/2026-09-27-governance-v0.4.0-acceptance.md)记录最终发布与闭环证据。
 
 ## 问题与用户价值
 
