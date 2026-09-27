@@ -14,3 +14,4 @@
 | [ADR-0006](0006-java-first-phased-delivery.md) | Java-first、Scanner-first 的阶段化交付顺序 | Accepted |
 | [ADR-0007](0007-dedicated-web-client.md) | 阶段 2 使用独立 Web 客户端仓库 | Accepted |
 | [ADR-0008](0008-baseline-and-quality-gate-semantics.md) | 冻结不可变基线、Finding 分类和质量门禁语义 | Accepted |
+| [ADR-0009](0009-pr-revision-delta.md) | PR 修订差异独立于基线门禁分类 | Accepted |

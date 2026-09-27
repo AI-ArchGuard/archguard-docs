@@ -1,16 +1,16 @@
 # Feature Spec：持续治理闭环 `v0.4.0-governance`
 
-- 状态：Accepted；3A 已完成，3B 契约冻结，后续切片按顺序关卡执行
+- 状态：Accepted；3A–3G 已完成，3H Compose 验收与发布进行中
 - 阶段：3
 - Issue：[AI-ArchGuard/archguard-docs#25](https://github.com/AI-ArchGuard/archguard-docs/issues/25)
 - 主要仓库：`archguard-platform`、`archguard-web`、`archguard-deploy`、`archguard-samples`、`archguard-docs`
 - 条件参与：`archguard-scanner` 仅在 3B 证明现有 Finding 数据不足以形成稳定逻辑指纹时重新评审；默认不修改
 - 前置：[Platform `v0.3.0` 阶段验收](../reports/2026-09-22-platform-v0.3.0-acceptance.md)
-- 架构决策：[ADR-0001](../adr/0001-versioned-scanner-contract.md)、[ADR-0003](../adr/0003-untrusted-repository-default-deny.md)、[ADR-0004](../adr/0004-platform-modular-monolith.md)、[ADR-0005](../adr/0005-postgresql-business-source-of-truth.md)、[ADR-0008](../adr/0008-baseline-and-quality-gate-semantics.md)
+- 架构决策：[ADR-0001](../adr/0001-versioned-scanner-contract.md)、[ADR-0003](../adr/0003-untrusted-repository-default-deny.md)、[ADR-0004](../adr/0004-platform-modular-monolith.md)、[ADR-0005](../adr/0005-postgresql-business-source-of-truth.md)、[ADR-0008](../adr/0008-baseline-and-quality-gate-semantics.md)、[ADR-0009](../adr/0009-pr-revision-delta.md)
 
 ## 阶段入口关卡
 
-本 Spec、ADR-0008、索引和路线图构成 3A 的完整交付。3A Docs PR #26 已合并，合并后的 `main` CI 已成功，3B 因而获准冻结跨仓库契约。3B 的 [Platform 设计与 OpenAPI](https://github.com/AI-ArchGuard/archguard-platform/blob/main/docs/technical-design/v0.4-governance-3b-contracts.md)及 [Samples 固定向量](https://github.com/AI-ArchGuard/archguard-samples/tree/main/governance)提供消费方证据；3C 仍须等待全部 3B PR 合并后的相关 `main` CI 成功。本阶段入口不创建验收报告；阶段验收报告只在 3H 形成。
+本 Spec、ADR-0008、索引和路线图构成 3A 的完整交付。3A Docs PR #26 已合并，合并后的 `main` CI 已成功；3B–3G 已按顺序完成并通过各自合并后的 `main` CI。3B 的 [Platform 设计与 OpenAPI](https://github.com/AI-ArchGuard/archguard-platform/blob/main/docs/technical-design/v0.4-governance-3b-contracts.md)及 [Samples 固定向量](https://github.com/AI-ArchGuard/archguard-samples/tree/main/governance)提供消费方证据。3H 验收发现的 PR 修订差异按 ADR-0009 扩展；阶段验收报告只在 3H 形成，未通过前不发布。
 
 ## 问题与用户价值
 
@@ -25,7 +25,7 @@
 3. Platform 使用稳定逻辑指纹把候选问题分类为 `NEW`、`EXISTING`、`RESOLVED`。
 4. 默认策略只让未被有效例外覆盖的新增 `high` 或 `critical` Finding 产生 `FAIL`，CI 退出 `2`。
 5. Maintainer 可以创建有范围、有原因、有创建者和到期时间的 `PolicyException`；历史扫描不被改写。
-6. 修复违规后重新扫描，问题分类为 `RESOLVED`，门禁返回 `PASS`。
+6. 修复违规后重新扫描，PR 修订差异把前一 head 的违规分类为 `RESOLVED`，基线门禁返回 `PASS`；两类差异不得混同。
 7. Web 展示 PR 门禁、新增/存量/已解决问题、趋势和例外状态。
 
 ## 范围
@@ -45,6 +45,7 @@
 - 初版“增量”只指完整报告之间的 Finding 差异分类，不进行部分文件或增量 AST 扫描。
 - Platform 依据稳定逻辑指纹关联 Finding。指纹不得只依赖 Scanner Finding ID、行号、列号、输入顺序、消息文本或时间戳。
 - 比较结果固定为 `NEW`、`EXISTING`、`RESOLVED`；相同输入集合在任意顺序下得到相同分类。
+- 基线比较始终以当前活动基线为参考；PR 内前后修订变化另按 ADR-0009 的已验签 head 顺序计算，不覆盖基线分类或改变门禁。
 - RuleSetVersion 不同的扫描不得静默复用基线；缺失或不兼容基线必须得到显式状态或 `ERROR`。
 
 ### 例外与质量门禁
@@ -62,6 +63,7 @@
 - 同一 PR 的重复、乱序和迟到事件不得覆盖较新 commit 的权威门禁结果；旧 commit 结果可以保留审计，但不能成为当前 PR 状态。
 - GitHub 状态发布只消费 Platform 已持久化的门禁事实；失败重试不得重复创建业务结果。
 - Web 通过 Platform OpenAPI 展示 PR、基线、趋势、`NEW`/`EXISTING`/`RESOLVED`、例外和门禁；不直连 GitHub 或数据库。
+- Web 将“相对默认分支基线的门禁分类”与“相对上一个 PR 修订的变化”分开展示；后一视图仅用于解释，不决定 CI 退出码。缺少可信前驱或兼容报告时明确标记不可用。
 
 ## 功能需求
 
@@ -98,6 +100,7 @@
 - Given 错误签名、重放、乱序或迟到 Webhook，When Platform 处理，Then 安全失败或显式忽略，较新 commit 状态不被覆盖。
 - Given 非成员或另一 Project 的成员，When 读取、提交、提升基线或创建例外，Then 使用隐藏式未找到或明确拒绝，且不泄漏资源存在性。
 - Given PR 引入非法依赖后又修复，When CI 运行两次，Then 首次分类为 `NEW`、门禁 `FAIL`、退出 `2`，第二次分类为 `RESOLVED`、门禁 `PASS`、退出 `0`。
+- 上一条的修复 `RESOLVED` 指独立的 PR 修订差异；如果默认分支基线原本干净，第二次相对基线的 `resolvedCount` 仍为 0，不得混淆两个参考点。
 - Given 任一治理写操作，When 成功、拒绝或失败，Then 审计记录主体、Project、动作、目标、结果、时间和 traceId，不记录凭据或源码。
 - Given 各切片完成，When 执行 PR CI、合并后 `main` CI 和最终 Compose 验收，Then 全部成功且证据可追踪。
 
@@ -110,7 +113,7 @@
 5. 3E：Platform、Deploy 实现 GitHub Webhook、CI 报告提交和退出码闭环。
 6. 3F：Web 实现 PR、基线、趋势、例外和门禁页面。
 7. 3G：全部已启用仓库完成安全、幂等、乱序事件、恢复和固定 Samples 加固。
-8. 3H：Deploy、Docs 完成 Compose 验收、版本发布、兼容矩阵和阶段报告。
+8. 3H：Platform、Web 按 ADR-0009 补齐独立 PR 修订差异；Deploy、Docs 完成 Compose 验收、版本发布、兼容矩阵和阶段报告。
 
 切片按顺序进入 `Current`。只有前一切片合并后的相关 `main` CI 成功，下一切片才能从 `Next` 进入 `Current`。
 
