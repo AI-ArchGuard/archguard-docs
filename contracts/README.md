@@ -5,9 +5,9 @@
 | 契约 | 生产者 | 消费者 | 当前状态 |
 |---|---|---|---|
 | Scanner Result Schema `0.1.x` | `archguard-scanner` | Platform、Evals | `0.1.0` 随 Scanner [`v0.2.0`](https://github.com/AI-ArchGuard/archguard-scanner/releases/tag/v0.2.0) 发布并通过[阶段验收](../reports/2026-09-19-scanner-v0.2.0-acceptance.md)；Schema 仍由 Scanner 仓库唯一拥有 |
-| Platform REST/OpenAPI v1 | `archguard-platform` | `archguard-web`、CI、Gateway | 阶段 2 已发布 Project、Repository、RuleSet、ScanJob、Result 和 Finding 处置边界；3B 的[治理扩展 OpenAPI](https://github.com/AI-ArchGuard/archguard-platform/blob/main/openapi/governance-v1.json)已冻结，运行时端点待 3C–3E 实现 |
+| Platform REST/OpenAPI v1 | `archguard-platform` | `archguard-web`、CI、Gateway | Platform [`v0.4.0`](https://github.com/AI-ArchGuard/archguard-platform/releases/tag/v0.4.0) 已实现并发布[治理扩展 OpenAPI](https://github.com/AI-ArchGuard/archguard-platform/blob/v0.4.0/openapi/governance-v1.json)；Gateway 仍未启用 |
 | Platform Finding 指纹 `platform-finding-v1` | `archguard-platform` | Platform 基线/门禁、Web | 3B 的[算法设计](https://github.com/AI-ArchGuard/archguard-platform/blob/main/docs/technical-design/v0.4-governance-3b-contracts.md)和[固定 Samples 向量](https://github.com/AI-ArchGuard/archguard-samples/tree/main/governance)覆盖现有 15 个 Finding；Scanner Schema 保持 `0.1.0` |
-| PR 修订差异只读 API | `archguard-platform` | `archguard-web`、Deploy 验收 | [ADR-0009](../adr/0009-pr-revision-delta.md) 已接受；Platform 机器契约与运行时实现待合并验证，不能把 PR `RESOLVED` 当作基线门禁计数 |
+| PR 修订差异只读 API `0.2.0` | `archguard-platform` | `archguard-web`、Deploy 验收 | [ADR-0009](../adr/0009-pr-revision-delta.md) 已接受；[Platform 固定读取契约](https://github.com/AI-ArchGuard/archguard-platform/blob/v0.4.0/openapi/governance-read-v1.json)与 Web `v0.2.0` 已通过 Compose 闭环；PR `RESOLVED` 不计入基线门禁 |
 | MCP Tool Schema | `archguard-mcp-gateway` | Agent/MCP 客户端 | 阶段 5 未启用 |
 | Agent Output Schema | `archguard-platform` | UI、Evals | 阶段 4 未启用 |
 

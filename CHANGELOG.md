@@ -4,6 +4,10 @@
 
 ## [Unreleased]
 
+### Stage 3 closed
+
+- 关闭 `v0.4.0-governance`：记录 Platform/Web/Deploy 发布资产、真实 Scanner/Compose 合成闭环、PR 修订差异与基线门禁的独立参考点、审计、兼容顺序及回滚限制。
+
 ### Changed
 
 - 按最终八阶段路线重构文档库，删除旧任务编号、旧版本路线、过渡设计和过期验收报告。
