@@ -4,6 +4,10 @@
 
 ## [Unreleased]
 
+### Stage 4 scope review
+
+- 启动 `v0.5.0-agent` 的 4A 范围评审，冻结确定性事实与 Agent 建议的隔离、可验证引用、项目文档版本、模型数据外发、数据处理审批、费用上限和失败回退；功能实现仍未启用。
+
 ### Stage 3 closed
 
 - 关闭 `v0.4.0-governance`：记录 Platform/Web/Deploy 发布资产、真实 Scanner/Compose 合成闭环、PR 修订差异与基线门禁的独立参考点、审计、兼容顺序及回滚限制。

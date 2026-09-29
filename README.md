@@ -8,7 +8,8 @@ ArchGuard 的跨仓库产品、架构、工程规范、契约索引和阶段证�
 - 阶段 0 `v0.1.0-foundation` 已关闭：七仓库 Foundation PR 已合并，合并后的 `main` CI 全部成功。
 - 阶段 1 `v0.2.0-scanner` 已通过[阶段验收](reports/2026-09-19-scanner-v0.2.0-acceptance.md)并关闭；Scanner `v0.2.0` Release、Result Schema `0.1.0` 和固定 Samples 已发布。
 - 阶段 2 `v0.3.0-platform` 已通过[阶段验收](reports/2026-09-22-platform-v0.3.0-acceptance.md)并关闭；Scanner `v0.2.1`、Platform `v0.3.0`、Web `v0.1.0` 和 Deploy `v0.3.0` 已发布。
-- 阶段 3 `v0.4.0-governance` 已通过[阶段验收](reports/2026-09-27-governance-v0.4.0-acceptance.md)并关闭；Platform `v0.4.0`、Web `v0.2.0`、Deploy `v0.4.0` 已发布，Scanner Schema 保持 `0.1.0`。PR 修复差异独立于基线门禁，见 [ADR-0009](adr/0009-pr-revision-delta.md)。阶段 4–7 未启用。
+- 阶段 3 `v0.4.0-governance` 已通过[阶段验收](reports/2026-09-27-governance-v0.4.0-acceptance.md)并关闭；Platform `v0.4.0`、Web `v0.2.0`、Deploy `v0.4.0` 已发布，Scanner Schema 保持 `0.1.0`。PR 修复差异独立于基线门禁，见 [ADR-0009](adr/0009-pr-revision-delta.md)。
+- 阶段 4 `v0.5.0-agent` 仅启动 4A 范围评审；[Feature Spec](requirements/agent-v0.5-feature-spec.md)与 [ADR-0010](adr/0010-agent-trust-boundary-and-model-egress.md)冻结目标语义，Agent 功能开发尚未启用。阶段 5–7 未启用。
 
 ## 唯一入口
 
@@ -22,7 +23,8 @@ ArchGuard 的跨仓库产品、架构、工程规范、契约索引和阶段证�
 | 六平面和运行组件 | [容器架构](architecture/containers.md) |
 | 当前功能范围 | [Java Scanner MVP](requirements/scanner-v0.2-feature-spec.md) |
 | 已发布平台范围 | [治理平台 MVP](requirements/platform-v0.3-feature-spec.md) |
-| 当前阶段范围 | [持续治理闭环](requirements/governance-v0.4-feature-spec.md) |
+| 已关闭治理范围 | [持续治理闭环](requirements/governance-v0.4-feature-spec.md) |
+| 当前阶段范围 | [Java Agent 增强](requirements/agent-v0.5-feature-spec.md) |
 | 工程约定 | [开发规范](development/README.md) |
 | 文档治理 | [文档编写规范](development/documentation-standard.md) |
 | 后续文档产物与节奏 | [文档交付计划](development/documentation-delivery-plan.md) |
