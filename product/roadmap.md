@@ -13,7 +13,7 @@
 - `archguard-scanner` S1–S7、三个项目样例、三个失败夹具、黄金/重复性/性能门禁和 `v0.2.0` Release 已通过托管 CI 与[阶段验收](../reports/2026-09-19-scanner-v0.2.0-acceptance.md)；阶段 1 已关闭。
 - `archguard-platform`、`archguard-scanner`、`archguard-web` 和 `archguard-deploy` 已完成阶段 2 发布与[阶段验收](../reports/2026-09-22-platform-v0.3.0-acceptance.md)；阶段 2 已关闭。
 - 阶段 3 的 3A–3H 已完成，Platform、Web 和 Deploy 发布及[阶段验收](../reports/2026-09-27-governance-v0.4.0-acceptance.md)通过；PR 修订差异按 [ADR-0009](../adr/0009-pr-revision-delta.md) 独立于基线门禁。
-- 当前只启动阶段 4 的 4A 范围评审；[Agent Feature Spec](../requirements/agent-v0.5-feature-spec.md)与 [ADR-0010](../adr/0010-agent-trust-boundary-and-model-egress.md)冻结目标语义。只有 4A 合并且 Docs `main` CI 成功后才启用 4B；Agent 功能、Gateway 和 Evals 实现均未启用。
+- 阶段 4 的 4A 范围评审已完成且 Docs `main` CI 成功，4B 契约冻结进行中；[Agent Feature Spec](../requirements/agent-v0.5-feature-spec.md)与 [ADR-0010](../adr/0010-agent-trust-boundary-and-model-egress.md)冻结目标语义。只有 4B 相关 PR 合并且各仓库 `main` CI 成功后才启用 4C；Agent 运行时、Gateway 和 Evals 实现均未启用。
 
 ## 路线图
 
@@ -23,7 +23,7 @@
 | 1 Java Scanner MVP | 6～8 周 | `v0.2.0-scanner` | Scanner、Samples、Docs | 本地 CLI 扫描三个 Java 样例并输出稳定 JSON | 已关闭；`v0.2.0` Release 与阶段验收通过 |
 | 2 治理平台 MVP | 8～10 周 | `v0.3.0-platform` | Platform、Scanner、Web、Deploy、Docs | 登录并创建项目/规则集/任务，查看和处置结果 | 已关闭；`v0.3.0` 发布与阶段验收通过 |
 | 3 持续治理闭环 | 6～8 周 | `v0.4.0-governance` | Platform、Web、Samples、Deploy、Docs；Scanner 条件参与 | 错误依赖使 CI 失败，修复后通过 | 已关闭；版本发布与阶段验收通过 |
-| 4 Java Agent 增强 | 6～8 周 | `v0.5.0-agent` | Platform、Web、Samples、Deploy、Docs；Scanner 仅提供已发布事实 | 引用证据生成解释、摘要和低风险建议 | 4A 范围评审中；功能开发未启动 |
+| 4 Java Agent 增强 | 6～8 周 | `v0.5.0-agent` | Platform、Web、Samples、Deploy、Docs；Scanner 仅提供已发布事实 | 引用证据生成解释、摘要和低风险建议 | 4A 已完成，4B 契约冻结中；运行时未启动 |
 | 5 Go MCP Gateway | 4～6 周 | `v0.6.0-mcp` | Gateway、Platform、Deploy | 受控工具调用具备权限、限流、取消和审计 | 未启用 |
 | 6 Python Evals | 5～7 周 | `v0.7.0-evals` | Evals、Samples、Docs | 一条命令比较候选/基线并生成 JSON/HTML 报告 | 未启用 |
 | 7 生产化与多语言 | 4～8 周 | `v1.0.0` | 全部按需启用 | 可部署、可观测、可恢复，并接入首个有需求证据的新语言 | 未启用 |
