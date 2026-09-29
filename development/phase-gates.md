@@ -17,7 +17,7 @@
 - 阶段 1：已关闭；Scanner `v0.2.0`、固定 Samples、托管 CI、Release 与阶段验收证据完整。
 - 阶段 2：已关闭；Scanner、Platform、Web、Deploy 的发布与 Compose 用户旅程已通过阶段验收。
 - 阶段 3：3A–3H 已关闭；Platform `v0.4.0`、Web `v0.2.0`、Deploy `v0.4.0` 发布与 Compose 阶段验收通过。
-- 阶段 4：仅 4A 范围评审进行中；只有 4A Docs PR 合并且 `main` CI 成功后才能启用 4B，Agent 功能实现当前未启用。阶段 5–7 亦未启用，只允许需求调研和不形成运行时承诺的文档准备。
+- 阶段 4：4A Docs PR 已合并且 `main` CI 成功，现仅 4B 契约和合成案例进行中。只有 4B 涉及的 Docs、Samples、Platform PR 均合并且各自 `main` CI 成功后才能启用 4C。Agent 运行时和阶段 5–7 均未启用。
 
 ## 停止条件
 
