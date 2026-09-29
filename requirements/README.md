@@ -7,5 +7,6 @@
 | [Java Scanner MVP](scanner-v0.2-feature-spec.md) | 1 | Accepted / Closed；`v0.2.0` 已发布并通过阶段验收 |
 | [治理平台 MVP](platform-v0.3-feature-spec.md) | 2 | Accepted / Closed；`v0.3.0` 已发布并通过阶段验收 |
 | [持续治理闭环](governance-v0.4-feature-spec.md) | 3 | Accepted / Closed；`v0.4.0-governance` 已发布并通过阶段验收 |
+| [Java Agent 增强](agent-v0.5-feature-spec.md) | 4 | Ready；仅 4A 范围评审进行中，功能实现未启用 |
 
 新功能从 [`../templates/feature-spec.md`](../templates/feature-spec.md) 创建。实现步骤和类设计不得写入 Feature Spec，应进入生产者仓库 Technical Design。
