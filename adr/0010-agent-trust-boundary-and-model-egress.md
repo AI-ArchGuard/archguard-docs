@@ -1,6 +1,6 @@
 # ADR-0010：冻结 Agent 信任边界与模型数据外发
 
-- 状态：Accepted
+- 状态：Accepted；首个真实协议与供应商条款由 [ADR-0011](0011-deepseek-official-api-egress.md) 替代，其余信任边界继续适用
 - 日期：2026-09-29
 - 决策者：ArchGuard 项目所有者
 - 扩展：[ADR-0003](0003-untrusted-repository-default-deny.md)、[ADR-0004](0004-platform-modular-monolith.md)、[ADR-0005](0005-postgresql-business-source-of-truth.md)、[ADR-0006](0006-java-first-phased-delivery.md)、[ADR-0008](0008-baseline-and-quality-gate-semantics.md)
