@@ -1,13 +1,13 @@
 # Feature Spec：Java Agent 增强 `v0.5.0-agent`
 
-- 状态：Ready；仅 4A 范围评审进行中，功能实现未启用
+- 状态：Ready；4A–4C 已完成，4D 合成解释草稿评审中，真实外发未获批准
 - 阶段：4
 - 阶段跟踪：[AI-ArchGuard/archguard-platform#34](https://github.com/AI-ArchGuard/archguard-platform/issues/34)
 - 4A Issue：[AI-ArchGuard/archguard-docs#30](https://github.com/AI-ArchGuard/archguard-docs/issues/30)
 - 主要仓库：`archguard-platform`、`archguard-web`、`archguard-samples`、`archguard-deploy`、`archguard-docs`
 - 事实提供方：`archguard-scanner` 继续提供已发布的 Finding 和 Evidence；4A 不修改 Scanner 或 Schema
 - 前置：[持续治理 `v0.4.0-governance` 阶段验收](../reports/2026-09-27-governance-v0.4.0-acceptance.md)
-- 架构决策：[ADR-0001](../adr/0001-versioned-scanner-contract.md)、[ADR-0003](../adr/0003-untrusted-repository-default-deny.md)、[ADR-0004](../adr/0004-platform-modular-monolith.md)、[ADR-0005](../adr/0005-postgresql-business-source-of-truth.md)、[ADR-0008](../adr/0008-baseline-and-quality-gate-semantics.md)、[ADR-0009](../adr/0009-pr-revision-delta.md)、[ADR-0010](../adr/0010-agent-trust-boundary-and-model-egress.md)
+- 架构决策：[ADR-0001](../adr/0001-versioned-scanner-contract.md)、[ADR-0003](../adr/0003-untrusted-repository-default-deny.md)、[ADR-0004](../adr/0004-platform-modular-monolith.md)、[ADR-0005](../adr/0005-postgresql-business-source-of-truth.md)、[ADR-0008](../adr/0008-baseline-and-quality-gate-semantics.md)、[ADR-0009](../adr/0009-pr-revision-delta.md)、[ADR-0010](../adr/0010-agent-trust-boundary-and-model-egress.md)、[ADR-0011](../adr/0011-deepseek-official-api-egress.md)
 
 ## 阶段入口关卡
 
@@ -50,7 +50,7 @@
 
 ## 模型调用与最小外发
 
-模型调用遵守 [ADR-0010](../adr/0010-agent-trust-boundary-and-model-egress.md)：默认关闭，由运行环境显式配置，并由 Project Maintainer 启用。首个真实协议是 OpenAI Responses API 的受限 HTTPS/JSON 子集；Platform 通过自有端口适配器编排，不把模型 SDK 引入领域层。
+模型调用遵守 [ADR-0010](../adr/0010-agent-trust-boundary-and-model-egress.md)及其协议替代决策 [ADR-0011](../adr/0011-deepseek-official-api-egress.md)：默认关闭，由运行环境显式配置，并由 Project Maintainer 启用。首个真实提供方是 DeepSeek 官方，使用 `deepseek-flash` 的受限 Responses HTTPS/JSON 子集；Platform 通过自有端口适配器编排，不把模型 SDK 引入领域层。
 
 每次调用只允许外发以下版本化字段的最小投影：
 
@@ -62,7 +62,7 @@
 
 不得外发 OIDC 令牌、API 密钥、Webhook secret、内部数据库 ID、成员列表、审计正文、未选择的 Finding、完整扫描报告、完整上传文档、完整仓库路径、主机路径、客户源码或无关 Project 数据。4H 的真实调用验收只使用合成 Finding、Evidence 和文档。
 
-真实调用必须使用运行时 Secret、固定 HTTPS 目标允许列表、严格结构化输出、禁用工具、禁用会话延续、禁用后台模式并设置 `store=false`。数据处理条款必须经项目所有者批准且满足零数据保留或等效约束；若提供方、地区、模型、保留策略或价格目录无法确认，调用在外发前失败关闭。
+真实调用必须使用运行时 Secret、固定 HTTPS 目标允许列表、严格结构化输出、禁用工具和会话延续，并发送 `store=false`；DeepSeek 不支持该参数，故它不构成零保留证明。数据处理条款必须经项目所有者批准且满足零数据保留或明确的等效约束；默认磁盘缓存、日志、训练、地区和价格均以账户级书面确认及版本化记录为准。任一条件无法确认时，调用在外发前失败关闭。
 
 费用硬上限为每请求最多 8,000 输入 Token、1,500 输出 Token、预估费用不超过 0.10 美元；每 Project 每 UTC 日最多 5 美元，单部署每 UTC 日最多 20 美元。运维方可以下调但不能绕过；提价或扩大外发上限必须单独评审并更新 ADR。无法取得版本化价格或预估超过任一上限时不发起调用。一个 AgentRequest 最多一次提供方尝试，重复提交返回同一请求，不通过自动重试制造重复费用。
 
@@ -130,7 +130,7 @@
 | [4G](https://github.com/AI-ArchGuard/archguard-platform/issues/39) | 注入、越权、超时、重复请求、成本上限与恢复测试；积累未来 Evals 案例 | Platform、Web、Samples |
 | [4H](https://github.com/AI-ArchGuard/archguard-deploy/issues/10) | 合成数据 Compose 验收、兼容矩阵、发布及唯一阶段报告 | Deploy、Docs |
 
-4A 只进行范围评审。4B–4H 在 Project #2 中保持 `Todo`，只有前置关卡完成后依次进入 `In Progress`。阶段 4 可以保存未来 Evals 案例，但不得启用阶段 6 的正式 Evals 运行系统。
+4A–4C 已完成；4D 当前进行中。4D 可以将默认关闭的合成解释基础与真实 DeepSeek 外发拆为分别跟踪的验收范围：仅在合成范围写入 Issue、PR 合并且 Platform `main` CI 成功后，4E 才能进入 `In Progress`。真实外发继续受 [ADR-0011](../adr/0011-deepseek-official-api-egress.md) 的独立审批与合成真实调用验收关卡约束；4H 不得以假模型演示代替真实模型发布验收。阶段 4 可以保存未来 Evals 案例，但不得启用阶段 6 的正式 Evals 运行系统。
 
 ## 明确非目标
 
@@ -151,8 +151,8 @@
 
 ## 风险、依赖与开放关卡
 
-- 真实模型提供方、地区、组织/项目级零数据保留或等效条款、密钥托管和价格目录必须由项目所有者批准；未批准时 4D/4E 只允许确定性假模型，真实调用暂停。
-- OpenAI Responses API 是首个受支持协议，不等于把领域层或 Agent 契约绑定到供应商；新增协议必须实现同一最小外发、校验、费用和审计不变量。
+- DeepSeek 官方提供方、地区、账户级零数据保留或明确等效条款、密钥托管和价格目录必须由项目所有者批准；未批准时 4D/4E 只允许确定性假模型，真实调用暂停。默认磁盘缓存不能因响应的 `store: false` 而被忽略。
+- DeepSeek 官方 Responses API 是首个受支持真实协议，不等于把领域层或 Agent 契约绑定到供应商；新增协议必须实现同一最小外发、校验、费用和审计不变量。
 - PostgreSQL 有界检索能否满足已声明的文档规模和延迟由 4C/4G 用合成数据验证；没有测量证据不引入向量数据库。
 - 文档删除、保留期和管理员密钥轮换的产品策略在 4C Technical Design 前必须明确，但不能削弱已被历史结果引用的不可变版本。
-- Project #2 的状态选项为 `Todo`、`In Progress`、`Done`、`Blocked`；4A 设为 `In Progress`，其余切片保持 `Todo`。
+- Project #2 的状态选项为 `Todo`、`In Progress`、`Done`、`Blocked`；当前仅 4D 应为 `In Progress`，4E–4H 保持 `Todo`，直到各自入口关卡通过。
