@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased — Stage 4 synthetic progress
+
+- Synchronize 4A–4G synthetic completion and 4H candidate acceptance status across entry points.
+- Preserve ADR-0011 real-egress approval and formal release/exit gates; no premature stage report.
+
 所有重要变更记录在此文件。版本遵循语义化版本；项目开发期从 `0.x.y` 开始。
 
 ## [Unreleased]

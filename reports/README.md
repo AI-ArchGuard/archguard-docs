@@ -10,3 +10,5 @@
 - [阶段 3 持续治理 `v0.4.0` 验收](2026-09-27-governance-v0.4.0-acceptance.md)
 
 报告必须写明对象版本、环境、执行方式、结果和未验证项，不得包含密钥、个人数据或真实客户源码。被新阶段报告完全取代且没有合规保留要求时，应删除旧报告并同步链接。
+
+阶段 4 尚未退出；当前合成 Compose 证据见 Deploy [4H Issue](https://github.com/AI-ArchGuard/archguard-deploy/issues/10)和[候选矩阵](https://github.com/AI-ArchGuard/archguard-deploy/blob/main/compatibility/agent-synthetic.md)。真实外发/正式发布关卡未满足前，不创建 Passed/Closed 阶段报告，也不以切片日志代替唯一退出报告。

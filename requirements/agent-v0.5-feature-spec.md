@@ -1,6 +1,6 @@
 # Feature Spec：Java Agent 增强 `v0.5.0-agent`
 
-- 状态：Ready；4A–4C 已完成，4D 合成解释草稿评审中，真实外发未获批准
+- 状态：Ready；4A–4G 合成/禁用模型范围已完成，4H 验收中，真实外发和正式发布未获批准
 - 阶段：4
 - 阶段跟踪：[AI-ArchGuard/archguard-platform#34](https://github.com/AI-ArchGuard/archguard-platform/issues/34)
 - 4A Issue：[AI-ArchGuard/archguard-docs#30](https://github.com/AI-ArchGuard/archguard-docs/issues/30)
@@ -130,7 +130,7 @@
 | [4G](https://github.com/AI-ArchGuard/archguard-platform/issues/39) | 注入、越权、超时、重复请求、成本上限与恢复测试；积累未来 Evals 案例 | Platform、Web、Samples |
 | [4H](https://github.com/AI-ArchGuard/archguard-deploy/issues/10) | 合成数据 Compose 验收、兼容矩阵、发布及唯一阶段报告 | Deploy、Docs |
 
-4A–4C 已完成；4D 当前进行中。4D 可以将默认关闭的合成解释基础与真实 DeepSeek 外发拆为分别跟踪的验收范围：仅在合成范围写入 Issue、PR 合并且 Platform `main` CI 成功后，4E 才能进入 `In Progress`。真实外发继续受 [ADR-0011](../adr/0011-deepseek-official-api-egress.md) 的独立审批与合成真实调用验收关卡约束；4H 不得以假模型演示代替真实模型发布验收。阶段 4 可以保存未来 Evals 案例，但不得启用阶段 6 的正式 Evals 运行系统。
+4A–4G 已在明确的合成/禁用模型范围完成，相关 PR 与合并后 `main` CI 成功；4H 当前进行合成 Compose 验收与候选兼容矩阵。4D 的合成基础与真实 DeepSeek 外发已按 ADR-0011 分开跟踪，真实外发继续受独立账户级审批与合成真实调用验收约束。4H 不得以假模型演示代替真实模型发布验收；正式 `v0.5.0-agent` 和阶段退出未完成。阶段 4 可以保存未来 Evals 案例，但不得启用阶段 6 的正式 Evals 运行系统。
 
 ## 明确非目标
 
@@ -155,4 +155,4 @@
 - DeepSeek 官方 Responses API 是首个受支持真实协议，不等于把领域层或 Agent 契约绑定到供应商；新增协议必须实现同一最小外发、校验、费用和审计不变量。
 - PostgreSQL 有界检索能否满足已声明的文档规模和延迟由 4C/4G 用合成数据验证；没有测量证据不引入向量数据库。
 - 文档删除、保留期和管理员密钥轮换的产品策略在 4C Technical Design 前必须明确，但不能削弱已被历史结果引用的不可变版本。
-- Project #2 的状态选项为 `Todo`、`In Progress`、`Done`、`Blocked`；当前仅 4D 应为 `In Progress`，4E–4H 保持 `Todo`，直到各自入口关卡通过。
+- Project #2 的状态选项为 `Todo`、`In Progress`、`Done`、`Blocked`；4A–4G 为 `Done`，4H 验收中，真实外发 #43 仍为 `Blocked`。阶段跟踪尚未关闭；下一阶段必须等待正式退出关卡。
