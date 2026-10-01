@@ -9,7 +9,7 @@
 | Platform Finding 指纹 `platform-finding-v1` | `archguard-platform` | Platform 基线/门禁、Web | 3B 的[算法设计](https://github.com/AI-ArchGuard/archguard-platform/blob/main/docs/technical-design/v0.4-governance-3b-contracts.md)和[固定 Samples 向量](https://github.com/AI-ArchGuard/archguard-samples/tree/main/governance)覆盖现有 15 个 Finding；Scanner Schema 保持 `0.1.0` |
 | PR 修订差异只读 API `0.2.0` | `archguard-platform` | `archguard-web`、Deploy 验收 | [ADR-0009](../adr/0009-pr-revision-delta.md) 已接受；[Platform 固定读取契约](https://github.com/AI-ArchGuard/archguard-platform/blob/v0.4.0/openapi/governance-read-v1.json)与 Web `v0.2.0` 已通过 Compose 闭环；PR `RESOLVED` 不计入基线门禁 |
 | MCP Tool Schema | `archguard-mcp-gateway` | Agent/MCP 客户端 | 阶段 5 未启用 |
-| [Agent API 0.1.0](https://github.com/AI-ArchGuard/archguard-platform/blob/main/openapi/agent-v1.json) 与 [模型输出 Schema 0.1.0](https://github.com/AI-ArchGuard/archguard-platform/blob/main/src/main/resources/contracts/agent-model-output-0.1.0.schema.json) | `archguard-platform` | Web、[Samples 合成向量](https://github.com/AI-ArchGuard/archguard-samples/tree/main/agent)；未来 Evals | 4B 仅冻结契约，无运行时；以 Platform 机器文件为准，引用必须经 Project 授权和服务端验证 |
+| [Agent API 0.1.0](https://github.com/AI-ArchGuard/archguard-platform/blob/main/openapi/agent-v1.json) 与 [模型输出 Schema 0.1.0](https://github.com/AI-ArchGuard/archguard-platform/blob/main/src/main/resources/contracts/agent-model-output-0.1.0.schema.json) | `archguard-platform` | Web、[Samples 合成向量](https://github.com/AI-ArchGuard/archguard-samples/tree/main/agent)；未来 Evals | 4C–4G 已实现并验证合成运行时和 Web 消费；4H 候选组合验收中，未正式发布。引用须经 Project 授权和服务端验证；真实外发仍关闭 |
 
 ## 兼容规则
 
