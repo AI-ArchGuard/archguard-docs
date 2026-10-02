@@ -12,3 +12,5 @@
 报告必须写明对象版本、环境、执行方式、结果和未验证项，不得包含密钥、个人数据或真实客户源码。被新阶段报告完全取代且没有合规保留要求时，应删除旧报告并同步链接。
 
 阶段 4 尚未退出；当前合成 Compose 证据见 Deploy [4H Issue](https://github.com/AI-ArchGuard/archguard-deploy/issues/10)和[候选矩阵](https://github.com/AI-ArchGuard/archguard-deploy/blob/main/compatibility/agent-synthetic.md)。真实外发/正式发布关卡未满足前，不创建 Passed/Closed 阶段报告，也不以切片日志代替唯一退出报告。
+
+最终阶段 4 报告须按 [ADR-0012](../adr/0012-personal-deepseek-release-scope.md)明确个人自用、合成真实调用和本地演练范围，并链接延期的 ADR-0010/0011 企业/客户严格条件；范围批准不是调用或验收通过。不得宣称零保留、固定处理地区、企业数据、数据库灾备或生产负载验收通过。

@@ -17,7 +17,7 @@
 - 阶段 1：已关闭；Scanner `v0.2.0`、固定 Samples、托管 CI、Release 与阶段验收证据完整。
 - 阶段 2：已关闭；Scanner、Platform、Web、Deploy 的发布与 Compose 用户旅程已通过阶段验收。
 - 阶段 3：3A–3H 已关闭；Platform `v0.4.0`、Web `v0.2.0`、Deploy `v0.4.0` 发布与 Compose 阶段验收通过。
-- 阶段 4：4A–4C 已完成；4D 合成解释基础 PR 尚在草稿评审。只有 [ADR-0011](../adr/0011-deepseek-official-api-egress.md)所述的 4D 合成范围在 Issue 中明确、相关 PR 合并且 Platform `main` CI 成功，4E 才能进入 `In Progress`。DeepSeek 真实外发另受账户级书面审批、Secret 和价格目录关卡约束；未获批准时允许假模型开发，但不得宣称真实调用或阶段发布验收通过。阶段 5–7 均未启用。
+- 阶段 4：4A–4G 合成范围完成；4H 合成 Compose 和本地旧应用回滚/恢复已验证。按 [ADR-0012](../adr/0012-personal-deepseek-release-scope.md)调整个人版范围；该 Docs PR 合并且 `main` CI 成功后才进入真实适配器/启用实现，开发仅用假 HTTP。实际外发仍须有效个人启用/风险记录、Secret/网络/模型/价格检查、默认关闭的部署与 Project 双开关和单独合成真实验收授权。发布制品与唯一报告合入且 Docs `main` CI 成功后才关闭阶段并启动阶段 5；企业/客户严格审批延期而非通过。阶段 5–7 均未启用。
 
 ## 停止条件
 

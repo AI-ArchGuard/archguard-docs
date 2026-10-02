@@ -1,19 +1,23 @@
 # Feature Spec：Java Agent 增强 `v0.5.0-agent`
 
-- 状态：Ready；4A–4G 合成/禁用模型范围已完成，4H 验收中，真实外发和正式发布未获批准
+- 状态：Ready；ADR-0012 已接受个人版范围调整；4A–4G 合成范围完成，4H 验收中，真实外发/正式发布尚未获批准或完成
 - 阶段：4
 - 阶段跟踪：[AI-ArchGuard/archguard-platform#34](https://github.com/AI-ArchGuard/archguard-platform/issues/34)
 - 4A Issue：[AI-ArchGuard/archguard-docs#30](https://github.com/AI-ArchGuard/archguard-docs/issues/30)
 - 主要仓库：`archguard-platform`、`archguard-web`、`archguard-samples`、`archguard-deploy`、`archguard-docs`
 - 事实提供方：`archguard-scanner` 继续提供已发布的 Finding 和 Evidence；4A 不修改 Scanner 或 Schema
 - 前置：[持续治理 `v0.4.0-governance` 阶段验收](../reports/2026-09-27-governance-v0.4.0-acceptance.md)
-- 架构决策：[ADR-0001](../adr/0001-versioned-scanner-contract.md)、[ADR-0003](../adr/0003-untrusted-repository-default-deny.md)、[ADR-0004](../adr/0004-platform-modular-monolith.md)、[ADR-0005](../adr/0005-postgresql-business-source-of-truth.md)、[ADR-0008](../adr/0008-baseline-and-quality-gate-semantics.md)、[ADR-0009](../adr/0009-pr-revision-delta.md)、[ADR-0010](../adr/0010-agent-trust-boundary-and-model-egress.md)、[ADR-0011](../adr/0011-deepseek-official-api-egress.md)
+- 架构决策：[ADR-0001](../adr/0001-versioned-scanner-contract.md)、[ADR-0003](../adr/0003-untrusted-repository-default-deny.md)、[ADR-0004](../adr/0004-platform-modular-monolith.md)、[ADR-0005](../adr/0005-postgresql-business-source-of-truth.md)、[ADR-0008](../adr/0008-baseline-and-quality-gate-semantics.md)、[ADR-0009](../adr/0009-pr-revision-delta.md)、[ADR-0010](../adr/0010-agent-trust-boundary-and-model-egress.md)、[ADR-0011](../adr/0011-deepseek-official-api-egress.md)、[ADR-0012](../adr/0012-personal-deepseek-release-scope.md)
 
 ## 阶段入口关卡
 
 4A 只交付本 Spec、ADR-0010、索引和路线图同步，用一个 Docs PR 冻结阶段范围与验收语义。此时不创建阶段验收报告，不修改 Scanner Schema，不启动 Platform、Web、Gateway 或 Evals 功能开发。
 
-只有 4A PR 合并且 Docs `main` CI 成功后，4B 才能从 `Todo` 进入 `In Progress`。4B–4H 依次遵守同一关卡：前一切片相关 PR 已合并且合并后的 `main` CI 成功，下一切片才可启动。真实模型调用还必须满足 ADR-0010 的数据处理审批、凭据、外发字段和费用关卡；未获批准时，确定性假模型可继续支持契约和 UI 开发，真实模型切片暂停。
+只有 4A PR 合并且 Docs `main` CI 成功后，4B 才能从 `Todo` 进入 `In Progress`。4B–4H 依次遵守同一关卡：前一切片相关 PR 已合并且合并后的 `main` CI 成功，下一切片才可启动。个人版真实适配器开发须先完成 ADR-0012 Docs 合并和 `main` CI；真实外发仍须满足个人启用记录、凭据、外发字段、费用和单独运行授权。未获批准时可用假模型/假 HTTP 开发测试，不能发送真实请求。
+
+## 当前发布范围
+
+阶段 4 的目标制品是所有者本地部署、个人 DeepSeek 官方账户的个人自用版，不声明客户/企业数据、多租户、公网服务或生产化验收。真实退出验收只使用合成 Finding、Evidence 和文档；个人日常使用仅允许有权外发的非敏感材料，仍禁止源码、凭据和第三方保密/敏感资料，不能以个人账户推断内容安全。ADR-0012 接受范围调整但不授权真实调用，也不证明零保留或固定处理地区；企业/客户严格数据处理审批保留至阶段 7 接入评审。
 
 ## 问题与用户价值
 
@@ -50,7 +54,7 @@
 
 ## 模型调用与最小外发
 
-模型调用遵守 [ADR-0010](../adr/0010-agent-trust-boundary-and-model-egress.md)及其协议替代决策 [ADR-0011](../adr/0011-deepseek-official-api-egress.md)：默认关闭，由运行环境显式配置，并由 Project Maintainer 启用。首个真实提供方是 DeepSeek 官方，使用 `deepseek-flash` 的受限 Responses HTTPS/JSON 子集；Platform 通过自有端口适配器编排，不把模型 SDK 引入领域层。
+模型调用遵守 [ADR-0010](../adr/0010-agent-trust-boundary-and-model-egress.md)、协议决策 [ADR-0011](../adr/0011-deepseek-official-api-egress.md)及个人范围部分替代决策 [ADR-0012](../adr/0012-personal-deepseek-release-scope.md)：默认关闭，由运行环境显式配置，并由 Project Maintainer 启用。首个真实提供方是 DeepSeek 官方，使用 `deepseek-flash` 的受限 Responses HTTPS/JSON 子集；Platform 通过自有端口适配器编排，不把模型 SDK 引入领域层。
 
 每次调用只允许外发以下版本化字段的最小投影：
 
@@ -60,15 +64,17 @@
 - 在本次 Project 授权范围内检索出的文档片段、DocumentVersion 内容摘要和候选引用 ID；
 - 生成结构化结果所需的语言/呈现参数。
 
-不得外发 OIDC 令牌、API 密钥、Webhook secret、内部数据库 ID、成员列表、审计正文、未选择的 Finding、完整扫描报告、完整上传文档、完整仓库路径、主机路径、客户源码或无关 Project 数据。4H 的真实调用验收只使用合成 Finding、Evidence 和文档。
+不得外发 OIDC 令牌、API 密钥、Webhook secret、内部数据库 ID、成员列表、审计正文、未选择的 Finding、完整扫描报告、完整上传文档、完整仓库路径、主机路径、源码、客户/第三方保密资料、个人敏感信息或无关 Project 数据。4H 的真实调用验收只使用合成 Finding、Evidence 和文档。
 
-真实调用必须使用运行时 Secret、固定 HTTPS 目标允许列表、严格结构化输出、禁用工具和会话延续，并发送 `store=false`；DeepSeek 不支持该参数，故它不构成零保留证明。数据处理条款必须经项目所有者批准且满足零数据保留或明确的等效约束；默认磁盘缓存、日志、训练、地区和价格均以账户级书面确认及版本化记录为准。任一条件无法确认时，调用在外发前失败关闭。
+真实调用必须使用运行时 Secret、固定 HTTPS 目标允许列表、严格结构化输出、禁用工具和会话延续，并按 ADR-0011 发送 `store=false`；它不构成零保留证明。个人版按 ADR-0012 记录公开条款/缓存说明、未核实事项和残余风险接受，不要求账户级零保留承诺，也不能把未知地区/日志/训练条件写成已验证。企业/客户数据仍须满足 ADR-0010/0011 的严格书面关卡。启用记录缺失、过期、撤销或不覆盖实际用途时，创建请求和实际外发前均失败关闭。
+
+首次真实验收必须另有所有者对固定官方目标、合成数据批次、请求次数及总费用上限的明确授权。仅确认本 Spec/ADR、配置 Key 或打开 Web 不足以授权外发。Secret 不进入前端或源码；部署和 Project Maintainer 开关必须同时开启，不能用展示开关替代后台控制。
 
 费用硬上限为每请求最多 8,000 输入 Token、1,500 输出 Token、预估费用不超过 0.10 美元；每 Project 每 UTC 日最多 5 美元，单部署每 UTC 日最多 20 美元。运维方可以下调但不能绕过；提价或扩大外发上限必须单独评审并更新 ADR。无法取得版本化价格或预估超过任一上限时不发起调用。一个 AgentRequest 最多一次提供方尝试，重复提交返回同一请求，不通过自动重试制造重复费用。
 
 ## 功能需求
 
-- FR-001：模型能力默认关闭；未配置、未获数据处理批准或 Project 未启用时，创建请求返回明确不可用状态且不外发数据。
+- FR-001：模型能力默认关闭；未配置、启用记录缺失/过期/撤销、用途不在个人批准范围、部署或 Project 未启用时，创建请求和实际外发前返回明确不可用状态且不外发数据。首次真实验收另需运行批次与费用授权。
 - FR-002：只有 Maintainer 可以上传文档；上传必须绑定 Project，校验 UTF-8 Markdown/纯文本、大小、内容摘要和幂等键。
 - FR-003：文档更新创建新的不可变 DocumentVersion；已被 AgentResult 引用的版本不能覆盖或删除。
 - FR-004：检索只在请求者有权访问的 Project、明确文档版本和有界候选集合内执行；跨 Project 资源使用隐藏式未找到或明确拒绝且不泄漏存在性。
@@ -98,7 +104,7 @@
 
 ## 验收标准
 
-- Given 模型默认关闭或数据处理审批缺失，When 用户请求解释，Then 返回明确不可用状态且网络侧无模型请求。
+- Given 模型默认关闭、任一后台开关关闭或启用记录缺失/过期/撤销，When 用户请求解释或 worker 准备执行，Then 返回明确不可用状态且网络侧无模型请求；仅 Docs 范围确认、装入 Key 或 Web 展示打开不得自动触发调用。
 - Given 一个获授权 Finding 和对应 Evidence，When 用户请求解释且模型返回合规内容，Then 结果关联确切 Finding/扫描、Prompt、Schema、模型和 traceId，并只展示可解析引用。
 - Given 引用同 Project 的 Evidence 或 DocumentVersion，When 查询历史结果，Then 可解析到请求时的不可变版本，当前文档更新不改变旧引用。
 - Given 模型返回未知引用、跨 Project 引用、错误版本或无引用事实，When Platform 校验，Then 请求失败或按 Schema 形成 `INSUFFICIENT`，未经验证内容不作为事实展示。
@@ -110,6 +116,8 @@
 - Given 原有门禁为 `PASS` 或 `FAIL`，When Agent 成功、失败、超时或不可用，Then Finding、基线、例外、GateEvaluation 和 CI 退出码逐字保持不变。
 - Given 选择一组兼容 Finding，When 生成 PR 摘要，Then 输出只覆盖所选 Finding，所有事实性结论有已验证引用或明确标注证据不足。
 - Given 4H 合成 Compose 旅程，When 从 Web 请求解释和摘要，Then 可追踪 Web → Platform → 模型 → 校验 → 引用展示，并核对所有相关 PR CI 与合并后 `main` CI。
+- Given 个人版真实退出验收已单独获批，When 合成解释和摘要实际调用 DeepSeek，Then 核对提供方用量、模型、Token/延迟/费用、已授权版本引用与审计，关闭出口后无新调用；假模型数值和文档批准不能代替真实证据。
+- Given 个人版所有退出证据齐全，When 发布制品并合入唯一阶段报告且 Docs `main` CI 成功，Then 才关闭阶段并进入阶段 5；报告明确个人范围和延期的企业/客户、生产与灾备验收，不宣称原严格关卡通过。
 
 ## 指标
 
@@ -130,7 +138,7 @@
 | [4G](https://github.com/AI-ArchGuard/archguard-platform/issues/39) | 注入、越权、超时、重复请求、成本上限与恢复测试；积累未来 Evals 案例 | Platform、Web、Samples |
 | [4H](https://github.com/AI-ArchGuard/archguard-deploy/issues/10) | 合成数据 Compose 验收、兼容矩阵、发布及唯一阶段报告 | Deploy、Docs |
 
-4A–4G 已在明确的合成/禁用模型范围完成，相关 PR 与合并后 `main` CI 成功；4H 当前进行合成 Compose 验收与候选兼容矩阵。4D 的合成基础与真实 DeepSeek 外发已按 ADR-0011 分开跟踪，真实外发继续受独立账户级审批与合成真实调用验收约束。4H 不得以假模型演示代替真实模型发布验收；正式 `v0.5.0-agent` 和阶段退出未完成。阶段 4 可以保存未来 Evals 案例，但不得启用阶段 6 的正式 Evals 运行系统。
+4A–4G 已在明确的合成/禁用模型范围完成，相关 PR 与合并后 `main` CI 成功；4H 合成 Compose、兼容矩阵及本地旧应用回滚/恢复证据已合入。4D 的合成基础与真实 DeepSeek 外发分开跟踪；ADR-0012 仅调整个人版审批和退出条件，#43 的真实适配器、默认关闭启用和获批合成真实验收仍未完成。4H 不得以假模型演示代替真实验收；个人版正式 `v0.5.0-agent` 和阶段退出未完成。阶段 4 可以保存未来 Evals 案例，但不得启用阶段 6 的正式 Evals 运行系统。
 
 ## 明确非目标
 
@@ -142,6 +150,7 @@
 - 不修改 Scanner Result/Rules Schema `0.1.0`，不把 Agent 字段加入 Scanner Finding。
 - 不提前建设阶段 5 Gateway 或阶段 6 正式 Evals；只保留可复用的合成安全案例。
 - 不在 4A 创建阶段验收报告、Technical Design、运行时代码、数据库迁移或占位 API Schema。
+- 不以个人版风险接受替代企业/客户数据审批，不宣称零保留、固定处理地区、生产负载或数据库灾备验收通过。
 
 ## 兼容、发布与回滚
 
@@ -151,8 +160,8 @@
 
 ## 风险、依赖与开放关卡
 
-- DeepSeek 官方提供方、地区、账户级零数据保留或明确等效条款、密钥托管和价格目录必须由项目所有者批准；未批准时 4D/4E 只允许确定性假模型，真实调用暂停。默认磁盘缓存不能因响应的 `store: false` 而被忽略。
+- 个人版须有 ADR-0012 的有效启用/风险记录、模型/价格快照、Secret/网络检查和单独真实验收授权；企业/客户数据仍受 ADR-0010/0011 账户级零保留或等效条款关卡约束。默认缓存和未知日志/训练/地区不能因 `store: false` 或个人账户而被忽略。
 - DeepSeek 官方 Responses API 是首个受支持真实协议，不等于把领域层或 Agent 契约绑定到供应商；新增协议必须实现同一最小外发、校验、费用和审计不变量。
 - PostgreSQL 有界检索能否满足已声明的文档规模和延迟由 4C/4G 用合成数据验证；没有测量证据不引入向量数据库。
 - 文档删除、保留期和管理员密钥轮换的产品策略在 4C Technical Design 前必须明确，但不能削弱已被历史结果引用的不可变版本。
-- Project #2 的状态选项为 `Todo`、`In Progress`、`Done`、`Blocked`；4A–4G 为 `Done`，4H 验收中，真实外发 #43 仍为 `Blocked`。阶段跟踪尚未关闭；下一阶段必须等待正式退出关卡。
+- Project #2 的状态选项为 `Todo`、`In Progress`、`Done`、`Blocked`；4A–4G 合成范围完成，4H 继续验收，#43 继续开放且真实外发关闭，范围调整不自动切换看板状态。阶段跟踪尚未关闭；下一阶段必须等待个人版正式退出关卡。

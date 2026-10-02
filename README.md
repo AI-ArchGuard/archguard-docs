@@ -9,7 +9,7 @@ ArchGuard 的跨仓库产品、架构、工程规范、契约索引和阶段证�
 - 阶段 1 `v0.2.0-scanner` 已通过[阶段验收](reports/2026-09-19-scanner-v0.2.0-acceptance.md)并关闭；Scanner `v0.2.0` Release、Result Schema `0.1.0` 和固定 Samples 已发布。
 - 阶段 2 `v0.3.0-platform` 已通过[阶段验收](reports/2026-09-22-platform-v0.3.0-acceptance.md)并关闭；Scanner `v0.2.1`、Platform `v0.3.0`、Web `v0.1.0` 和 Deploy `v0.3.0` 已发布。
 - 阶段 3 `v0.4.0-governance` 已通过[阶段验收](reports/2026-09-27-governance-v0.4.0-acceptance.md)并关闭；Platform `v0.4.0`、Web `v0.2.0`、Deploy `v0.4.0` 已发布，Scanner Schema 保持 `0.1.0`。PR 修复差异独立于基线门禁，见 [ADR-0009](adr/0009-pr-revision-delta.md)。
-- 阶段 4 `v0.5.0-agent` 的 4A–4G 已在合成/默认禁用模型范围完成；4H 已推进[合成 Compose 验收与候选矩阵](https://github.com/AI-ArchGuard/archguard-deploy/blob/main/docs/agent-synthetic-compose-acceptance.md)，正式发布和阶段退出尚未完成。[Feature Spec](requirements/agent-v0.5-feature-spec.md)、[ADR-0010](adr/0010-agent-trust-boundary-and-model-egress.md)与 [ADR-0011](adr/0011-deepseek-official-api-egress.md)继续约束真实外发；[账户级审批 #43](https://github.com/AI-ArchGuard/archguard-platform/issues/43)仍阻塞，阶段 5–7 未启用。
+- 阶段 4 `v0.5.0-agent` 的 4A–4G 合成范围完成，4H [合成 Compose](https://github.com/AI-ArchGuard/archguard-deploy/blob/main/docs/agent-synthetic-compose-acceptance.md)和[本地回滚/恢复](https://github.com/AI-ArchGuard/archguard-deploy/blob/main/docs/agent-rollback-rehearsal.md)已验证，正式发布/退出尚未完成。[ADR-0012](adr/0012-personal-deepseek-release-scope.md)已接受个人自用版范围调整，[Feature Spec](requirements/agent-v0.5-feature-spec.md)继续要求真实适配器、双开关、单独获批的合成真实验收、制品和唯一报告。[#43](https://github.com/AI-ArchGuard/archguard-platform/issues/43)继续开放、真实调用关闭；[ADR-0010](adr/0010-agent-trust-boundary-and-model-egress.md)/[ADR-0011](adr/0011-deepseek-official-api-egress.md)协议/技术防护及企业/客户严格数据处理关卡保留。阶段 5–7 未启用。
 
 ## 唯一入口
 

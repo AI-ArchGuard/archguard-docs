@@ -1,6 +1,6 @@
 # ADR-0011：DeepSeek 官方 API 的受限接入与真实外发关卡
 
-- 状态：Accepted；真实外发未获批准
+- 状态：Accepted；个人范围的账户级数据处理审批及阶段退出条件由 [ADR-0012](0012-personal-deepseek-release-scope.md) 部分替代；协议和其他技术防护、企业/客户严格审批继续适用，真实外发未获批准
 - 日期：2026-09-30
 - 决策者：ArchGuard 项目所有者
 - 替代：[ADR-0010](0010-agent-trust-boundary-and-model-egress.md)中的首个真实协议及供应商专属数据处理假设；其余信任边界、额度和失败语义继续适用

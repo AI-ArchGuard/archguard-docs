@@ -23,7 +23,7 @@
 - 阶段 0 已关闭；七仓库 Foundation PR 和合并后的 `main` CI 证据保留在 `reports/`。
 - 阶段 1 已通过 Scanner `v0.2.0` Release 与正式阶段验收并关闭。
 - 阶段 2 Platform MVP 与阶段 3 持续治理闭环均已发布并通过阶段验收；各自 Feature Spec、ADR 与单份阶段报告已归档。
-- 阶段 4 只允许范围评审；阶段 4–7 不创建未启用能力的 Technical Design 或验收报告占位文件。
+- 阶段 4 的 4A–4G 合成范围完成，4H 验收中；[ADR-0012](../adr/0012-personal-deepseek-release-scope.md)接受个人版范围，但真实调用、制品和唯一报告尚未完成。阶段 5–7 未启用，不创建未来能力的 Technical Design 或验收报告占位文件。
 - 历史 M、D、G、V 编号体系已从本地文档库删除；远端历史 Issue/PR 不再作为当前事实来源。
 
 ## 判断一份材料应该放在哪里
