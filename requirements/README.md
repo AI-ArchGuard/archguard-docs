@@ -7,6 +7,6 @@
 | [Java Scanner MVP](scanner-v0.2-feature-spec.md) | 1 | Accepted / Closed；`v0.2.0` 已发布并通过阶段验收 |
 | [治理平台 MVP](platform-v0.3-feature-spec.md) | 2 | Accepted / Closed；`v0.3.0` 已发布并通过阶段验收 |
 | [持续治理闭环](governance-v0.4-feature-spec.md) | 3 | Accepted / Closed；`v0.4.0-governance` 已发布并通过阶段验收 |
-| [Java Agent 增强](agent-v0.5-feature-spec.md) | 4 | 4A–4G 合成范围完成；4H 验收中，真实外发/正式发布未获批准 |
+| [Java Agent 增强](agent-v0.5-feature-spec.md) | 4 | ADR-0012 个人版范围已接受；4A–4G 合成完成，4H 验收中，真实调用关闭/正式退出未完成 |
 
 新功能从 [`../templates/feature-spec.md`](../templates/feature-spec.md) 创建。实现步骤和类设计不得写入 Feature Spec，应进入生产者仓库 Technical Design。
