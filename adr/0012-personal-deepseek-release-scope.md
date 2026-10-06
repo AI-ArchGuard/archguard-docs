@@ -1,6 +1,6 @@
 # ADR-0012：个人自用 DeepSeek 接入与阶段 4 发布范围
 
-- 状态：Accepted；仅批准范围与验收调整，真实外发及收费调用尚未获批准
+- 状态：Accepted；个人凭据入口限制由 [ADR-0013](0013-personal-write-only-credential-management.md) 部分替代；真实外发及收费调用尚未获批准
 - 日期：2026-10-02
 - 决策者：ArchGuard 项目所有者；所有者已确认个人版范围调整，不授权立即真实调用
 - 部分替代：[ADR-0010](0010-agent-trust-boundary-and-model-egress.md)的供应商零保留前置条件、[ADR-0011](0011-deepseek-official-api-egress.md)的账户级书面数据处理审批及阶段退出条件，仅限下述个人自用范围；其他信任边界、协议和技术防护继续适用

@@ -13,6 +13,8 @@ ArchGuard 的跨仓库产品、架构、工程规范、契约索引和阶段证�
 
 ## 唯一入口
 
+个人所有者已批准 [Web 只写凭据管理与后端加密持久化](adr/0013-personal-write-only-credential-management.md) 的开发范围；添加/删除 Key 不触发模型、不能自动关闭阶段。真实 Key 不进入本仓库，真实外发仍须单独授权。
+
 | 主题 | 文档 |
 |---|---|
 | 产品定位和原则 | [产品愿景](product/vision.md) |

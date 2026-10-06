@@ -2,6 +2,8 @@
 
 ## Unreleased — Stage 4 synthetic progress
 
+- Accept ADR-0013 personal-owner write-only Web credential management and backend encrypted persistence; no exposed chat key, live request or spending authorization.
+
 - Accept ADR-0012 personal-use release scope: replace only enterprise account-specific processing prerequisites for personal use; retain strict enterprise/customer-data gates, protocol, security and cost limits.
 - Require separate live-call authorization and synthetic real-API acceptance before personal release/exit; no model call or runtime change in this documentation update.
 - Synchronize 4A–4G synthetic completion and 4H candidate acceptance status across entry points.

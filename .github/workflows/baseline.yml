@@ -25,6 +25,7 @@ jobs:
           test -f adr/0009-pr-revision-delta.md
           test -f adr/0011-deepseek-official-api-egress.md
           test -f adr/0012-personal-deepseek-release-scope.md
+          test -f adr/0013-personal-write-only-credential-management.md
           test -f reports/2026-09-27-governance-v0.4.0-acceptance.md
           echo "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4  LICENSE" | sha256sum --check --strict
           for directory in product architecture adr requirements development contracts operations reports templates scripts; do

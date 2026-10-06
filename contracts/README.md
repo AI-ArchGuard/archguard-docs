@@ -13,6 +13,8 @@
 
 ## 兼容规则
 
+个人凭据管理的增量 API 由 Platform 唯一拥有，Web 消费固定快照；开发边界见 [ADR-0013](../adr/0013-personal-write-only-credential-management.md)。当前待实现，不复制 DTO/Schema、不改变 Agent Output 或 Scanner Schema，也不表示真实模型已启用。
+
 - 生产者发布 Schema、示例和提供方测试，消费者不得导入生产者内部类。
 - 开发期契约使用独立 `0.MINOR.PATCH`；破坏性变化提升 MINOR，并保留并行迁移窗口。
 - 正常顺序为 Spec/ADR → Samples → 生产者 → 消费者 → Deploy 兼容组合。
