@@ -5,6 +5,7 @@
 - 决策者：ArchGuard 项目所有者
 - 扩展：[ADR-0003](0003-untrusted-repository-default-deny.md)、[ADR-0004](0004-platform-modular-monolith.md)、[ADR-0005](0005-postgresql-business-source-of-truth.md)、[ADR-0006](0006-java-first-phased-delivery.md)、[ADR-0008](0008-baseline-and-quality-gate-semantics.md)
 - 替代：无
+- 后续部分替代：[ADR-0014](0014-personal-token-admission-and-cost-reservation.md)调整个人模式的输入 Token 准入与单请求费用/预留；本记录正文保留决策当日历史，其余信任边界继续适用
 
 ## 背景
 

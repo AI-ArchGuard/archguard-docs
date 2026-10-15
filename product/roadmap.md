@@ -14,6 +14,7 @@
 - `archguard-platform`、`archguard-scanner`、`archguard-web` 和 `archguard-deploy` 已完成阶段 2 发布与[阶段验收](../reports/2026-09-22-platform-v0.3.0-acceptance.md)；阶段 2 已关闭。
 - 阶段 3 的 3A–3H 已完成，Platform、Web 和 Deploy 发布及[阶段验收](../reports/2026-09-27-governance-v0.4.0-acceptance.md)通过；PR 修订差异按 [ADR-0009](../adr/0009-pr-revision-delta.md) 独立于基线门禁。
 - 阶段 4 的 4A–4G 合成范围完成，4H 合成 Compose、固定候选矩阵及本地旧应用回滚/恢复已验证；[ADR-0012](../adr/0012-personal-deepseek-release-scope.md)接受个人自用版范围，[Agent Feature Spec](../requirements/agent-v0.5-feature-spec.md)仍要求获批合成真实调用、制品和唯一退出报告。真实出口及 Project 启用未完成，模型继续关闭；ADR-0010/0011 的技术防护和企业/客户严格审批保留。Gateway/Evals 未启用。
+- [ADR-0014](../adr/0014-personal-token-admission-and-cost-reservation.md)已接受个人输入观察阈值/保守费用预留，及两次合成真实验收的条件授权；具体运行绑定和工程技术关卡未完成，不代表真实调用、验收、发布或退出完成。
 
 ## 路线图
 
@@ -23,7 +24,7 @@
 | 1 Java Scanner MVP | 6～8 周 | `v0.2.0-scanner` | Scanner、Samples、Docs | 本地 CLI 扫描三个 Java 样例并输出稳定 JSON | 已关闭；`v0.2.0` Release 与阶段验收通过 |
 | 2 治理平台 MVP | 8～10 周 | `v0.3.0-platform` | Platform、Scanner、Web、Deploy、Docs | 登录并创建项目/规则集/任务，查看和处置结果 | 已关闭；`v0.3.0` 发布与阶段验收通过 |
 | 3 持续治理闭环 | 6～8 周 | `v0.4.0-governance` | Platform、Web、Samples、Deploy、Docs；Scanner 条件参与 | 错误依赖使 CI 失败，修复后通过 | 已关闭；版本发布与阶段验收通过 |
-| 4 Java Agent 增强 | 6～8 周 | `v0.5.0-agent` | Platform、Web、Samples、Deploy、Docs；Scanner 仅提供已发布事实 | 个人自用版：引用证据生成解释、摘要和低风险建议 | ADR-0012 范围已接受；4A–4G 合成完成，4H 真实验收/发布/退出未完成 |
+| 4 Java Agent 增强 | 6～8 周 | `v0.5.0-agent` | Platform、Web、Samples、Deploy、Docs；Scanner 仅提供已发布事实 | 个人自用版：引用证据生成解释、摘要和低风险建议 | ADR-0012/0014 已接受；两次合成真实验收条件授权，出口仍关，4H/发布/退出未完成 |
 | 5 Go MCP Gateway | 4～6 周 | `v0.6.0-mcp` | Gateway、Platform、Deploy | 受控工具调用具备权限、限流、取消和审计 | 未启用 |
 | 6 Python Evals | 5～7 周 | `v0.7.0-evals` | Evals、Samples、Docs | 一条命令比较候选/基线并生成 JSON/HTML 报告 | 未启用 |
 | 7 生产化与多语言 | 4～8 周 | `v1.0.0` | 全部按需启用 | 可部署、可观测、可恢复，并接入首个有需求证据的新语言 | 未启用 |
@@ -66,7 +67,7 @@
 - Agent 输出含结论、规则依据、可验证引用、低风险建议、Platform 计算的证据覆盖等级、状态、traceId、模型、Prompt 和 Schema 版本。
 - 引用只解析到获授权的真实 Evidence 或不可变项目文档版本；输出经过 Schema、Project 权限、引用和业务校验，无法验证的内容不展示为事实。
 - Maintainer 显式上传的 Markdown/纯文本文档按 Project 隔离和不可变版本管理；初版复用 PostgreSQL 有界检索，不引入向量数据库或 Platform 侧 Git clone。
-- 个人自用、本地部署和个人官方账户范围按 ADR-0012 冻结；模型默认关闭，满足有效风险/启用记录、最小外发、后端 Secret、Project 授权、Token/延迟/费用硬上限及单独运行授权。CI 使用假模型/假 HTTP，真实验收只发送合成数据并核对提供方实际用量。
+- 个人自用、本地部署和个人官方账户范围按 ADR-0012 冻结，Token/费用按 ADR-0014：完整请求字节及输出受控，输入 8,000 为调用后验收阈值而非发送前证明，使用新版本保守预留/本地费用准入和不变日额度，不宣称供应商账户限费。模型默认关闭，须有效风险/启用记录、最小外发、后端 Secret、Project 授权、超时取消及具体运行授权。CI 使用假模型/假 HTTP；仅有条件授权的两次合成真实验收须完成具体绑定与全部技术/CI 关卡，超阈值或失败即停，可信费用照常结算。
 - 模型不可用、超时、输出无效、引用不实、越权或额度耗尽均明确失败；不改变 Finding、基线、门禁或 CI 退出码，不自动修改代码、PR、规则或例外。
 - 真实适配器、默认关闭双开关、Web 解释/摘要/引用闭环和最终候选回滚通过，相关 PR/main CI 成功，发布个人版制品并合入唯一阶段报告后才关闭阶段。报告不得宣称零保留、账户级供应商审批或企业/客户/生产验收通过；延期严格条件可追溯。
 
