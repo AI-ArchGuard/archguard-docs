@@ -2,6 +2,8 @@
 
 ## Unreleased — Stage 4 synthetic progress
 
+- Accept ADR-0014 personal Token admission and conservative reservation: complete request <=6,000 UTF-8 bytes, output <=1,500 tokens, input 8,000 as a post-call acceptance threshold, and new 316,373 microUSD reservation under declared context/peak-price assumptions; local per-call admission USD 0.35, unchanged daily limits, no provider-account spending guarantee.
+- Record the owner's conditional authorization for two serial synthetic calls (one explanation and one summary), USD 0.35 each / USD 0.70 total; require all engineering and CI gates and exact Project/manifest/credential/version/expiry bindings, stop on failure, no retries. Runtime remains off; no real acceptance, release or stage closure is claimed.
 - Accept ADR-0013 personal-owner write-only Web credential management and backend encrypted persistence; no exposed chat key, live request or spending authorization.
 
 - Accept ADR-0012 personal-use release scope: replace only enterprise account-specific processing prerequisites for personal use; retain strict enterprise/customer-data gates, protocol, security and cost limits.

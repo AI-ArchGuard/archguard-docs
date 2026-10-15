@@ -1,6 +1,6 @@
 # Feature Spec：Java Agent 增强 `v0.5.0-agent`
 
-- 状态：Ready；ADR-0012 已接受个人版范围调整；4A–4G 合成范围完成，4H 验收中，真实外发/正式发布尚未获批准或完成
+- 状态：Ready；ADR-0012 个人范围与 ADR-0014 Token/费用策略已接受；两次合成真实验收有条件授权，具体批次绑定和技术关卡未完成，运行时出口仍关闭；4H/正式发布/退出未完成
 - 阶段：4
 - 阶段跟踪：[AI-ArchGuard/archguard-platform#34](https://github.com/AI-ArchGuard/archguard-platform/issues/34)
 - 4A Issue：[AI-ArchGuard/archguard-docs#30](https://github.com/AI-ArchGuard/archguard-docs/issues/30)
@@ -8,6 +8,7 @@
 - 事实提供方：`archguard-scanner` 继续提供已发布的 Finding 和 Evidence；4A 不修改 Scanner 或 Schema
 - 前置：[持续治理 `v0.4.0-governance` 阶段验收](../reports/2026-09-27-governance-v0.4.0-acceptance.md)
 - 架构决策：[ADR-0001](../adr/0001-versioned-scanner-contract.md)、[ADR-0003](../adr/0003-untrusted-repository-default-deny.md)、[ADR-0004](../adr/0004-platform-modular-monolith.md)、[ADR-0005](../adr/0005-postgresql-business-source-of-truth.md)、[ADR-0008](../adr/0008-baseline-and-quality-gate-semantics.md)、[ADR-0009](../adr/0009-pr-revision-delta.md)、[ADR-0010](../adr/0010-agent-trust-boundary-and-model-egress.md)、[ADR-0011](../adr/0011-deepseek-official-api-egress.md)、[ADR-0012](../adr/0012-personal-deepseek-release-scope.md)
+- 个人增量：[ADR-0013](../adr/0013-personal-write-only-credential-management.md)只写凭据管理、[ADR-0014](../adr/0014-personal-token-admission-and-cost-reservation.md) Token 准入/费用预留及两次合成验收条件授权；被替代的旧 ADR 条款保留历史，不作为当前个人策略
 
 ## 阶段入口关卡
 
@@ -18,6 +19,8 @@
 ## 当前发布范围
 
 阶段 4 的目标制品是所有者本地部署、个人 DeepSeek 官方账户的个人自用版，不声明客户/企业数据、多租户、公网服务或生产化验收。真实退出验收只使用合成 Finding、Evidence 和文档；个人日常使用仅允许有权外发的非敏感材料，仍禁止源码、凭据和第三方保密/敏感资料，不能以个人账户推断内容安全。ADR-0012 接受范围调整但不授权真实调用，也不证明零保留或固定处理地区；企业/客户严格数据处理审批保留至阶段 7 接入评审。
+
+ADR-0014 另行记录所有者于 2026-10-15 批准的个人 Token/费用策略及**有条件的两次串行合成真实验收**：解释和摘要各一次，单次最多 USD 0.35、合计 USD 0.70，任一次失败即停、不重试或补发。执行前必须完成工程/PR/合并后 `main` CI 及全部技术关卡，并绑定具体 Project、合成 manifest/来源和模板、当前凭据版本、价格/策略/模型快照及有效期；当前未完成这些绑定，不能把本次批准推广为任意调用或日常材料授权。
 
 ## 问题与用户价值
 
@@ -56,7 +59,7 @@
 
 ## 模型调用与最小外发
 
-模型调用遵守 [ADR-0010](../adr/0010-agent-trust-boundary-and-model-egress.md)、协议决策 [ADR-0011](../adr/0011-deepseek-official-api-egress.md)及个人范围部分替代决策 [ADR-0012](../adr/0012-personal-deepseek-release-scope.md)：默认关闭，由运行环境显式配置，并由 Project Maintainer 启用。首个真实提供方是 DeepSeek 官方，使用 `deepseek-flash` 的受限 Responses HTTPS/JSON 子集；Platform 通过自有端口适配器编排，不把模型 SDK 引入领域层。
+模型调用遵守 [ADR-0010](../adr/0010-agent-trust-boundary-and-model-egress.md)、协议决策 [ADR-0011](../adr/0011-deepseek-official-api-egress.md)及个人范围/Token 费用的部分替代决策 [ADR-0012](../adr/0012-personal-deepseek-release-scope.md)、[ADR-0014](../adr/0014-personal-token-admission-and-cost-reservation.md)：默认关闭，由运行环境显式配置，并由 Project Maintainer 启用。首个真实提供方是 DeepSeek 官方，使用 `deepseek-flash` 的受限 Responses HTTPS/JSON 子集；Platform 通过自有端口适配器编排，不把模型 SDK 引入领域层。
 
 每次调用只允许外发以下版本化字段的最小投影：
 
@@ -70,9 +73,9 @@
 
 真实调用必须使用运行时 Secret、固定 HTTPS 目标允许列表、严格结构化输出、禁用工具和会话延续，并按 ADR-0011 发送 `store=false`；它不构成零保留证明。个人版按 ADR-0012 记录公开条款/缓存说明、未核实事项和残余风险接受，不要求账户级零保留承诺，也不能把未知地区/日志/训练条件写成已验证。企业/客户数据仍须满足 ADR-0010/0011 的严格书面关卡。启用记录缺失、过期、撤销或不覆盖实际用途时，创建请求和实际外发前均失败关闭。
 
-首次真实验收必须另有所有者对固定官方目标、合成数据批次、请求次数及总费用上限的明确授权。仅确认本 Spec/ADR、配置 Key 或打开 Web 不足以授权外发。Secret 不进入前端或源码；部署和 Project Maintainer 开关必须同时开启，不能用展示开关替代后台控制。
+首次真实验收必须有所有者对固定官方目标、合成数据批次、请求次数及总费用上限的明确授权；本次仅有 ADR-0014 的条件授权，实际批次绑定和技术检查仍须全部成立。配置 Key、文档合并或打开 Web 不足以直接外发。Key 只按 ADR-0013 在受控只写入口短暂输入，不进入浏览器存储、回显、源码或日志；部署和 Project Maintainer 开关必须同时开启，不能用展示开关替代后台控制。
 
-费用硬上限为每请求最多 8,000 输入 Token、1,500 输出 Token、预估费用不超过 0.10 美元；每 Project 每 UTC 日最多 5 美元，单部署每 UTC 日最多 20 美元。运维方可以下调但不能绕过；提价或扩大外发上限必须单独评审并更新 ADR。无法取得版本化价格或预估超过任一上限时不发起调用。一个 AgentRequest 最多一次提供方尝试，重复提交返回同一请求，不通过自动重试制造重复费用。
+个人模式按 ADR-0014：发送前完整 JSON 最多 6,000 UTF-8 字节，输出最多 1,500 Token；输入 8,000 是调用后验收阈值，不是可证明的发送前上界。按官方上下文声明及高峰全未命中单价保守预留每请求 316,373 microUSD，单请求本地费用准入上限 USD 0.35；每 Project 每 UTC 日 USD 5、单部署每 UTC 日 USD 20 不变。该推算不是供应商账户强制限费或绝对零超支保证；模型/价格/上下文变化须暂停复核。使用新不可变策略，不能沿用旧 4,200 预留或改写历史；价格/依据过期或任一额度不足时不发起调用。实际输入超过 8,000 则验收失败并停止后续发送，可信费用仍结算，未知结果保留预留。一个 AgentRequest 最多一次提供方尝试，重复提交返回同一请求，不通过自动重试制造重复费用。
 
 ## 功能需求
 
@@ -92,6 +95,7 @@
 - FR-014：每次请求记录请求者、Project、用途、输入版本摘要、状态转换、traceId、模型/Prompt/Schema/价格目录版本、输入/输出 Token、延迟、预估/实际费用和失败类别。
 - FR-015：审计与日志不得记录密钥、授权头、完整 Prompt、模型原始输出、完整源码、完整报告或完整上传文档；必要摘要使用内容 digest 和计数。
 - FR-016：模型适配器故障、额度耗尽或 Agent 数据迁移失败不得阻塞 Scanner 报告接收、基线、例外、门禁、Webhook 或 CI 查询路径。
+- FR-017：个人模式分别执行完整请求字节/输出控制、调用后输入阈值、新版本保守费用预留及批次/日额度；输入超阈值、输出/引用失败或后续撤权不能抹去可信已发生费用，任一合成验收失败立即阻止后续批次发送。
 
 ## 非功能需求
 
@@ -100,7 +104,7 @@
 - 可用性：模型调用异步且有硬超时；失败可观察但不影响确定性治理路径。一个请求最多一次提供方尝试。
 - 一致性：PostgreSQL 是 AgentRequest、DocumentVersion、已验证 AgentResult、额度账本和审计的业务事实来源；提供方响应不是事实来源。
 - 可追溯：历史结果永久引用确切输入、文档、Prompt、Schema、模型和价格目录版本；后续配置变化不改写旧结果。
-- 成本：调用前预估并预留额度，调用后记录实际用量；未知价格、超限或并发预留冲突均失败关闭。
+- 成本：按 ADR-0014 的版本化供应商声明/价格假设保守预留，调用后记录可信实际用量；未知/过期依据、额度不足或并发冲突均调用前失败关闭，不宣称本地控制等于供应商账户限费。
 - 兼容：Scanner Result/Rules Schema 保持 `0.1.0`；Agent Output/Request 契约由 Platform 在 4B 发布独立兼容线，不导入 Scanner 内部类。
 - 性能：4B 固定异步请求和查询 SLO；Web 不同步等待模型，Scanner 和质量门禁 SLO 不因 Agent 启用而放宽。
 
@@ -115,6 +119,9 @@
 - Given 相同幂等键和相同输入，When 并发或重复请求，Then 返回同一 AgentRequest 且最多一次提供方调用；不同输入复用键返回冲突。
 - Given 模型超时、不可用、拒绝、输出不合 Schema、引用不实或额度耗尽，When 请求结束，Then 显式失败并记录稳定类别、Token/延迟/费用和 traceId，不泄漏原始响应。
 - Given 预估单次、Project 日额或部署日额将超限，When 请求进入调用前检查，Then 不外发数据并返回 `QUOTA_EXHAUSTED`。
+- Given 完整请求超过 6,000 UTF-8 字节或缺少新策略/具体运行绑定，When 准备真实发送，Then 网络请求为零；字节检查不宣称证明完整输入 Token 上界。
+- Given 真实响应输入超过 8,000 Token，When 核对合法实际 usage，Then 先独立结算已知费用、该次验收失败且后续调用为零；不自动重试或补发，未知用量不释放预留。
+- Given 两次合成验收条件全部成立，When 依次执行解释和摘要，Then 总尝试最多两次、单次/总授权 USD 0.35/0.70，第一次失败时第二次为零；新旧预留策略及历史结算保持隔离。
 - Given 原有门禁为 `PASS` 或 `FAIL`，When Agent 成功、失败、超时或不可用，Then Finding、基线、例外、GateEvaluation 和 CI 退出码逐字保持不变。
 - Given 选择一组兼容 Finding，When 生成 PR 摘要，Then 输出只覆盖所选 Finding，所有事实性结论有已验证引用或明确标注证据不足。
 - Given 4H 合成 Compose 旅程，When 从 Web 请求解释和摘要，Then 可追踪 Web → Platform → 模型 → 校验 → 引用展示，并核对所有相关 PR CI 与合并后 `main` CI。
