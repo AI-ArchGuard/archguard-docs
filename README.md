@@ -17,6 +17,8 @@ ArchGuard 的跨仓库产品、架构、工程规范、契约索引和阶段证�
 
 [ADR-0014](adr/0014-personal-token-admission-and-cost-reservation.md)已接受个人 Token/费用策略，并记录有条件的两次串行合成真实验收授权（解释/摘要各一次，单次 USD 0.35、合计 USD 0.70）。完整请求字节控制不是输入 Token 证明；8000 为调用后阈值，费用改用新版本保守预留。实际 Project/manifest/凭据版本/有效期绑定及全部工程技术关卡尚未完成，运行时真实出口继续关闭；本次文档不等于已验收、发布或阶段退出。
 
+[ADR-0015](adr/0015-approved-deepseek-1017-mapping.md)记录所有者于 2026-10-18 仅批准本次合成验收映射更新为 `DeepSeek-V4.1-Flash-1017`；请求别名及唯一允许的 `response.model` 仍为 `deepseek-flash`。生产者个人启用输入 Schema `0.4.0` 是待交付目标，旧确认不得静默升级或用于新真实发送；原两次调用均未使用，工程/CI 与新鲜运行绑定全部成立前出口继续关闭。
+
 | 主题 | 文档 |
 |---|---|
 | 产品定位和原则 | [产品愿景](product/vision.md) |

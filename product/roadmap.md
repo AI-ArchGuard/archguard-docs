@@ -15,6 +15,7 @@
 - 阶段 3 的 3A–3H 已完成，Platform、Web 和 Deploy 发布及[阶段验收](../reports/2026-09-27-governance-v0.4.0-acceptance.md)通过；PR 修订差异按 [ADR-0009](../adr/0009-pr-revision-delta.md) 独立于基线门禁。
 - 阶段 4 的 4A–4G 合成范围完成，4H 合成 Compose、固定候选矩阵及本地旧应用回滚/恢复已验证；[ADR-0012](../adr/0012-personal-deepseek-release-scope.md)接受个人自用版范围，[Agent Feature Spec](../requirements/agent-v0.5-feature-spec.md)仍要求获批合成真实调用、制品和唯一退出报告。真实出口及 Project 启用未完成，模型继续关闭；ADR-0010/0011 的技术防护和企业/客户严格审批保留。Gateway/Evals 未启用。
 - [ADR-0014](../adr/0014-personal-token-admission-and-cost-reservation.md)已接受个人输入观察阈值/保守费用预留，及两次合成真实验收的条件授权；具体运行绑定和工程技术关卡未完成，不代表真实调用、验收、发布或退出完成。
+- [ADR-0015](../adr/0015-approved-deepseek-1017-mapping.md)仅更新本次合成验收的 1017 映射快照；生产者输入 `0.4.0`、Web 新确认及 Deploy 最终候选须依序完成工程/CI，再落实新鲜运行绑定。原两次调用均未使用，费用/协议/响应模型白名单不扩展，阶段 4 仍未退出。
 
 ## 路线图
 
