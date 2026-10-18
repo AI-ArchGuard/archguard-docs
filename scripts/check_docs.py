@@ -13,6 +13,9 @@ LEGACY_REFERENCE = re.compile(
     r"|engineering/|runbooks/|architecture/adr/"
     r"|reports/(?:g[1-4]-|m0-)|requirements/v1-"
 )
+APPROVED_MODEL_REFERENCE = re.compile(
+    r"(?<![\w.-])DeepSeek-V4\.1-Flash-1017(?![\w-]|\.[\w-])"
+)
 SKIPPED_SCHEMES = ("http://", "https://", "mailto:", "codex://", "#")
 
 
@@ -42,7 +45,9 @@ def check_legacy_references(files: list[Path]) -> list[str]:
     errors: list[str] = []
     for file in files:
         for line_number, line in enumerate(file.read_text(encoding="utf-8").splitlines(), 1):
-            matches = sorted(set(LEGACY_REFERENCE.findall(line)))
+            # Mask only the complete approved name, preserving other legacy text.
+            legacy_text = APPROVED_MODEL_REFERENCE.sub(" ", line)
+            matches = sorted(set(LEGACY_REFERENCE.findall(legacy_text)))
             if matches:
                 errors.append(f"{relative(file)}:{line_number}: {', '.join(matches)}")
     return errors

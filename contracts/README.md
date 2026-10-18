@@ -15,6 +15,8 @@
 
 个人凭据管理的增量 API 由 Platform 唯一拥有，Web 消费固定快照；开发边界见 [ADR-0013](../adr/0013-personal-write-only-credential-management.md)。当前待实现，不复制 DTO/Schema、不改变 Agent Output 或 Scanner Schema，也不表示真实模型已启用。
 
+[ADR-0015](../adr/0015-approved-deepseek-1017-mapping.md)冻结的最小跟进目标是 Platform 生产者拥有的个人启用输入 Schema `0.4.0`：本次映射为 `DeepSeek-V4.1-Flash-1017`，别名和单元素响应模型集合仍为 `deepseek-flash`，上下文价格版本仍为 `deepseek-flash-context-peak-usd-2026-10-15`，其余限制/有效期/来源/批准引用/凭据要求不变。该版本尚待生产者交付；Web 随后消费生成契约并只提交新确认。旧 Schema/确认、费用历史和迁移保留；旧映射不得用于新真实发送，历史读取、撤销和结算继续支持。本索引不复制 DTO；Docs/main CI → Platform 契约/测试/main CI → Web 消费/测试/main CI → Deploy 显式候选/测试/main CI → 新鲜运行绑定的顺序不可由版本号替代。
+
 - 生产者发布 Schema、示例和提供方测试，消费者不得导入生产者内部类。
 - 开发期契约使用独立 `0.MINOR.PATCH`；破坏性变化提升 MINOR，并保留并行迁移窗口。
 - 正常顺序为 Spec/ADR → Samples → 生产者 → 消费者 → Deploy 兼容组合。

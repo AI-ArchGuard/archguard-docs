@@ -8,7 +8,7 @@
 - 事实提供方：`archguard-scanner` 继续提供已发布的 Finding 和 Evidence；4A 不修改 Scanner 或 Schema
 - 前置：[持续治理 `v0.4.0-governance` 阶段验收](../reports/2026-09-27-governance-v0.4.0-acceptance.md)
 - 架构决策：[ADR-0001](../adr/0001-versioned-scanner-contract.md)、[ADR-0003](../adr/0003-untrusted-repository-default-deny.md)、[ADR-0004](../adr/0004-platform-modular-monolith.md)、[ADR-0005](../adr/0005-postgresql-business-source-of-truth.md)、[ADR-0008](../adr/0008-baseline-and-quality-gate-semantics.md)、[ADR-0009](../adr/0009-pr-revision-delta.md)、[ADR-0010](../adr/0010-agent-trust-boundary-and-model-egress.md)、[ADR-0011](../adr/0011-deepseek-official-api-egress.md)、[ADR-0012](../adr/0012-personal-deepseek-release-scope.md)
-- 个人增量：[ADR-0013](../adr/0013-personal-write-only-credential-management.md)只写凭据管理、[ADR-0014](../adr/0014-personal-token-admission-and-cost-reservation.md) Token 准入/费用预留及两次合成验收条件授权；被替代的旧 ADR 条款保留历史，不作为当前个人策略
+- 个人增量：[ADR-0013](../adr/0013-personal-write-only-credential-management.md)只写凭据管理、[ADR-0014](../adr/0014-personal-token-admission-and-cost-reservation.md) Token 准入/费用预留及两次合成验收条件授权、[ADR-0015](../adr/0015-approved-deepseek-1017-mapping.md)本次验收的 1017 映射更新；被替代的旧 ADR 条款保留历史，不作为当前个人策略
 
 ## 阶段入口关卡
 
@@ -21,6 +21,8 @@
 阶段 4 的目标制品是所有者本地部署、个人 DeepSeek 官方账户的个人自用版，不声明客户/企业数据、多租户、公网服务或生产化验收。真实退出验收只使用合成 Finding、Evidence 和文档；个人日常使用仅允许有权外发的非敏感材料，仍禁止源码、凭据和第三方保密/敏感资料，不能以个人账户推断内容安全。ADR-0012 接受范围调整但不授权真实调用，也不证明零保留或固定处理地区；企业/客户严格数据处理审批保留至阶段 7 接入评审。
 
 ADR-0014 另行记录所有者于 2026-10-15 批准的个人 Token/费用策略及**有条件的两次串行合成真实验收**：解释和摘要各一次，单次最多 USD 0.35、合计 USD 0.70，任一次失败即停、不重试或补发。执行前必须完成工程/PR/合并后 `main` CI 及全部技术关卡，并绑定具体 Project、合成 manifest/来源和模板、当前凭据版本、价格/策略/模型快照及有效期；当前未完成这些绑定，不能把本次批准推广为任意调用或日常材料授权。
+
+ADR-0015 记录所有者于 2026-10-18 批准仅将本次 `mappingSnapshot` 更新为 `DeepSeek-V4.1-Flash-1017`。Platform 须新增其拥有的个人启用输入 Schema `0.4.0`，Web 消费生成契约且只提交新版本显式确认；旧映射/确认不得静默升级或准入新真实发送，历史读取、撤销和结算保留。请求别名及唯一允许的 `response.model` 仍精确为 `deepseek-flash`，不因公告名称扩大白名单；官方证据若冲突则停下评审，不花费探测请求。原协议、Token/费用和有效期/来源/批准引用/凭据要求不变，价格版本仍为 `deepseek-flash-context-peak-usd-2026-10-15`；两次调用均未使用，解释成功且可信费用结算后才可摘要。须先按 ADR-0015 完成 Docs → Platform → Web → Deploy 的工程及 PR/main CI、新鲜具体运行绑定，才可执行原两次授权；不增加调用、替换或数据。
 
 ## 问题与用户价值
 
@@ -122,6 +124,7 @@ ADR-0014 另行记录所有者于 2026-10-15 批准的个人 Token/费用策略�
 - Given 完整请求超过 6,000 UTF-8 字节或缺少新策略/具体运行绑定，When 准备真实发送，Then 网络请求为零；字节检查不宣称证明完整输入 Token 上界。
 - Given 真实响应输入超过 8,000 Token，When 核对合法实际 usage，Then 先独立结算已知费用、该次验收失败且后续调用为零；不自动重试或补发，未知用量不释放预留。
 - Given 两次合成验收条件全部成立，When 依次执行解释和摘要，Then 总尝试最多两次、单次/总授权 USD 0.35/0.70，第一次失败时第二次为零；新旧预留策略及历史结算保持隔离。
+- Given 旧映射/旧确认、非当前版本输入或任一非 `deepseek-flash` 的响应模型，When 校验新真实发送准入或响应，Then 失败关闭且不自动升级、扩白名单或补发；旧记录仍支持读取、撤销与独立费用结算。新版本确认不能替代具体运行绑定或增加调用授权。
 - Given 原有门禁为 `PASS` 或 `FAIL`，When Agent 成功、失败、超时或不可用，Then Finding、基线、例外、GateEvaluation 和 CI 退出码逐字保持不变。
 - Given 选择一组兼容 Finding，When 生成 PR 摘要，Then 输出只覆盖所选 Finding，所有事实性结论有已验证引用或明确标注证据不足。
 - Given 4H 合成 Compose 旅程，When 从 Web 请求解释和摘要，Then 可追踪 Web → Platform → 模型 → 校验 → 引用展示，并核对所有相关 PR CI 与合并后 `main` CI。
