@@ -1,11 +1,13 @@
 from __future__ import annotations
 
+# 文档仓库离线检查器：检查本地目标存在、退役标识和文件结尾，不请求网页或执行文档示例。
 import re
 import sys
 from pathlib import Path
 from urllib.parse import unquote
 
 
+# 路径以脚本所属仓库为根，调用目录变化不会切换检查对象。
 ROOT = Path(__file__).resolve().parents[1]
 MARKDOWN_LINK = re.compile(r"!?\[[^\]]*\]\(([^)]+)\)")
 LEGACY_REFERENCE = re.compile(
@@ -20,10 +22,12 @@ SKIPPED_SCHEMES = ("http://", "https://", "mailto:", "codex://", "#")
 
 
 def relative(path: Path) -> str:
+    # 诊断使用仓库相对路径，便于 CI 与本地定位同一文件。
     return path.relative_to(ROOT).as_posix()
 
 
 def check_links(files: list[Path]) -> list[str]:
+    # 提取简单 Markdown 链接/图片；只验证本地目标存在，不验证远端状态或页内锚点。
     errors: list[str] = []
     for file in files:
         text = file.read_text(encoding="utf-8")
@@ -42,10 +46,11 @@ def check_links(files: list[Path]) -> list[str]:
 
 
 def check_legacy_references(files: list[Path]) -> list[str]:
+    # 仅排除获批的完整模型名，不能因此掩盖同一行中真正退役的编号或路径。
     errors: list[str] = []
     for file in files:
         for line_number, line in enumerate(file.read_text(encoding="utf-8").splitlines(), 1):
-            # Mask only the complete approved name, preserving other legacy text.
+            # 只遮盖精确名称，保留周围文本以继续检测其他旧引用。
             legacy_text = APPROVED_MODEL_REFERENCE.sub(" ", line)
             matches = sorted(set(LEGACY_REFERENCE.findall(legacy_text)))
             if matches:
@@ -54,6 +59,7 @@ def check_legacy_references(files: list[Path]) -> list[str]:
 
 
 def check_file_endings(files: list[Path]) -> list[str]:
+    # 同时接受 LF/CRLF，但要求末尾换行且不能有多余空白行；不自动改文件。
     errors: list[str] = []
     trailing_blank_lines = re.compile(rb"(?:\r?\n[ \t]*){2,}$")
     for file in files:
@@ -66,6 +72,7 @@ def check_file_endings(files: list[Path]) -> list[str]:
 
 
 def main() -> int:
+    # 汇总全部类别再返回退出码，方便一次修复多项问题；不会因先遇到一类就跳过其他检查。
     files = sorted(path for path in ROOT.rglob("*.md") if ".git" not in path.parts)
     link_errors = check_links(files)
     legacy_errors = check_legacy_references(files)

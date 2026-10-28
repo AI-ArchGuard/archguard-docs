@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+# 文档检查器的离线回归：临时 Markdown 和替换 ROOT 隔离真实仓库，不改发布文档。
 import importlib.util
 import tempfile
 import unittest
@@ -16,7 +17,9 @@ SPEC.loader.exec_module(check_docs)
 
 
 class LegacyReferenceTests(unittest.TestCase):
+    # 聚焦获批模型名与退役标识共存的边界；不是所有 Markdown 语法或链接场景的完整测试。
     def setUp(self) -> None:
+        # 每项测试使用独立目录，清理目录与恢复模块常量都注册到 unittest 的清理阶段。
         temporary_directory = tempfile.TemporaryDirectory()
         self.addCleanup(temporary_directory.cleanup)
         self.root = Path(temporary_directory.name)
@@ -25,11 +28,13 @@ class LegacyReferenceTests(unittest.TestCase):
         self.addCleanup(root_patch.stop)
 
     def check_markdown(self, text: str) -> list[str]:
+        # 用真实文件调用生产检查函数，保留行号诊断，而非复刻正则实现。
         markdown = self.root / "example.md"
         markdown.write_text(text, encoding="utf-8")
         return check_docs.check_legacy_references([markdown])
 
     def test_exact_approved_model_is_not_a_legacy_reference(self) -> None:
+        # 完整获批名称在普通文本、代码、中文标点和 URL 中均可出现。
         cases = (
             "`DeepSeek-V4.1-Flash-1017`\n",
             "Approved model: DeepSeek-V4.1-Flash-1017.\n",
@@ -43,6 +48,7 @@ class LegacyReferenceTests(unittest.TestCase):
                 self.assertEqual([], self.check_markdown(text))
 
     def test_approved_model_does_not_suppress_same_line_legacy_references(self) -> None:
+        # 排除模型名不能让同一行中另一个退役编号也被放行。
         for text in (
             "`DeepSeek-V4.1-Flash-1017` still rejects V4.\n",
             "V4 and DeepSeek-V4.1-Flash-1017.\n",
@@ -51,6 +57,7 @@ class LegacyReferenceTests(unittest.TestCase):
                 self.assertEqual(["example.md:1: V4"], self.check_markdown(text))
 
     def test_other_model_like_names_remain_legacy_references(self) -> None:
+        # 大小写、前后缀和相近版本都不是精确豁免对象，防止扩大排除范围。
         names = (
             "V4.1",
             "Other-V4.1-Flash-1017",
@@ -73,6 +80,7 @@ class LegacyReferenceTests(unittest.TestCase):
                 )
 
     def test_all_original_legacy_stage_identifiers_still_reject(self) -> None:
+        # 遍历原退役编号集合，证明新增豁免没有降低既有检测规则。
         identifiers = (
             [f"M{number}" for number in range(14)]
             + [f"D{number}" for number in range(17)]
@@ -87,6 +95,7 @@ class LegacyReferenceTests(unittest.TestCase):
                 )
 
     def test_all_original_retired_paths_still_reject(self) -> None:
+        # 已退役目录前缀即使嵌入普通文本也继续报告。
         paths = (
             "engineering/",
             "runbooks/",
@@ -106,12 +115,14 @@ class LegacyReferenceTests(unittest.TestCase):
                 )
 
     def test_model_does_not_suppress_same_line_retired_path(self) -> None:
+        # 模型名称旁边的旧目录仍应独立被发现。
         self.assertEqual(
             ["example.md:1: engineering/"],
             self.check_markdown("DeepSeek-V4.1-Flash-1017 uses engineering/old.md.\n"),
         )
 
     def test_safe_text_passes(self) -> None:
+        # 当前阶段/ADR/Schema 的合法描述不应误报。
         self.assertEqual(
             [],
             self.check_markdown(
@@ -122,6 +133,7 @@ class LegacyReferenceTests(unittest.TestCase):
         )
 
     def test_diagnostics_preserve_line_numbers_and_all_same_line_matches(self) -> None:
+        # 多行、多处命中必须保留准确行号及排序后的完整诊断。
         self.assertEqual(
             ["example.md:2: M0, V4, engineering/", "example.md:3: D16"],
             self.check_markdown(
