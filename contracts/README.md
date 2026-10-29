@@ -13,9 +13,11 @@
 
 ## 兼容规则
 
-个人凭据管理的增量 API 由 Platform 唯一拥有，Web 消费固定快照；开发边界见 [ADR-0013](../adr/0013-personal-write-only-credential-management.md)。当前待实现，不复制 DTO/Schema、不改变 Agent Output 或 Scanner Schema，也不表示真实模型已启用。
+个人凭据管理API由Platform唯一拥有，Web消费固定快照；边界见[ADR-0013](../adr/0013-personal-write-only-credential-management.md)。现有加密只写入口不触发模型，不改变Agent Output或Scanner Schema，也不表示真实模型已启用。
 
-[ADR-0015](../adr/0015-approved-deepseek-1017-mapping.md)冻结的最小跟进目标是 Platform 生产者拥有的个人启用输入 Schema `0.4.0`：本次映射为 `DeepSeek-V4.1-Flash-1017`，别名和单元素响应模型集合仍为 `deepseek-flash`，上下文价格版本仍为 `deepseek-flash-context-peak-usd-2026-10-15`，其余限制/有效期/来源/批准引用/凭据要求不变。该版本尚待生产者交付；Web 随后消费生成契约并只提交新确认。旧 Schema/确认、费用历史和迁移保留；旧映射不得用于新真实发送，历史读取、撤销和结算继续支持。本索引不复制 DTO；Docs/main CI → Platform 契约/测试/main CI → Web 消费/测试/main CI → Deploy 显式候选/测试/main CI → 新鲜运行绑定的顺序不可由版本号替代。
+[ADR-0015](../adr/0015-approved-deepseek-1017-mapping.md)冻结的个人启用输入`0.4.0`已有生产者和消费者，映射`DeepSeek-V4.1-Flash-1017`、别名/单元素响应模型`deepseek-flash`与价格`deepseek-flash-context-peak-usd-2026-10-15`保持现有兼容线。实际发送前须重新核对官方依据、相关PR/main CI与运行绑定；旧确认、失败批次和剩余次数不升级或复用，历史读取/撤销/结算保留。
+
+[ADR-0016](../adr/0016-personal-project-agent-use.md)的日常Project授权/请求由Platform另立版本化机器契约，当前待交付；Web后续消费固定快照。它绑定普通资源选择、不可变最小输入、当前所有者/Project/凭据/运行版本及独立次数/预算/有效期，不能复用合成`SYNTHETIC_ACCEPTANCE`模板或批准。原输出Schema、合成API与历史保持兼容，迁移只追加；日常与合成批准分开追溯，共享Project/部署技术额度。本索引不复制DTO或创建占位Schema，合入顺序仍为Docs/main CI→生产者/main CI→消费者/main CI→Deploy固定候选。
 
 - 生产者发布 Schema、示例和提供方测试，消费者不得导入生产者内部类。
 - 开发期契约使用独立 `0.MINOR.PATCH`；破坏性变化提升 MINOR，并保留并行迁移窗口。
