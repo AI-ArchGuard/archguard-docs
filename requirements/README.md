@@ -7,6 +7,6 @@
 | [Java Scanner MVP](scanner-v0.2-feature-spec.md) | 1 | Accepted / Closed；`v0.2.0` 已发布并通过阶段验收 |
 | [治理平台 MVP](platform-v0.3-feature-spec.md) | 2 | Accepted / Closed；`v0.3.0` 已发布并通过阶段验收 |
 | [持续治理闭环](governance-v0.4-feature-spec.md) | 3 | Accepted / Closed；`v0.4.0-governance` 已发布并通过阶段验收 |
-| [Java Agent 增强](agent-v0.5-feature-spec.md) | 4 | ADR-0012 个人范围及 [ADR-0014](../adr/0014-personal-token-admission-and-cost-reservation.md) Token/费用策略已接受；两次合成真实验收有条件授权，运行时仍关闭，4H/正式退出未完成 |
+| [Java Agent 增强](agent-v0.5-feature-spec.md) | 4 | 个人范围/费用策略及[ADR-0016日常使用](../adr/0016-personal-project-agent-use.md)开发范围已冻结；旧失败批次不复用，新预算未批准，日常实现与4H真实验收/发布/退出未完成 |
 
 新功能从 [`../templates/feature-spec.md`](../templates/feature-spec.md) 创建。实现步骤和类设计不得写入 Feature Spec，应进入生产者仓库 Technical Design。

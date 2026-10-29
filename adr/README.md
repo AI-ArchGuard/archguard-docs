@@ -19,5 +19,6 @@
 | [ADR-0011](0011-deepseek-official-api-egress.md) | DeepSeek 官方 API 的受限接入与真实外发关卡 | Accepted；个人审批/退出由 ADR-0012、个人 Token/单请求费用由 ADR-0014 部分替代；协议/技术防护及企业严格审批保留 |
 | [ADR-0012](0012-personal-deepseek-release-scope.md) | 个人自用 DeepSeek 接入与阶段 4 发布范围 | Accepted；个人 Token/单请求费用及合成验收条件授权后续见 ADR-0014 |
 | [ADR-0013](0013-personal-write-only-credential-management.md) | 个人所有者的 Web 只写凭据入口与后端加密持久化 | Accepted；只批准开发，真实调用仍关闭 |
-| [ADR-0014](0014-personal-token-admission-and-cost-reservation.md) | 个人合成验收的 Token 准入与保守费用预留 | Accepted；仅本次旧映射假设由 [ADR-0015](0015-approved-deepseek-1017-mapping.md) 部分替代；两次合成验收条件授权保留，运行时真实出口关闭 |
-| [ADR-0015](0015-approved-deepseek-1017-mapping.md) | 本次合成验收的 DeepSeek 1017 映射快照 | Accepted；所有者于 2026-10-18 批准；生产者输入 Schema 0.4.0 为跟进目标，具体绑定/工程关卡未完成，两次调用均未使用 |
+| [ADR-0014](0014-personal-token-admission-and-cost-reservation.md) | 个人合成验收的 Token 准入与保守费用预留 | Accepted；映射由ADR-0015部分替代；批准正文为当时记录，失败终止的旧批次不复用，出口关闭 |
+| [ADR-0015](0015-approved-deepseek-1017-mapping.md) | 本次合成验收的 DeepSeek 1017 映射快照 | Accepted；保留当时批准；现有输入0.4.0不等于新授权，真实发送前重新核对官方依据和运行绑定 |
+| [ADR-0016](0016-personal-project-agent-use.md) | 个人Project日常使用的独立授权、最小快照和请求/费用关联 | Accepted；落实已批准设计，仅批准开发；独立生产者契约/实现待交付，不授权真实调用或费用 |

@@ -14,8 +14,9 @@
 - `archguard-platform`、`archguard-scanner`、`archguard-web` 和 `archguard-deploy` 已完成阶段 2 发布与[阶段验收](../reports/2026-09-22-platform-v0.3.0-acceptance.md)；阶段 2 已关闭。
 - 阶段 3 的 3A–3H 已完成，Platform、Web 和 Deploy 发布及[阶段验收](../reports/2026-09-27-governance-v0.4.0-acceptance.md)通过；PR 修订差异按 [ADR-0009](../adr/0009-pr-revision-delta.md) 独立于基线门禁。
 - 阶段 4 的 4A–4G 合成范围完成，4H 合成 Compose、固定候选矩阵及本地旧应用回滚/恢复已验证；[ADR-0012](../adr/0012-personal-deepseek-release-scope.md)接受个人自用版范围，[Agent Feature Spec](../requirements/agent-v0.5-feature-spec.md)仍要求获批合成真实调用、制品和唯一退出报告。真实出口及 Project 启用未完成，模型继续关闭；ADR-0010/0011 的技术防护和企业/客户严格审批保留。Gateway/Evals 未启用。
-- [ADR-0014](../adr/0014-personal-token-admission-and-cost-reservation.md)已接受个人输入观察阈值/保守费用预留，及两次合成真实验收的条件授权；具体运行绑定和工程技术关卡未完成，不代表真实调用、验收、发布或退出完成。
-- [ADR-0015](../adr/0015-approved-deepseek-1017-mapping.md)仅更新本次合成验收的 1017 映射快照；生产者输入 `0.4.0`、Web 新确认及 Deploy 最终候选须依序完成工程/CI，再落实新鲜运行绑定。原两次调用均未使用，费用/协议/响应模型白名单不扩展，阶段 4 仍未退出。
+- [ADR-0014](../adr/0014-personal-token-admission-and-cost-reservation.md)保留输入观察阈值/保守预留策略与历史批准；旧真实批次失败及UNKNOWN保留，不能复用剩余授权，新合成验收次数/金额待确认，阶段尚未退出。
+- [ADR-0015](../adr/0015-approved-deepseek-1017-mapping.md)保留1017映射；现有个人启用输入`0.4.0`不代表新授权，真实发送前重新核对官方依据、相关CI和具体运行绑定。
+- [ADR-0016](../adr/0016-personal-project-agent-use.md)落实已批准的日常Project解释/摘要设计；需独立授权、不可变最小快照及请求/费用关联，默认关闭。日常生产者/消费者及真实运行未交付；黑白工作台独立实现，不提前启动阶段5/6。
 
 ## 路线图
 
@@ -25,7 +26,7 @@
 | 1 Java Scanner MVP | 6～8 周 | `v0.2.0-scanner` | Scanner、Samples、Docs | 本地 CLI 扫描三个 Java 样例并输出稳定 JSON | 已关闭；`v0.2.0` Release 与阶段验收通过 |
 | 2 治理平台 MVP | 8～10 周 | `v0.3.0-platform` | Platform、Scanner、Web、Deploy、Docs | 登录并创建项目/规则集/任务，查看和处置结果 | 已关闭；`v0.3.0` 发布与阶段验收通过 |
 | 3 持续治理闭环 | 6～8 周 | `v0.4.0-governance` | Platform、Web、Samples、Deploy、Docs；Scanner 条件参与 | 错误依赖使 CI 失败，修复后通过 | 已关闭；版本发布与阶段验收通过 |
-| 4 Java Agent 增强 | 6～8 周 | `v0.5.0-agent` | Platform、Web、Samples、Deploy、Docs；Scanner 仅提供已发布事实 | 个人自用版：引用证据生成解释、摘要和低风险建议 | ADR-0012/0014 已接受；两次合成真实验收条件授权，出口仍关，4H/发布/退出未完成 |
+| 4 Java Agent 增强 | 6～8 周 | `v0.5.0-agent` | Platform、Web、Samples、Deploy、Docs；Scanner 仅提供已发布事实 | 个人自用版：从所选资源生成可引用解释/摘要和低风险建议 | 个人/费用/日常设计已冻结；新预算未批准，日常实现及4H真实验收/发布/退出未完成 |
 | 5 Go MCP Gateway | 4～6 周 | `v0.6.0-mcp` | Gateway、Platform、Deploy | 受控工具调用具备权限、限流、取消和审计 | 未启用 |
 | 6 Python Evals | 5～7 周 | `v0.7.0-evals` | Evals、Samples、Docs | 一条命令比较候选/基线并生成 JSON/HTML 报告 | 未启用 |
 | 7 生产化与多语言 | 4～8 周 | `v1.0.0` | 全部按需启用 | 可部署、可观测、可恢复，并接入首个有需求证据的新语言 | 未启用 |
@@ -65,6 +66,7 @@
 ### 阶段 4：`v0.5.0-agent`
 
 - 用户在 Web 中显式请求单个 Finding 解释或所选 Finding 摘要；后台事件不隐式触发模型。
+- 日常个人Project按ADR-0016提供独立有界授权与不可变最小快照，不依赖手填合成模板/批次；日常及合成请求均不得绕过共享技术日额度、严格校验或历史UNKNOWN，真实启用须新的具体预算与有效绑定。
 - Agent 输出含结论、规则依据、可验证引用、低风险建议、Platform 计算的证据覆盖等级、状态、traceId、模型、Prompt 和 Schema 版本。
 - 引用只解析到获授权的真实 Evidence 或不可变项目文档版本；输出经过 Schema、Project 权限、引用和业务校验，无法验证的内容不展示为事实。
 - Maintainer 显式上传的 Markdown/纯文本文档按 Project 隔离和不可变版本管理；初版复用 PostgreSQL 有界检索，不引入向量数据库或 Platform 侧 Git clone。

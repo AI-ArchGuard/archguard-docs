@@ -15,9 +15,11 @@ ArchGuard 的跨仓库产品、架构、工程规范、契约索引和阶段证�
 
 个人所有者已批准 [Web 只写凭据管理与后端加密持久化](adr/0013-personal-write-only-credential-management.md) 的开发范围；添加/删除 Key 不触发模型、不能自动关闭阶段。真实 Key 不进入本仓库，真实外发仍须单独授权。
 
-[ADR-0014](adr/0014-personal-token-admission-and-cost-reservation.md)已接受个人 Token/费用策略，并记录有条件的两次串行合成真实验收授权（解释/摘要各一次，单次 USD 0.35、合计 USD 0.70）。完整请求字节控制不是输入 Token 证明；8000 为调用后阈值，费用改用新版本保守预留。实际 Project/manifest/凭据版本/有效期绑定及全部工程技术关卡尚未完成，运行时真实出口继续关闭；本次文档不等于已验收、发布或阶段退出。
+[ADR-0014](adr/0014-personal-token-admission-and-cost-reservation.md)保留个人Token/保守费用策略与当时的合成验收批准记录；完整请求6000字节不是输入Token证明，8000为调用后阈值。旧真实批次失败及UNKNOWN费用保留，失败终止后不复用剩余授权；新合成验收次数/预算仍待单独确认，出口关闭，阶段尚未退出。
 
-[ADR-0015](adr/0015-approved-deepseek-1017-mapping.md)记录所有者于 2026-10-18 仅批准本次合成验收映射更新为 `DeepSeek-V4.1-Flash-1017`；请求别名及唯一允许的 `response.model` 仍为 `deepseek-flash`。生产者个人启用输入 Schema `0.4.0` 是待交付目标，旧确认不得静默升级或用于新真实发送；原两次调用均未使用，工程/CI 与新鲜运行绑定全部成立前出口继续关闭。
+[ADR-0015](adr/0015-approved-deepseek-1017-mapping.md)保留`DeepSeek-V4.1-Flash-1017`映射批准；现有个人启用输入`0.4.0`不等于发送授权，别名及唯一响应模型仍为`deepseek-flash`。旧确认不静默升级，实际发送前重新核对官方依据、相关PR/main CI与新鲜运行绑定。
+
+[ADR-0016](adr/0016-personal-project-agent-use.md)落实2026-10-29已批准的个人Project日常使用设计：普通Finding/PR显式选材，独立有界授权、服务端不可变最小快照和请求/费用追溯；不要求手填合成模板/批次。生产者契约及实现待交付，日常次数/金额/有效期未批准，默认关闭。黑白工作台可独立交付，不以新UI或假HTTP替代真实验收。
 
 | 主题 | 文档 |
 |---|---|
@@ -56,6 +58,8 @@ ArchGuard 的跨仓库产品、架构、工程规范、契约索引和阶段证�
 实现细节与源码一起维护：例如 Scanner S1 Technical Design 位于 `archguard-scanner/docs/technical-design/`。临时计划、任务拆分、评审对话和执行提示放在 Issue/PR，不进入长期文档库。
 
 ## 许可证
+
+本地实现设计：[阶段四个人 Agent 可用化与黑白工作台](docs/superpowers/specs/2026-10-28-stage4-agent-workbench-design.md)。所有者已于2026-10-29批准按设计实现；新的真实调用预算与日常费用授权仍待确认。
 
 阅读仓库内检查工具时，可从[工程检查脚本中文阅读](development/code-reading.zh-CN.md)进入；脚本已补中文说明，批准记录和历史报告不变。
 

@@ -18,7 +18,8 @@
 - 阶段 2：已关闭；Scanner、Platform、Web、Deploy 的发布与 Compose 用户旅程已通过阶段验收。
 - 阶段 3：3A–3H 已关闭；Platform `v0.4.0`、Web `v0.2.0`、Deploy `v0.4.0` 发布与 Compose 阶段验收通过。
 - 阶段 4：4A–4G 合成范围完成；4H 合成 Compose 和本地旧应用回滚/恢复已验证。按 [ADR-0012](../adr/0012-personal-deepseek-release-scope.md)调整个人版范围；该 Docs PR 合并且 `main` CI 成功后才进入真实适配器/启用实现，开发仅用假 HTTP。实际外发仍须有效个人启用/风险记录、Secret/网络/模型/价格检查、默认关闭的部署与 Project 双开关和单独合成真实验收授权。发布制品与唯一报告合入且 Docs `main` CI 成功后才关闭阶段并启动阶段 5；企业/客户严格审批延期而非通过。阶段 5–7 均未启用。
-- 个人真实验收增量：[ADR-0014](../adr/0014-personal-token-admission-and-cost-reservation.md)接受输入 8,000 调用后阈值与新版本保守费用预留，并记录两次串行合成验收（解释/摘要各一次，单次 USD 0.35、总 USD 0.70）的条件授权；不能沿用旧 4,200 预留。实际发送前仍须 Docs/Platform/Web/Deploy 所有相关工程和 PR/合并后 `main` CI 成功，绑定具体 Project、合成来源/manifest/模板、凭据版本、模型/价格/策略及有效期，并通过身份/引用/费用/超时取消/网络/关闭与回滚关卡。当前绑定/技术关卡未完成、运行时关闭；任一次失败或输入超阈值即停止后续调用，不自动重试或补发，可信已知费用仍记账。本地准入不是供应商账户限费保证。
+- 个人真实验收：[ADR-0014](../adr/0014-personal-token-admission-and-cost-reservation.md)的策略保留，旧失败批次及UNKNOWN不重开，不沿用其剩余调用或旧4200预留。新验收须所有者另批具体合成数据、用途、次数、预算；实际发送前相关Docs/Platform/Web/Deploy的工程、PR/main CI及身份/引用/费用/网络/超时取消/关闭与回滚关卡全部通过，绑定当前来源、凭据、模型/价格/策略及有效期。失败或超阈值即停，可信费用照常结算，本地控制不承诺供应商硬限费。
+- 日常Project增量：[ADR-0016](../adr/0016-personal-project-agent-use.md)已冻结开发语义；Docs/main CI→Platform独立契约、追加迁移与假HTTP回归/main CI→Web固定快照/恢复路径/main CI→Deploy关闭候选。无新的所有者预算/次数/有效期与运行绑定，日常模式保持关闭；不能借普通入口绕过合成守卫、历史UNKNOWN或共享技术额度。普通UI基础可独立交付，阶段四仍须真实合成验收、制品和唯一报告后退出。
 
 ## 停止条件
 
