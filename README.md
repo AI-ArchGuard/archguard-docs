@@ -57,4 +57,6 @@ ArchGuard 的跨仓库产品、架构、工程规范、契约索引和阶段证�
 
 ## 许可证
 
+阅读仓库内检查工具时，可从[工程检查脚本中文阅读](development/code-reading.zh-CN.md)进入；脚本已补中文说明，批准记录和历史报告不变。
+
 本仓库采用 [Apache License 2.0](LICENSE)。
