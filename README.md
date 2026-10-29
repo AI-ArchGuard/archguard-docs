@@ -57,6 +57,8 @@ ArchGuard 的跨仓库产品、架构、工程规范、契约索引和阶段证�
 
 ## 许可证
 
+本地待评审设计：[阶段四个人 Agent 可用化与黑白工作台](docs/superpowers/specs/2026-10-28-stage4-agent-workbench-design.md)。交互原型用于确认视觉和流程，完整设计与新的真实调用预算尚未批准。
+
 阅读仓库内检查工具时，可从[工程检查脚本中文阅读](development/code-reading.zh-CN.md)进入；脚本已补中文说明，批准记录和历史报告不变。
 
 本仓库采用 [Apache License 2.0](LICENSE)。
